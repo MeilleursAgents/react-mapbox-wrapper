@@ -1,0 +1,121 @@
+import { Component } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import { mapboxgl } from 'MapboxMap';
+
+/**
+ * Popup Component.
+ */
+export default class Popup extends Component {
+    /**
+     * Creates an instance of Popup.
+     * @param {Object} props Component props
+     */
+    constructor(props) {
+        super(props);
+
+        /**
+         * Dom element of the popup container
+         * @type {Element}
+         * @private
+         */
+        this.container = null;
+
+        /**
+         * Instance of the popup
+         * @type {Mapbox.Popup}
+         * @private
+         */
+        this.popup = null;
+
+        const {
+            onMouseOver,
+            onMouseOut,
+            closeButton,
+            closeOnClick,
+            offset,
+            className,
+            coordinates,
+            map,
+        } = this.props;
+
+        this.container = document.createElement('div');
+        this.container.addEventListener('mouseover', onMouseOver);
+        this.container.addEventListener('mouseout', onMouseOut);
+
+        this.popup = new mapboxgl.Popup({ closeButton, closeOnClick, offset, className });
+        this.popup.setDOMContent(this.container);
+
+        if (coordinates) {
+            this.popup.setLngLat(coordinates);
+        }
+
+        if (map) {
+            this.popup.addTo(map);
+        }
+
+        this.getMapboxPopup = this.getMapboxPopup.bind(this);
+    }
+
+    /**
+     * React lifecycle.
+     * @param {Object} nextProps Next props
+     */
+    componentWillReceiveProps(nextProps) {
+        const currentCoord = this.props.coordinates || {};
+        const nextCoord = nextProps.coordinates || {};
+
+        if (currentCoord.lat !== nextCoord.lat || currentCoord.lng !== nextCoord.lng) {
+            this.popup.setLngLat(nextProps.coordinates);
+        }
+    }
+
+    /**
+     * React lifecycle.
+     */
+    componentWillUnmount() {
+        this.popup.remove();
+    }
+
+    /**
+     * Accessor of this.popup
+     * @return {Element}
+     */
+    getMapboxPopup() {
+        return this.popup;
+    }
+
+    /**
+     * React lifecycle.
+     */
+    render() {
+        return ReactDOM.createPortal(this.props.children, this.container);
+    }
+}
+
+Popup.propTypes = {
+    closeButton: PropTypes.bool,
+    closeOnClick: PropTypes.bool,
+    coordinates: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        lng: PropTypes.number.isRequired,
+    }),
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+    className: PropTypes.string,
+    map: PropTypes.shape({}),
+    offset: PropTypes.number,
+    onMouseOut: PropTypes.func,
+    onMouseOver: PropTypes.func,
+};
+
+Popup.defaultProps = {
+    children: null,
+    className: '',
+    closeButton: true,
+    closeOnClick: true,
+    coordinates: undefined,
+    map: undefined,
+    offset: undefined,
+    onMouseOut: undefined,
+    onMouseOver: undefined,
+};

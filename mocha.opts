@@ -1,0 +1,5 @@
+--require babel-core/register
+--require ./src/test.js
+--watch-extensions jsx
+--full-trace
+--recursive

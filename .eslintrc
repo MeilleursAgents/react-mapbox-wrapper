@@ -1,0 +1,27 @@
+{
+    "extends": ["airbnb", "prettier", "prettier/react"],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "settings": {
+        "import/resolver": {
+            "webpack": {}
+        }
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "mocha": true
+    },
+    "globals": {
+        "Promise": true,
+        "expect": true
+    },
+    "plugins": ["babel", "react"],
+    "rules": {
+        "indent": [2, 4]
+    }
+}

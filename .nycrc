@@ -1,0 +1,27 @@
+{
+  "reporter": [
+    "text",
+    "lcov"
+  ],
+  "require": [
+    "babel-core/register"
+  ],
+  "extension": [
+    ".jsx"
+  ],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "**/*webpack*",
+    "src/index.js",
+    "src/MapboxMap/diagnose.js",
+    "**/*.test.js",
+    "**/*.test.jsx"
+  ],
+  "check-coverage": true,
+  "lines": 80,
+  "statements": 80,
+  "functions": 80,
+  "branches": 80
+}
