@@ -15,7 +15,7 @@
     "doc": "esdoc -c esdoc.json",
     "start": "webpack --watch",
     "build": "webpack -p",
-    "quality": "npm run format && npm run lint && npm run test && npm run doc && npm run build"
+    "ci": "npm run format && npm run lint && npm run test && npm run doc && npm run build"
   },
   "keywords": [
     "react",

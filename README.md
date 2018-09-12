@@ -1,5 +1,8 @@
 # react-mapbox-wrapper
 
+[![Build Status](https://travis-ci.org/MeilleursAgents/react-mapbox-wrapper.svg?branch=master)](https://travis-ci.org/MeilleursAgents/react-mapbox-wrapper)
+[![npm version](https://badge.fury.io/js/react-mapbox-wrapper.svg)](https://badge.fury.io/js/react-mapbox-wrapper)
+
 React wrapper for [mapboxgl-js API](https://www.mapbox.com/mapbox-gl-js/api/).
 
 ![](sample.png)
