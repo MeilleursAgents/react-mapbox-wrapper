@@ -2,6 +2,7 @@ import { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { mapboxgl } from 'MapboxMap';
+import { coordinatesAreEqual } from 'Helpers';
 
 /**
  * Popup Component.
@@ -65,7 +66,7 @@ export default class Popup extends Component {
         const currentCoord = this.props.coordinates || {};
         const nextCoord = nextProps.coordinates || {};
 
-        if (currentCoord.lat !== nextCoord.lat || currentCoord.lng !== nextCoord.lng) {
+        if (!coordinatesAreEqual(currentCoord, nextCoord)) {
             this.popup.setLngLat(nextProps.coordinates);
         }
     }
@@ -78,7 +79,7 @@ export default class Popup extends Component {
     }
 
     /**
-     * Accessor of this.popup
+     * Accessor of underlying Mapbox Popup
      * @return {Element}
      */
     getMapboxPopup() {
@@ -94,14 +95,14 @@ export default class Popup extends Component {
 }
 
 Popup.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+    className: PropTypes.string,
     closeButton: PropTypes.bool,
     closeOnClick: PropTypes.bool,
     coordinates: PropTypes.shape({
         lat: PropTypes.number.isRequired,
         lng: PropTypes.number.isRequired,
     }),
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-    className: PropTypes.string,
     map: PropTypes.shape({}),
     offset: PropTypes.number,
     onMouseOut: PropTypes.func,

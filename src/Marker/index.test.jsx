@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import { mapboxgl } from 'MapboxMap';
-import Marker, { DEBOUNCE_TIMEOUT } from './';
+import { mapboxgl, DEBOUNCE_TIMEOUT } from 'MapboxMap';
+import Marker from './';
 
 function defaultProps() {
     return {
@@ -128,9 +128,9 @@ describe('<Marker />', () => {
         const props = defaultProps();
         props.popup = <span>Hello World!</span>;
 
-        const wrapper = mount(<Marker {...props} popupOnOver />);
+        const wrapper = mount(<Marker {...props} popupOnOver>Content</Marker>);
         wrapper.instance().popup.isOpen = sinon.fake.returns(false);
-        wrapper.find('div').simulate('mouseOver');
+        wrapper.find('[data-marker]').simulate('mouseOver');
 
         expect(wrapper.instance().marker.togglePopup.called).to.equal(true);
     });
@@ -140,9 +140,9 @@ describe('<Marker />', () => {
         props.popup = <span>Hello World!</span>;
         const onMouseOver = sinon.spy();
 
-        const wrapper = mount(<Marker {...props} popupOnOver onMouseOver={onMouseOver} />);
+        const wrapper = mount(<Marker {...props} popupOnOver onMouseOver={onMouseOver}>Content</Marker>);
         wrapper.instance().popup.isOpen = sinon.fake.returns(false);
-        wrapper.find('div').simulate('mouseOver');
+        wrapper.find('[data-marker]').simulate('mouseOver');
 
         expect(onMouseOver.called).to.equal(true);
     });
@@ -151,9 +151,9 @@ describe('<Marker />', () => {
         const props = defaultProps();
         props.popup = <span>Hello World!</span>;
 
-        const wrapper = mount(<Marker {...props} popupOnOver />);
+        const wrapper = mount(<Marker {...props} popupOnOver>Content</Marker>);
         wrapper.instance().popup.isOpen = sinon.fake.returns(true);
-        wrapper.find('div').simulate('mouseOut');
+        wrapper.find('[data-marker]').simulate('mouseOut');
 
         clock.tick(DEBOUNCE_TIMEOUT);
 
@@ -165,9 +165,9 @@ describe('<Marker />', () => {
         props.popup = <span>Hello World!</span>;
         const onMouseOut = sinon.spy();
 
-        const wrapper = mount(<Marker {...props} popupOnOver onMouseOut={onMouseOut} />);
+        const wrapper = mount(<Marker {...props} popupOnOver onMouseOut={onMouseOut}>Content</Marker>);
         wrapper.instance().popup.isOpen = sinon.fake.returns(false);
-        wrapper.find('div').simulate('mouseOut');
+        wrapper.find('[data-marker]').simulate('mouseOut');
 
         clock.tick(DEBOUNCE_TIMEOUT);
 

@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isFunction } from 'Utils';
 import Popup from 'Popup';
-import { mapboxgl } from 'MapboxMap';
-
-/**
- * Debounce timeout;
- * @type {Number}
- */
-export const DEBOUNCE_TIMEOUT = 200;
+import { mapboxgl, DEBOUNCE_TIMEOUT } from 'MapboxMap';
 
 /**
  * Marker rendered on map.
@@ -45,10 +39,19 @@ export default class Marker extends Component {
         this.onMarkerOver = this.onMarkerOver.bind(this);
         this.onMarkerOut = this.onMarkerOut.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
-        this.setContainer = this.setContainer.bind(this);
-        this.setPopup = this.setPopup.bind(this);
+        this.initMarker = this.initMarker.bind(this);
+        this.initPopup = this.initPopup.bind(this);
         this.clearDebounce = this.clearDebounce.bind(this);
         this.moveToTop = this.moveToTop.bind(this);
+
+        /**
+         * Props for rendered marker (custom or default)
+         * @type {Object}
+         */
+        this.markerProps = {
+            ref: this.initMarker,
+            'data-marker': '',
+        };
     }
 
     /**
@@ -134,16 +137,33 @@ export default class Marker extends Component {
      * Attach to the dom
      * @param {Element} element Dom element of the marker
      */
-    setContainer(element) {
+    initMarker(element) {
         if (!element) {
             return;
         }
 
-        const { coordinates, map, anchor, offset, draggable, onDragEnd, getRef } = this.props;
+        const {
+            coordinates,
+            map,
+            draggable,
+            onDragEnd,
+            getRef,
+            children,
+            ...rest
+        } = this.props;
 
-        this.marker = new mapboxgl.Marker({ element, anchor, offset, draggable });
+        this.marker = new mapboxgl.Marker({
+            element: children ? element : null,
+            draggable,
+            ...rest,
+        });
+
         this.marker.setLngLat(coordinates);
         this.marker.addTo(map);
+
+        if (this.popup) {
+            this.marker.setPopup(this.popup);
+        }
 
         if (draggable && isFunction(onDragEnd)) {
             this.marker.on('dragend', this.onDragEnd);
@@ -158,17 +178,16 @@ export default class Marker extends Component {
      * Display a Popup from a marker
      * @param {Object} ref React ref element of the marker
      */
-    setPopup(ref) {
+    initPopup(ref) {
         if (!ref) {
             return;
         }
 
-        if (!this.marker) {
-            return;
-        }
-
         this.popup = ref.getMapboxPopup();
-        this.marker.setPopup(this.popup);
+
+        if (this.marker) {
+            this.marker.setPopup(this.popup);
+        }
     }
 
     /**
@@ -194,20 +213,30 @@ export default class Marker extends Component {
     render() {
         const { children, popup, popupOffset, popupCloseButton } = this.props;
 
-        return (
-            <span>
+        let marker;
+        let wrapperProps;
+        if (children) {
+            marker = (
                 <div
                     key="marker"
-                    ref={this.setContainer}
                     onMouseOver={this.onMarkerOver}
                     onMouseOut={this.onMarkerOut}
+                    {...this.markerProps}
                 >
                     {children}
                 </div>
+            );
+        } else {
+            wrapperProps = this.markerProps;
+        }
+
+        return (
+            <span {...wrapperProps}>
+                {marker}
                 {popup && (
                     <Popup
                         key="popup"
-                        ref={this.setPopup}
+                        ref={this.initPopup}
                         onMouseOver={this.clearDebounce}
                         onMouseOut={this.onMarkerOut}
                         closeButton={popupCloseButton}
@@ -226,32 +255,28 @@ Marker.propTypes = {
         lat: PropTypes.number.isRequired,
         lng: PropTypes.number.isRequired,
     }).isRequired,
-    anchor: PropTypes.string,
-    offset: PropTypes.number,
-    popupOffset: PropTypes.number,
-    getRef: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     draggable: PropTypes.bool,
+    getRef: PropTypes.func,
     map: PropTypes.shape({}).isRequired,
+    onDragEnd: PropTypes.func,
     onMouseOut: PropTypes.func,
     onMouseOver: PropTypes.func,
-    onDragEnd: PropTypes.func,
     popup: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     popupCloseButton: PropTypes.bool,
+    popupOffset: PropTypes.number,
     popupOnOver: PropTypes.bool,
 };
 
 Marker.defaultProps = {
-    anchor: undefined,
-    offset: undefined,
-    popupOffset: undefined,
+    children: null,
+    draggable: false,
     getRef: undefined,
-    children: undefined,
-    draggable: undefined,
+    onDragEnd: undefined,
     onMouseOut: undefined,
     onMouseOver: undefined,
-    onDragEnd: undefined,
     popup: undefined,
-    popupCloseButton: undefined,
-    popupOnOver: undefined,
+    popupCloseButton: false,
+    popupOffset: undefined,
+    popupOnOver: false,
 };

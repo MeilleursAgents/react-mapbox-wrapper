@@ -1,12 +1,42 @@
 import { isFunction } from 'Utils';
+import { mapboxgl } from 'MapboxMap';
 
 /**
- * Get layer identifier from source identifier
+ * Get layer identifier from source identifier.
  * @param  {String} id Source's identifier
  * @return {String} Layer's identifier
  */
 export function getLayerId(id) {
     return `${id}_layer`;
+}
+
+/**
+ * Check if coordinates are equal.
+ * @param  {Object} a First coordinates
+ * @param  {Object} b Second coordinates
+ * @return {Boolean}  True if they are equal, false otherwise
+ */
+export function coordinatesAreEqual(a, b) {
+    return a.lat === b.lat && a.lng === b.lng;
+}
+
+/**
+ * Return new empty bounds according to underlying map library.
+ * @param  {Object} sw South West Bound.
+ * @param  {Object} ne North East Bound.
+ * @return {Object} Bounds
+ */
+export function newBounds(sw, ne) {
+    return new mapboxgl.LngLatBounds(sw, ne);
+}
+
+/**
+ * Create new bound according to the underlying library.
+ * @param  {Object} coordinates Coordinates of bound.
+ * @return {BoundObject} Bound object matching the underlying map library
+ */
+export function newBound(coordinates) {
+    return [coordinates.lng, coordinates.lat];
 }
 
 /**
@@ -77,7 +107,7 @@ export function removeGeoJSON(map, id) {
         }
     } catch (e) {
         global.console.warn(
-            `Error while removing GeoJSON layer with id=${layerId}. It's sometimes due to an already removed map`,
+            `Error while removing GeoJSON layer with id ${layerId}. It's sometimes due to an already removed map`,
             e,
         );
     }
@@ -89,8 +119,17 @@ export function removeGeoJSON(map, id) {
         }
     } catch (e) {
         global.console.warn(
-            `Error while removing GeoJSON soruce with id=${id}. It's sometimes due to an already removed map`,
+            `Error while removing GeoJSON soruce with id ${id}. It's sometimes due to an already removed map`,
             e,
         );
     }
 }
+
+export default {
+    getLayerId,
+    coordinatesAreEqual,
+    newBounds,
+    newBound,
+    drawGeoJSON,
+    removeGeoJSON,
+};

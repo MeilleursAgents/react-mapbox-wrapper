@@ -1,5 +1,6 @@
 --require babel-core/register
---require ./src/test.js
+--require ignore-styles
+--require src/test.js
 --watch-extensions jsx
 --full-trace
 --recursive

@@ -88,9 +88,9 @@ describe('<MapboxMap />', () => {
         expect(wrapper.instance().map.on.callCount).to.equal(1);
     });
 
-    it('should add control if navigation is asked', () => {
+    it('should add control if zoom is asked', () => {
         const props = defaultProps();
-        const wrapper = mount(<MapboxMap {...props} withNavigation />);
+        const wrapper = mount(<MapboxMap {...props} withZoom />);
 
         expect(wrapper.instance().map.addControl.called).to.equal(true);
     });

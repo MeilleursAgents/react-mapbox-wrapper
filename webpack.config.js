@@ -12,13 +12,16 @@ module.exports = {
     },
 
     module: {
+        noParse: /(mapbox-gl)\.js$/,
         rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                },
+                use: { loader: 'babel-loader' },
+            },
+            {
+                test: /\.css$/,
+                use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
             },
         ],
     },
@@ -31,6 +34,9 @@ module.exports = {
     },
 
     externals: {
-        react: 'commonjs react',
+        react: 'react',
+        'prop-types': 'prop-types',
+        'mapbox-gl': 'mapbox-gl',
+        '@turf/circle': '@turf/circle',
     },
 };

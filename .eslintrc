@@ -20,8 +20,5 @@
         "Promise": true,
         "expect": true
     },
-    "plugins": ["babel", "react"],
-    "rules": {
-        "indent": [2, 4]
-    }
+    "plugins": ["babel", "react"]
 }

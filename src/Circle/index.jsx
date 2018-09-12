@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import circle from '@turf/circle';
 import { deepEqual } from 'Utils';
-import { drawGeoJSON, removeGeoJSON } from 'Helpers';
+import { coordinatesAreEqual, drawGeoJSON, removeGeoJSON } from 'Helpers';
 
 /**
  * Number of points to draw a circle.
@@ -13,7 +13,7 @@ const CIRCLE_POINTS_CONFIG = 64;
 /**
  * Get circle points.
  * @param  {Object} coordinates Center coordinates
- * @param  {Number} radius      Radius in kilometers
+ * @param  {Number} radius      Radius in meters
  * @return {Object}             GeoJSON data
  */
 export function getCircleData(coordinates, radius) {
@@ -24,15 +24,15 @@ export function getCircleData(coordinates, radius) {
 }
 
 /**
- * Update marker render
- * @param  {String} id          Identifier
- * @param  {Object} map         MapboxMap
- * @param  {Object} coordinates Coordinates
- * @param  {Number} radius      Radius of circle in kilometers
- * @param  {Object} paint       Paint options
- * @param  {Function} onClick   Click callback
+ * Update radius GeoJSON layer.
+ * @param {Object} map         MapboxMap
+ * @param {String} id          Identifier
+ * @param {Object} coordinates Coordinates
+ * @param {Number} radius      Radius of circle in meters
+ * @param {Object} paint       Paint options
+ * @param {Function} onClick   onClick callback
  */
-export function updateMarker(id, map, coordinates, radius, paint, onClick) {
+function updateRadiusLayer(map, id, coordinates, radius, paint, onClick) {
     if (!map) {
         return;
     }
@@ -52,8 +52,9 @@ export default class Circle extends Component {
      * React lifecycle.
      */
     componentWillMount() {
-        const { id, map, coordinates, radius, paint, onClick } = this.props;
-        updateMarker(id, map, coordinates, radius, paint, onClick);
+        const { map, id, coordinates, radius, paint, onClick } = this.props;
+
+        updateRadiusLayer(map, id, coordinates, radius, paint, onClick);
     }
 
     /**
@@ -63,13 +64,11 @@ export default class Circle extends Component {
     componentWillReceiveProps({ id, map, coordinates, radius, paint, onClick }) {
         const currentCoord = this.props.coordinates;
 
-        if (
-            currentCoord.lat !== coordinates.lat ||
-            currentCoord.lng !== coordinates.lng ||
+        if (!coordinatesAreEqual(currentCoord, coordinates) ||
             this.props.radius !== radius ||
             !deepEqual(this.props.paint, paint)
         ) {
-            updateMarker(id, map, coordinates, radius, paint, onClick);
+            updateRadiusLayer(map, id, coordinates, radius, paint, onClick);
         }
     }
 
@@ -77,7 +76,9 @@ export default class Circle extends Component {
      * React lifecycle.
      */
     componentWillUnmount() {
-        removeGeoJSON(this.props.map, this.props.id);
+        const { id, map } = this.props;
+
+        removeGeoJSON(map, id);
     }
 
     /**

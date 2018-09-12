@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { coordinatesAreEqual } from 'Helpers';
 import { isBrowser, isFunction } from 'Utils';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import './index.css';
 
 /**
  * Mapbox-gl API.
@@ -38,12 +41,22 @@ export default class MapboxMap extends Component {
         /**
          * Store Mapbox map instance
          * @type {mapboxgl.Map}
+         * @private
          */
         this.map = null;
 
+        /**
+         * Zoom end event debounce timeout.
+         * @type {Number}
+         * @private
+         */
+        this.zoomendTimeout = null;
+
         this.onChange = this.onChange.bind(this);
         this.onZoomEnd = this.onZoomEnd.bind(this);
-        this.setContainer = this.setContainer.bind(this);
+        this.initMap = this.initMap.bind(this);
+        this.addControls = this.addControls.bind(this);
+        this.addEvents = this.addEvents.bind(this);
     }
 
     /**
@@ -56,7 +69,7 @@ export default class MapboxMap extends Component {
         }
 
         const currentCenter = this.props.coordinates;
-        if (currentCenter.lat !== coordinates.lat || currentCenter.lng !== coordinates.lng) {
+        if (!coordinatesAreEqual(currentCenter, coordinates)) {
             this.map.setCenter([coordinates.lng, coordinates.lat]);
         }
 
@@ -92,14 +105,16 @@ export default class MapboxMap extends Component {
      */
     onChange() {
         const { onChange } = this.props;
+
         if (isFunction(onChange)) {
             const { lng, lat } = this.map.getCenter();
+
             onChange({
                 zoom: this.map.getZoom(),
                 coordinates: { lng, lat },
             });
         }
-    };
+    }
 
     /**
      * Call callback on zoom end after a small debounce.
@@ -119,56 +134,28 @@ export default class MapboxMap extends Component {
                 onZoomEnd(e);
             }
         }, DEBOUNCE_TIMEOUT);
-    };
+    }
 
     /**
      * Initialize map's container from ref.
      * @param  {DOMElement} container Map's container ref
      */
-    setContainer(container) {
+    initMap(container) {
         if (!container) {
             return;
         }
 
         const {
             coordinates,
-            zoom,
-            minZoom,
-            maxZoom,
-            style,
-            interactive,
-            attributionControl,
             onLoad,
-            withNavigation,
-            withCompass,
-            withFullscreen,
+            ...mapOptions
         } = this.props;
 
-        /**
-         * Underlying map.
-         * @type {mapboxgl}
-         */
         this.map = new mapboxgl.Map({
+            ...mapOptions,
             container,
-            minZoom,
-            maxZoom,
-            style,
             center: new mapboxgl.LngLat(coordinates.lng, coordinates.lat),
-            zoom,
-            attributionControl,
-            interactive,
         });
-
-        if (withNavigation) {
-            this.map.addControl(
-                new mapboxgl.NavigationControl({ showCompass: withCompass }),
-                'bottom-right',
-            );
-        }
-
-        if (withFullscreen) {
-            this.map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
-        }
 
         this.map.on('load', () => {
             if (isFunction(onLoad)) {
@@ -176,6 +163,32 @@ export default class MapboxMap extends Component {
             }
         });
 
+        this.addControls();
+        this.addEvents();
+    }
+
+    /**
+     * Add controls to map according to component's props.
+     */
+    addControls() {
+        const { withZoom, withCompass, withFullscreen } = this.props;
+
+        if (withZoom || withCompass) {
+            this.map.addControl(
+                new mapboxgl.NavigationControl({ showCompass: withCompass, showZoom: withZoom }),
+                'bottom-right',
+            );
+        }
+
+        if (withFullscreen) {
+            this.map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+        }
+    }
+
+    /**
+     * Add events handling to map according to component's props callback.
+     */
+    addEvents() {
         const { onChange, onZoomStart, onZoomEnd, onClick } = this.props;
 
         if (isFunction(onChange)) {
@@ -185,6 +198,7 @@ export default class MapboxMap extends Component {
         if (isFunction(onZoomStart)) {
             this.map.on('zoomstart', onZoomStart);
         }
+
         if (isFunction(onChange) || isFunction(onZoomEnd)) {
             this.map.on('zoomend', this.onZoomEnd);
         }
@@ -192,20 +206,21 @@ export default class MapboxMap extends Component {
         if (isFunction(onClick)) {
             this.map.on('click', onClick);
         }
-    };
+    }
 
     /**
      * React lifecycle.
      */
     render() {
-        if (!mapboxgl.supported() && isFunction(this.props.renderNotSupported)) {
-            return this.props.renderNotSupported();
+        const { renderNotSupported, className, children } = this.props;
+
+        if (!mapboxgl.supported() && isFunction(renderNotSupported)) {
+            return renderNotSupported(className);
         }
 
         return (
-            <div className={this.props.className || ''}>
-                <div ref={this.setContainer} style={{ width: '100%', height: '100%' }} />
-                {this.props.children}
+            <div className={className || ''} ref={this.initMap}>
+                {children}
             </div>
         );
     }
@@ -213,14 +228,12 @@ export default class MapboxMap extends Component {
 
 MapboxMap.propTypes = {
     accessToken: PropTypes.string,
-    attributionControl: PropTypes.bool,
     coordinates: PropTypes.shape({
         lat: PropTypes.number.isRequired,
         lng: PropTypes.number.isRequired,
     }).isRequired,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     className: PropTypes.string,
-    interactive: PropTypes.bool,
     maxZoom: PropTypes.number,
     minZoom: PropTypes.number,
     onChange: PropTypes.func,
@@ -232,16 +245,14 @@ MapboxMap.propTypes = {
     style: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     withCompass: PropTypes.bool,
     withFullscreen: PropTypes.bool,
-    withNavigation: PropTypes.bool,
+    withZoom: PropTypes.bool,
     zoom: PropTypes.number.isRequired,
 };
 
 MapboxMap.defaultProps = {
     accessToken: '',
-    attributionControl: true,
     children: null,
     className: '',
-    interactive: true,
     maxZoom: undefined,
     minZoom: undefined,
     onChange: undefined,
@@ -252,14 +263,14 @@ MapboxMap.defaultProps = {
     style: DEFAULT_STYLE,
     withCompass: false,
     withFullscreen: false,
-    withNavigation: false,
-    renderNotSupported: () => (
+    withZoom: false,
+    renderNotSupported: (className) => (
         <div
+            className={className || ''}
             style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '100%',
                 background:
                     'repeating-linear-gradient(45deg, aliceblue, aliceblue 10px, white 10px, white 20px)',
             }}

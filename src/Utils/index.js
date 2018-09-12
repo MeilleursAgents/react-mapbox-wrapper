@@ -80,7 +80,7 @@ export function isFunction(fn) {
 }
 
 /**
- * Checking if we are in a browser or not
+ * Checking if we are in a browser or not.
  * @type {Boolean}
  */
 export const isBrowser = !(
@@ -88,3 +88,8 @@ export const isBrowser = !(
     String(process) === '[object process]' &&
     !process.browser
 );
+
+export default {
+    deepEqual,
+    isFunction,
+};
