@@ -22,33 +22,35 @@ global.DEFAULT_COORDINATES = { lat: 48.872198, lng: 2.3366308 };
 export default class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">react-mapbox-wrapper</h1>
+      <div>
+        <header className="header">
+          <h1>react-mapbox-wrapper</h1>
         </header>
 
-        <div className="App-content">
-          <div>
+        <a className="link" href="https://github.com/MeilleursAgents/react-mapbox-wrapper" target="_blank" rel="noreferrer noopener">Documentation</a>
+
+        <div className="content">
+          <div class="example">
             <h2>SimpleMap</h2>
             <SimpleMap />
           </div>
 
-          <div>
+          <div class="example">
             <h2>Marker</h2>
             <MapWithMarker />
           </div>
 
-          <div>
+          <div class="example">
             <h2>Marker with Popup on Click</h2>
             <MarkerWithPopup />
           </div>
 
-          <div>
+          <div class="example">
             <h2>Custom Marker with Popup on Over</h2>
             <CustomMarkerOnOver />
           </div>
 
-          <div>
+          <div class="example">
             <h2>Radius, Marker, Popup and fitBounds</h2>
             <AllInOne />
           </div>

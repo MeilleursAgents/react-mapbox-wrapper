@@ -38,12 +38,14 @@ See [examples](examples/src/) folder for more example.
 
 React Component that render a Mapbox Map. Extra props are directly passed to the [Map constructor](https://www.mapbox.com/mapbox-gl-js/api/#map). Following props are handled by wrapper for updating or handling behavior in the React philosophy.
 
+Wrapper is CSS flex-ready for *width* but you **have to set a height** for having visible Mapbox.
+
 | Props | Type | Default | Description |
 | -- | -- | -- | -- |
 | accessToken | String | required | Mapbox Access Token ([find it here](https://www.mapbox.com/account/access-tokens)) |
 | coordinates | Object | required | Coordinates of the map center <br /> In the form `{ lng: 3.4, lat: 1.2 }` |
 | zoom | number | required | The viewport zoom (missing will result in a `failed to invert matrix` error) |
-| className | string | `''` | `className` added to map's container. Your should provide a height in order to render the map (default at 0) |
+| className | string | `''` | `className` added to map's wrapper. Your should provide a height in order to render the map (default at 0) |
 | children | Node | `null` | Rendered children, typically a [Marker](#Marker) and/or [Circle](#Circle) |
 | minZoom | number | `undefined` | The minimum zoom level of the map (0-24). |
 | maxZoom | number | `undefined` | The maximum zoom level of the map (0-24). |

@@ -219,8 +219,10 @@ export default class MapboxMap extends Component {
         }
 
         return (
-            <div className={className || ''} ref={this.initMap}>
-                {children}
+            <div className={className || ''}>
+                <div ref={this.initMap} style={{ height: '100%', width: '100%' }}>
+                    {children}
+                </div>
             </div>
         );
     }
