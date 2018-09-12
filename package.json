@@ -2,16 +2,19 @@
   "name": "react-mapbox-wrapper",
   "version": "0.0.1",
   "description": "Mapbox GL Javascript wrapper for ReactJS",
-  "repository": "https://github.com/MeilleursAgents/react-mapbox-wrapper",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeilleursAgents/react-mapbox-wrapper.git"
+  },
   "main": "build/index.js",
   "scripts": {
-    "format": "./node_modules/.bin/prettier-eslint --write",
-    "lint": "./node_modules/.bin/eslint --fix --ext .jsx,.js src",
+    "format": "prettier-eslint --write",
+    "lint": "eslint --fix --ext .jsx,.js src",
     "test": "NODE_PATH=./src ./node_modules/.bin/nyc --all ./node_modules/.bin/mocha --opts ./mocha.opts \"./src/**/*.test.js\" \"./src/**/*.test.jsx\"",
     "test:file": "NODE_PATH=./src ./node_modules/.bin/mocha --opts ./mocha.opts",
-    "doc": "./node_modules/.bin/esdoc -c esdoc.json",
-    "start": "./node_modules/.bin/webpack --watch",
-    "build": "./node_modules/.bin/webpack -p",
+    "doc": "esdoc -c esdoc.json",
+    "start": "webpack --watch",
+    "build": "webpack -p",
     "quality": "npm run format && npm run lint && npm run test && npm run doc && npm run build"
   },
   "keywords": [
@@ -84,5 +87,11 @@
     "style-loader": "^0.23.0",
     "webpack": "4.12.0",
     "webpack-cli": "3.0.3"
+  },
+  "bugs": {
+    "url": "https://github.com/MeilleursAgents/react-mapbox-wrapper/issues"
+  },
+  "directories": {
+    "example": "examples"
   }
 }
