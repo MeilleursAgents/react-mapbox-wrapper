@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { MapboxMap, Marker } from 'react-mapbox-wrapper';
 
-/**
- * MarkerWithPopup Component.
- */
 export default class MarkerWithPopup extends Component {
   constructor(props) {
     super(props);
@@ -19,14 +16,15 @@ export default class MarkerWithPopup extends Component {
   render() {
     let marker;
     if (this.map) {
-      const popup = (
-        <div>
-          Meaningful content on my Marker
-        </div>
-      );
+      const popup = <div>Meaningful content on my Marker</div>;
 
       marker = (
-        <Marker coordinates={global.DEFAULT_COORDINATES} map={this.map} popup={popup} popupOffset={30} />
+        <Marker
+          coordinates={global.DEFAULT_COORDINATES}
+          map={this.map}
+          popup={popup}
+          popupOffset={30}
+        />
       );
     }
 

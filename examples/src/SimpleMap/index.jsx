@@ -1,9 +1,6 @@
 import React from 'react';
 import { MapboxMap } from 'react-mapbox-wrapper';
 
-/**
- * SimpleMap Component.
- */
 export default function SimpleMap() {
   return (
     <MapboxMap

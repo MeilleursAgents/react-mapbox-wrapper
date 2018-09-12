@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { MapboxMap, Marker } from 'react-mapbox-wrapper';
 
-/**
- * MapWithMarker Component.
- */
 export default class MapWithMarker extends Component {
   constructor(props) {
     super(props);

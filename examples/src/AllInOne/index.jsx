@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import { MapboxMap, Marker, Circle, Helpers } from 'react-mapbox-wrapper';
 
 const SENTIER_COORDINATES = { lat: 48.868526, lng: 2.3434886 };
-
 const RADIUS_COORDINATES = { lat: 48.870362, lng: 2.3400597 };
 
-/**
- * CustomMarker Component.
- */
-export default class CustomMarker extends Component {
+export default class AllInOne extends Component {
   constructor(props) {
     super(props);
 
@@ -23,29 +19,14 @@ export default class CustomMarker extends Component {
     bounds.extend(Helpers.newBound(global.DEFAULT_COORDINATES));
     bounds.extend(Helpers.newBound(SENTIER_COORDINATES));
 
-    this.map.jumpTo(this.map.cameraForBounds(bounds, { padding: 50 }));
+    this.map.jumpTo(this.map.cameraForBounds(bounds, { padding: 120 }));
   }
 
   render() {
     let markers;
     if (this.map) {
-      const popupHaussmann = (
-        <div>
-          <span role="img" aria-label="smile">
-            😀
-          </span>
-          &nbsp; Happy to be here
-        </div>
-      );
-
-      const popupSentier = (
-        <div>
-          <span role="img" aria-label="smile">
-            😉
-          </span>
-          &nbsp; Old home
-        </div>
-      );
+      const popupHaussmann = <div>Happy to be here</div>;
+      const popupSentier = <div>Old home</div>;
 
       markers = [
         <Marker
@@ -103,4 +84,4 @@ export default class CustomMarker extends Component {
   }
 }
 
-CustomMarker.displayName = 'CustomMarker';
+AllInOne.displayName = 'AllInOne';

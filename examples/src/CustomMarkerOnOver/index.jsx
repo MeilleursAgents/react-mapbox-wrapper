@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { MapboxMap, Marker } from 'react-mapbox-wrapper';
 
-/**
- * CustomMarker Component.
- */
 export default class CustomMarker extends Component {
   constructor(props) {
     super(props);
@@ -19,18 +16,16 @@ export default class CustomMarker extends Component {
   render() {
     let marker;
     if (this.map) {
-      const popup = (
-        <div>
-          <span role="img" aria-label="smile">
-            😀
-          </span>
-          &nbsp;
-          Happy to be here
-        </div>
-      );
+      const popup = <div>http://localhost</div>;
 
       marker = (
-        <Marker coordinates={global.DEFAULT_COORDINATES} map={this.map} popup={popup} popupOnOver popupOffset={20}>
+        <Marker
+          coordinates={global.DEFAULT_COORDINATES}
+          map={this.map}
+          popup={popup}
+          popupOnOver
+          popupOffset={20}
+        >
           <span role="img" aria-label="Emoji Marker" style={{ fontSize: '30px' }}>
             🏢
           </span>
