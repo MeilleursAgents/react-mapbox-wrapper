@@ -2,7 +2,7 @@
     "source": "./src",
     "destination": "./esdoc",
     "includes": ["\\.(js|jsx)$"],
-    "excludes": ["\\.test\\.(js|jsx)$", "esdoc/.*$", "diagnose.js$"],
+    "excludes": ["\\.test\\.(js|jsx)$", "esdoc/.*$", "Diagnose/*"],
     "unexportIdentifier": true,
     "package": "./package.json",
     "plugins": [

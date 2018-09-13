@@ -15,7 +15,7 @@
   "exclude": [
     "**/*webpack*",
     "src/index.js",
-    "src/MapboxMap/diagnose.js",
+    "src/Diagnose/",
     "**/*.test.js",
     "**/*.test.jsx"
   ],

@@ -1,7 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import { mapboxgl, DEBOUNCE_TIMEOUT } from 'MapboxMap';
+import mapboxgl from 'Lib';
+import { DEBOUNCE_TIMEOUT } from 'MapboxMap';
 import Marker from './';
 
 function defaultProps() {

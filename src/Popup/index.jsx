@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { mapboxgl } from 'MapboxMap';
+import mapboxgl from 'Lib';
 import { coordinatesAreEqual } from 'Helpers';
 
 /**
