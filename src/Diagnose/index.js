@@ -1,10 +1,7 @@
-import { mapboxgl } from './';
+import mapboxgl from 'Lib';
+import { isBrowser } from 'Utils';
 
 // inspired by https://github.com/mapbox/mapbox-gl-supported/blob/gh-pages/diagnostics.html
-
-function isBrowser() {
-    return typeof window !== 'undefined' && typeof document !== 'undefined';
-}
 
 function isArraySupported() {
     return (

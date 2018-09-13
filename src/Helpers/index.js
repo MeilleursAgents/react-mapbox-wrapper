@@ -1,5 +1,5 @@
 import { isFunction } from 'Utils';
-import { mapboxgl } from 'MapboxMap';
+import mapboxgl from 'Lib';
 
 /**
  * Get layer identifier from source identifier.

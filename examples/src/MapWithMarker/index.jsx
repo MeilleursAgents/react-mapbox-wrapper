@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MapboxMap, Marker } from 'react-mapbox-wrapper';
+import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
 export default class MapWithMarker extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ export default class MapWithMarker extends Component {
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
         coordinates={global.DEFAULT_COORDINATES}
-        zoom={15}
         className="map-container"
         onLoad={this.onMapLoad}
       >
