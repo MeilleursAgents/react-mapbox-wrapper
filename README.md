@@ -5,6 +5,8 @@
 
 React wrapper for [mapboxgl-js API](https://www.mapbox.com/mapbox-gl-js/api/).
 
+Made with ❤️ by [MeilleursAgents](https://www.meilleursagents.com)
+
 ![](sample.png)
 
 ## Usage
