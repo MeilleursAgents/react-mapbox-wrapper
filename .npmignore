@@ -1,0 +1,20 @@
+# gitignore
+node_modules/
+esdoc/
+coverage/
+.nyc_output/
+
+# npmignore
+examples/
+src/
+_config.yml
+.babelrc
+.eslintrc
+.nycrc
+.prettierrc
+.travis.yml
+CODE_OF_CONDUCT.md
+esdoc.json
+mocha.opts
+sample.png
+webpack.config.js
