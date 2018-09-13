@@ -15,19 +15,16 @@ Made with ❤️ by [MeilleursAgents](https://www.meilleursagents.com)
 import React from 'react';
 import MapboxMap from 'react-mapbox-wrapper';
 
-/**
- * SimpleMap Component.
- */
 export default function SimpleMap() {
   return (
-    <MapboxMap
-      accessToken="<your acess token here>"
-      className="map-container"
-      coordinates={{ lat: 48.872198, lng: 2.3366308 }}
-      zoom={15}
-    />
+    <div style={{ height: 400, width: 400 }}>
+      <MapboxMap
+        accessToken="<your acess token here>"
+        coordinates={{ lat: 48.872198, lng: 2.3366308 }}
+      />
+    </div>
   );
-};
+}
 
 SimpleMap.displayName = 'SimpleMap';
 ```
@@ -46,11 +43,11 @@ Wrapper is CSS flex-ready for *width* but you **have to set a height** for havin
 | -- | -- | -- | -- |
 | accessToken | String | required | Mapbox Access Token ([find it here](https://www.mapbox.com/account/access-tokens)) |
 | coordinates | Object | required | Coordinates of the map center <br /> In the form `{ lng: 3.4, lat: 1.2 }` |
-| zoom | number | required | The viewport zoom (missing will result in a `failed to invert matrix` error) |
 | className | string | `''` | `className` added to map's wrapper. Your should provide a height in order to render the map (default at 0) |
 | children | Node | `null` | Rendered children, typically a [Marker](#Marker) and/or [Circle](#Circle) |
 | minZoom | number | `undefined` | The minimum zoom level of the map (0-24). |
 | maxZoom | number | `undefined` | The maximum zoom level of the map (0-24). |
+| zoom | number | `15` | The viewport zoom |
 | onChange | func | `undefined` | Callback function called on every viewport change (`moveend`, `zoomend`) <br /><br /> Callback receive param with the following shape <br /> `{ zoom: 15, coordinates: { lng: 3.4, lat: 1.2 } }` |
 | onClick | func | `undefined` | Callback function called on [map's click](https://www.mapbox.com/mapbox-gl-js/api/#map.event:click) |
 | onLoad | func | `undefined` | Callback function called on [map's load](https://www.mapbox.com/mapbox-gl-js/api/#map.event:load) with current Mapbox instance param |

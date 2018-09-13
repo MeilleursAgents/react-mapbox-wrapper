@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { coordinatesAreEqual } from 'Helpers';
-import { isBrowser, isFunction } from 'Utils';
+import { isFunction } from 'Utils';
+import mapboxgl from 'Lib';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './index.css';
-
-/**
- * Mapbox-gl API.
- * @type {Object}
- */
-// eslint-disable-next-line global-require
-export const mapboxgl = isBrowser ? require('mapbox-gl') : {};
 
 /**
  * Debounce timeout on zoom change.
@@ -219,10 +213,8 @@ export default class MapboxMap extends Component {
         }
 
         return (
-            <div className={className || ''}>
-                <div ref={this.initMap} style={{ height: '100%', width: '100%' }}>
-                    {children}
-                </div>
+            <div className={className || ''} ref={this.initMap} style={{ height: '100%', width: '100%' }}>
+                {children}
             </div>
         );
     }
@@ -266,6 +258,7 @@ MapboxMap.defaultProps = {
     withCompass: false,
     withFullscreen: false,
     withZoom: false,
+    zoom: 15,
     renderNotSupported: (className) => (
         <div
             className={className || ''}
