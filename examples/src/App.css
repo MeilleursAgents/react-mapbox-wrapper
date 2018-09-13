@@ -2,10 +2,19 @@
   text-align: center;
 }
 
+.margin-left {
+  margin-left: 10px;
+}
+
 .header {
   background-color: rgb(0, 116, 228);
   color: white;
   padding: 5px;
+}
+
+.footer {
+  padding: 20px 10px;
+  font-size: 12px;
 }
 
 .link,
@@ -22,7 +31,7 @@
 }
 
 .map-container {
-  height: 100%;
+  flex: 1 1;
   width: 400px;
 }
 
