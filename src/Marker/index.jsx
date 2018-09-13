@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isFunction } from 'Utils';
 import Popup from 'Popup';
-import { mapboxgl, DEBOUNCE_TIMEOUT } from 'MapboxMap';
+import mapboxgl from 'Lib';
+import { DEBOUNCE_TIMEOUT } from 'MapboxMap';
 
 /**
  * Marker rendered on map.

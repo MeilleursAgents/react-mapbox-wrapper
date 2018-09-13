@@ -29,8 +29,16 @@ export default function App() {
     <div>
       <header className="header">
         <h1>react-mapbox-wrapper</h1>
-        <a href="https://github.com/MeilleursAgents/react-mapbox-wrapper" target="_blank" rel="noreferrer noopener">
-          <img style={{ position: 'absolute', top: 0, right: 0, border: 0 }} src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
+        <a
+          href="https://github.com/MeilleursAgents/react-mapbox-wrapper"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img
+            style={{ position: 'absolute', top: 0, right: 0, border: 0 }}
+            src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+            alt="Fork me on GitHub"
+          />
         </a>
       </header>
 
@@ -52,21 +60,21 @@ export default function App() {
       </a>
 
       <div className="content">
-        <h2>SimpleMap</h2>
+        <h2>SimpleMap with fixed size</h2>
         <div className="example">
-          <SimpleMap />
+          <SimpleMap  className="map-container" />
           <SyntaxHighlighter className="code" language="jsx" style={prism}>
             {`import React from 'react';
-import { MapboxMap } from 'react-mapbox-wrapper';
+import MapboxMap from 'react-mapbox-wrapper';
 
 export default function SimpleMap() {
   return (
-    <MapboxMap
-      accessToken={global.ACCESS_TOKEN}
-      coordinates={global.DEFAULT_COORDINATES}
-      zoom={15}
-      className="map-container"
-    />
+    <div style={{ height: 400, width: 400 }}>
+      <MapboxMap
+        accessToken={global.ACCESS_TOKEN}
+        coordinates={global.DEFAULT_COORDINATES}
+      />
+    </div>
   );
 }
 
@@ -81,7 +89,7 @@ SimpleMap.displayName = 'SimpleMap';`}
           <MapWithMarker />
           <SyntaxHighlighter className="code" language="jsx" style={prism}>
             {`import React, { Component } from 'react';
-import { MapboxMap, Marker } from 'react-mapbox-wrapper';
+import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
 export default class MapWithMarker extends Component {
   constructor(props) {
@@ -105,7 +113,6 @@ export default class MapWithMarker extends Component {
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
         coordinates={global.DEFAULT_COORDINATES}
-        zoom={15}
         className="map-container"
         onLoad={this.onMapLoad}
       >
@@ -126,7 +133,7 @@ MapWithMarker.displayName = 'MapWithMarker';`}
           <MarkerWithPopup />
           <SyntaxHighlighter className="code" language="jsx" style={prism}>
             {`import React, { Component } from 'react';
-import { MapboxMap, Marker } from 'react-mapbox-wrapper';
+import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
 export default class MarkerWithPopup extends Component {
   constructor(props) {
@@ -159,7 +166,6 @@ export default class MarkerWithPopup extends Component {
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
         coordinates={global.DEFAULT_COORDINATES}
-        zoom={15}
         className="map-container"
         onLoad={this.onMapLoad}
       >
@@ -180,7 +186,7 @@ MarkerWithPopup.displayName = 'MarkerWithPopup';`}
           <CustomMarkerOnOver />
           <SyntaxHighlighter className="code" language="jsx" style={prism}>
             {`import React, { Component } from 'react';
-import { MapboxMap, Marker } from 'react-mapbox-wrapper';
+import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
 export default class CustomMarker extends Component {
   constructor(props) {
@@ -218,7 +224,6 @@ export default class CustomMarker extends Component {
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
         coordinates={global.DEFAULT_COORDINATES}
-        zoom={15}
         className="map-container"
         onLoad={this.onMapLoad}
       >
@@ -239,14 +244,10 @@ CustomMarker.displayName = 'CustomMarker';`}
           <AllInOne />
           <SyntaxHighlighter className="code" language="jsx" style={prism}>
             {`import React, { Component } from 'react';
-import { MapboxMap, Marker, Circle, Helpers } from 'react-mapbox-wrapper';
+import MapboxMap, { Marker, Circle, Helpers } from 'react-mapbox-wrapper';
 
 const SENTIER_COORDINATES = { lat: 48.868526, lng: 2.3434886 };
 const RADIUS_COORDINATES = { lat: 48.870362, lng: 2.3400597 };
-
-const bounds = Helpers.newBounds();
-bounds.extend(Helpers.newBound(global.DEFAULT_COORDINATES));
-bounds.extend(Helpers.newBound(SENTIER_COORDINATES));
 
 export default class AllInOne extends Component {
   constructor(props) {
@@ -258,6 +259,10 @@ export default class AllInOne extends Component {
   onMapLoad(map) {
     this.map = map;
     this.forceUpdate();
+
+    const bounds = Helpers.newBounds();
+    bounds.extend(Helpers.newBound(global.DEFAULT_COORDINATES));
+    bounds.extend(Helpers.newBound(SENTIER_COORDINATES));
 
     this.map.jumpTo(this.map.cameraForBounds(bounds, { padding: 120 }));
   }
@@ -311,7 +316,6 @@ export default class AllInOne extends Component {
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
         coordinates={global.DEFAULT_COORDINATES}
-        zoom={15}
         className="map-container"
         onLoad={this.onMapLoad}
         withCompass
@@ -330,7 +334,11 @@ AllInOne.displayName = 'AllInOne';`}
       </div>
 
       <footer className="footer">
-        Made with <span role="img" aria-label="love">❤️</span> by{' '}
+        Made with{' '}
+        <span role="img" aria-label="love">
+          ❤️
+        </span>{' '}
+        by{' '}
         <a href="https://www.meilleursagents.com" target="_blank" rel="noreferrer noopener">
           MeilleursAgents
         </a>

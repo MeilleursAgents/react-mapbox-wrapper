@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MapboxMap, Marker, Circle, Helpers } from 'react-mapbox-wrapper';
+import MapboxMap, { Marker, Circle, Helpers } from 'react-mapbox-wrapper';
 
 const SENTIER_COORDINATES = { lat: 48.868526, lng: 2.3434886 };
 const RADIUS_COORDINATES = { lat: 48.870362, lng: 2.3400597 };
@@ -71,7 +71,6 @@ export default class AllInOne extends Component {
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
         coordinates={global.DEFAULT_COORDINATES}
-        zoom={15}
         className="map-container"
         onLoad={this.onMapLoad}
         withCompass
