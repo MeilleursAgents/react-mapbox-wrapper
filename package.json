@@ -8,10 +8,11 @@
   },
   "main": "build/index.js",
   "scripts": {
+    "peers": "npm-install-peers",
     "format": "prettier-eslint --write",
     "lint": "eslint --fix --ext .jsx,.js src",
-    "test": "NODE_PATH=./src ./node_modules/.bin/nyc --all ./node_modules/.bin/mocha --opts ./mocha.opts \"./src/**/*.test.js\" \"./src/**/*.test.jsx\"",
-    "test:file": "NODE_PATH=./src ./node_modules/.bin/mocha --opts ./mocha.opts",
+    "test": "NODE_PATH=./src nyc --all mocha --opts ./mocha.opts \"./src/**/*.test.js\" \"./src/**/*.test.jsx\"",
+    "test:file": "NODE_PATH=./src mocha --opts ./mocha.opts",
     "doc": "esdoc -c esdoc.json",
     "start": "webpack --watch",
     "build": "webpack -p",
@@ -31,13 +32,6 @@
     "node": ">=8.0.0"
   },
   "peerDependencies": {
-    "@turf/circle": "^6.0.0",
-    "mapbox-gl": "^0.46.0",
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
-  },
-  "dependencies": {
     "@turf/circle": "^6.0.0",
     "mapbox-gl": "^0.46.0",
     "prop-types": "^15.6.0",
@@ -80,13 +74,15 @@
     "ignore-styles": "5.0.1",
     "jsdom": "12.0.0",
     "mocha": "5.2.0",
+    "npm-install-peers": "1.2.1",
     "nyc": "12.0.2",
     "prettier-eslint-cli": "4.7.1",
     "sinon": "5.1.1",
     "sinon-chai": "3.1.0",
     "style-loader": "0.23.0",
     "webpack": "4.12.0",
-    "webpack-cli": "3.0.3"
+    "webpack-cli": "3.0.3",
+    "webpack-node-externals": "1.7.2"
   },
   "bugs": {
     "url": "https://github.com/MeilleursAgents/react-mapbox-wrapper/issues"

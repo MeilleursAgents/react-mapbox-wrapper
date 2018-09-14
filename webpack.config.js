@@ -1,5 +1,10 @@
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
+/**
+ * Determine wether or not is the production build.
+ * @type {Boolean}
+ */
 const isBuild = process.env.npm_lifecycle_event === 'build';
 
 module.exports = {
@@ -33,10 +38,7 @@ module.exports = {
         modules: ['node_modules', './src'],
     },
 
-    externals: {
-        react: 'react',
-        'prop-types': 'prop-types',
-        'mapbox-gl': 'mapbox-gl',
-        '@turf/circle': '@turf/circle',
-    },
+    externals: [nodeExternals({
+        whitelist: [/mapbox-gl\/dist\/mapbox-gl.css/],
+    })]
 };
