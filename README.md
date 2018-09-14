@@ -31,6 +31,20 @@ SimpleMap.displayName = 'SimpleMap';
 
 See [examples](examples/src/) folder for more example.
 
+## Getting started
+
+Read carefully the [getting started section](https://www.mapbox.com/mapbox-gl-js/api/) of Mapbox GL API.
+
+If you use Webpack, you should add the following parameter in order to properly build your app.
+
+```js
+module: {
+    noParse: /(mapbox-gl)\.js$/,
+}
+```
+
+`react-mapbox-wrapper` import the corresponding CSS stylesheet from Javascript, you don't have to do it.
+
 ## API
 
 ### MapboxMap
@@ -92,6 +106,10 @@ React Component that render a Circle. Extra props are directly passed to the [Ma
 | paint | Object | | [Paint option of the layer](https://www.mapbox.com/mapbox-gl-js/style-spec#layer-paint) |
 
 ## Development
+
+```js
+npm install && npm run peers # install both dependencies and peers
+```
 
 You can use [`npm link`](https://docs.npmjs.com/cli/link) while developping new features on this repo for use in targeted repository.
 
