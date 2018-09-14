@@ -219,7 +219,7 @@ export function performanceTests() {
     };
 }
 
-export function isSupported(options) {
+function isSupported(options) {
     return {
         isBrowser: isBrowser(),
         isArraySupported: isArraySupported(),
@@ -235,7 +235,7 @@ export function isSupported(options) {
     };
 }
 
-export function fullDiagnostic() {
+function fullDiagnostic() {
     return createMap().then(result => ({
         supported: mapboxgl.supported(),
         isSupported: isSupported(),
@@ -251,4 +251,11 @@ export function fullDiagnostic() {
             language: navigator.language,
         },
     }));
+}
+
+export default {
+    createMap,
+    performanceTests,
+    isSupported,
+    fullDiagnostic,
 }
