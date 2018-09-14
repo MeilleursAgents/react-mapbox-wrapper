@@ -84,7 +84,7 @@ export function isFunction(fn) {
  * @type {Boolean}
  */
 export function isBrowser() {
-    return !(Object.prototype.toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]');
+    return !(Object.prototype.toString.call(global.process) === '[object process]');
 }
 
 export default {
