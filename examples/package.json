@@ -4,10 +4,11 @@
   "private": true,
   "homepage": "https://meilleursagents.github.io/react-mapbox-wrapper",
   "dependencies": {
-    "@turf/circle": "6.0.1",
-    "mapbox-gl": "0.46.0",
+    "@turf/circle": "^6.0.0",
+    "mapbox-gl": "^0.46.0",
     "react": "16.5.0",
     "react-dom": "16.5.0",
+    "react-mapbox-wrapper": "0.1.0",
     "react-scripts": "1.1.5",
     "react-syntax-highlighter": "8.0.1"
   },

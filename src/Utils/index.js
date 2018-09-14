@@ -83,13 +83,12 @@ export function isFunction(fn) {
  * Checking if we are in a browser or not.
  * @type {Boolean}
  */
-export const isBrowser = !(
-    typeof process === 'object' &&
-    String(process) === '[object process]' &&
-    !process.browser
-);
+export function isBrowser() {
+    return !(Object.prototype.toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]');
+}
 
 export default {
     deepEqual,
     isFunction,
+    isBrowser,
 };
