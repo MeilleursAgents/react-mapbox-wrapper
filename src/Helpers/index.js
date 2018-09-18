@@ -1,5 +1,25 @@
+import circle from '@turf/circle';
 import { isFunction } from 'Utils';
 import mapboxgl from 'Lib';
+
+/**
+ * Number of points to draw a circle.
+ * @type {Number}
+ */
+const CIRCLE_POINTS_CONFIG = 64;
+
+/**
+ * Get circle points.
+ * @param  {Object} coordinates Center coordinates
+ * @param  {Number} radius      Radius in meters
+ * @return {Object}             GeoJSON data
+ */
+export function getCircleData(coordinates, radius) {
+    return circle([coordinates.lng, coordinates.lat], radius / 1000, {
+        steps: CIRCLE_POINTS_CONFIG,
+        units: 'kilometers',
+    });
+}
 
 /**
  * Get layer identifier from source identifier.
@@ -126,6 +146,7 @@ export function removeGeoJSON(map, id) {
 }
 
 export default {
+    getCircleData,
     getLayerId,
     coordinatesAreEqual,
     newBounds,

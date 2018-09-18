@@ -44,7 +44,7 @@ export default function App() {
 
       <a
         className="link"
-        href="https://github.com/MeilleursAgents/react-mapbox-wrapper"
+        href="https://github.com/MeilleursAgents/react-mapbox-wrapper#usage"
         target="_blank"
         rel="noreferrer noopener"
       >

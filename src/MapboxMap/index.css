@@ -1,4 +1,4 @@
 .mapboxgl-map .mapboxgl-canvas {
   top: 0;
-  right: 0;
+  left: 0;
 }
