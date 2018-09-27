@@ -15,21 +15,6 @@ const CIRCLE_POINTS_CONFIG = 64;
 const UNITS = ["kilometers", "meters", "miles", "feet"];
 
 /**
- * Get circle points.
- * @param  {Object} coordinates Center coordinates
- * @param  {Number} radius      Radius
- * @param  {String} unit        Unit of the radius
- * @return {Object}             GeoJSON data
- */
-export function getCircleData(coordinates, radius, unit) {
-    const convertedRadiusUnit = convertRadiusUnit(radius, unit);
-    return circle([coordinates.lng, coordinates.lat], convertedRadiusUnit.radius, {
-        steps: CIRCLE_POINTS_CONFIG,
-        units: convertedRadiusUnit.unit,
-    });
-}
-    
-/**
  * Convert the radius into the unit given
  * @param {int} radius unit 
  * @param {string} unit to convert to if necessary
@@ -57,6 +42,22 @@ export function convertRadiusUnit(radius, unit) {
 
     return { radius: convertedRadius, unit: convertedUnit };
 }
+
+/**
+ * Get circle points.
+ * @param  {Object} coordinates Center coordinates
+ * @param  {Number} radius      Radius
+ * @param  {String} unit        Unit of the radius
+ * @return {Object}             GeoJSON data
+ */
+export function getCircleData(coordinates, radius, unit) {
+    const convertedRadiusUnit = convertRadiusUnit(radius, unit);
+    return circle([coordinates.lng, coordinates.lat], convertedRadiusUnit.radius, {
+        steps: CIRCLE_POINTS_CONFIG,
+        units: convertedRadiusUnit.unit,
+    });
+}
+
 
 /**
  * Get layer identifier from source identifier.
