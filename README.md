@@ -79,18 +79,18 @@ React Component that render a Marker. Extra props are directly passed to the [Ma
 
 | Props | Type | Default | Description |
 | -- | -- | -- | -- |
-| map | Object | required | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn) |
-| coordinates | Object | required | Coordinates of the marker <br /> In the form `{ lng: 3.4, lat: 1.2 }` |
 | children | Node | `null` | Marker HTML DOM, default marker will be used if not provided |
-| getRef | func |  | Callback function called with marker's ref (useful for calling `#moveToTop()` function) |
+| coordinates | Object | required | Coordinates of the marker <br /> In the form `{ lng: 3.4, lat: 1.2 }` |
 | draggable | bool | `false` | Allow user to drag'n'drop Marker |
+| getRef | func |  | Callback function called with marker's ref (useful for calling `#moveToTop()` function) |
+| map | Object | required | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn) |
 | onDragEnd | func |  | Callback function called on [marker's dragend](https://www.mapbox.com/mapbox-gl-js/api/#marker.event:dragend) |
-| popup | Node |  | Popup attached to the marker, displayed on click to marker |
-| popupOffset | number |  | [Popup offset param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
-| popupCloseButton | bool | `false` | [Popup closeButton param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
-| popupOnOver | bool | `false` | Trigger popup show on mouse over (only available if **children** are provided, default marker cannot be bind) |
-| onMouseOver | func |  | Callback function called on marker or popup mouseOver |
 | onMouseOut | func |  | Callback function called on marker or popup mouseOut |
+| onMouseOver | func |  | Callback function called on marker or popup mouseOver |
+| popup | Node |  | Popup attached to the marker, displayed on click to marker |
+| popupCloseButton | bool | `false` | [Popup closeButton param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
+| popupOffset | number |  | [Popup offset param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
+| popupOnOver | bool | `false` | Trigger popup show on mouse over (only available if **children** are provided, default marker cannot be bind) |
 
 ### Circle
 
@@ -98,12 +98,12 @@ React Component that render a Circle. Extra props are directly passed to the [Ma
 
 | Props | Type | Default | Description |
 | -- | -- | -- | -- |
-| map | Object | required | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn) |
 | coordinates | Object | required | Coordinates of the marker <br /> In the form `{ lng: 3.4, lat: 1.2 }` |
 | id | string | required | Identifier of circle, used to name the underlying layer |
-| radius | number | required | Radius of circle, in kilometers |
+| map | Object | required | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn) |
 | onClick | func | | Callback function called on circle's click |
 | paint | Object | | [Paint option of the layer](https://www.mapbox.com/mapbox-gl-js/style-spec#layer-paint) |
+| radius | number | required | Radius of circle, in kilometers |
 
 ## Development
 
