@@ -9,16 +9,53 @@ import mapboxgl from 'Lib';
 const CIRCLE_POINTS_CONFIG = 64;
 
 /**
+ * Array of possible units
+ * @type {Array}
+ */
+const UNITS = ["kilometers", "meters", "miles", "feet"];
+
+/**
  * Get circle points.
  * @param  {Object} coordinates Center coordinates
- * @param  {Number} radius      Radius in meters
+ * @param  {Number} radius      Radius
+ * @param  {String} unit        Unit of the radius
  * @return {Object}             GeoJSON data
  */
-export function getCircleData(coordinates, radius) {
-    return circle([coordinates.lng, coordinates.lat], radius / 1000, {
+export function getCircleData(coordinates, radius, unit) {
+    const convertedRadiusUnit = convertRadiusUnit(radius, unit);
+    return circle([coordinates.lng, coordinates.lat], convertedRadiusUnit.radius, {
         steps: CIRCLE_POINTS_CONFIG,
-        units: 'kilometers',
+        units: convertedRadiusUnit.unit,
     });
+}
+    
+/**
+ * Convert the radius into the unit given
+ * @param {int} radius unit 
+ * @param {string} unit to convert to if necessary
+ */
+export function convertRadiusUnit(radius, unit) {
+    let convertedRadius = radius;
+    let convertedUnit = unit;
+
+    if(!Number.isInteger(radius)) {
+        global.console.error('Radius is not an integer');
+    }
+
+    if(unit && UNITS.indexOf(unit) === -1) {
+        global.console.warn('The unit is not supported, the fallback \'kilometers\' is used');
+    }
+
+    if(!unit || (unit && (unit === 'meters' || UNITS.indexOf(unit) === -1))) {
+        convertedRadius = radius / 1000;
+        convertedUnit = 'kilometers';
+    }
+    else if(unit === 'feet') {
+        convertedRadius = radius / 5280;
+        convertedUnit = 'miles';
+    }
+
+    return { radius: convertedRadius, unit: convertedUnit };
 }
 
 /**
@@ -146,11 +183,12 @@ export function removeGeoJSON(map, id) {
 }
 
 export default {
+    convertRadiusUnit,
+    coordinatesAreEqual,
+    drawGeoJSON,
     getCircleData,
     getLayerId,
-    coordinatesAreEqual,
-    newBounds,
     newBound,
-    drawGeoJSON,
+    newBounds,
     removeGeoJSON,
 };

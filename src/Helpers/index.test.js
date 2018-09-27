@@ -1,5 +1,5 @@
 import sinon from 'sinon';
-import { drawGeoJSON, removeGeoJSON, getLayerId } from './';
+import { drawGeoJSON, removeGeoJSON, getLayerId, convertRadiusUnit } from './';
 
 describe('drawGeoJSON', () => {
     it('should do nothing if no map', () => {
@@ -98,5 +98,28 @@ describe('removeGeoJSON', () => {
         expect(map.removeLayer.called).to.equal(true);
         expect(map.getSource.called).to.equal(true);
         expect(map.removeSource.called).to.equal(true);
+    });
+});
+
+
+describe('convertRadiusUnit', () => {
+    it('should convert radius 15 with a bad unit to 0.015 km', () => {
+        expect(convertRadiusUnit(15, 'notValidUnit')).to.deep.equal({radius:0.015, unit:'kilometers'});
+    });
+    
+    it('should convert radius 15 with no unit to 0.015 km', () => {
+        expect(convertRadiusUnit(15)).to.deep.equal({radius:0.015, unit:'kilometers'});
+    });
+
+    it('should convert radius 15 with unit kilometers to 15 km', () => {
+        expect(convertRadiusUnit(15, 'kilometers')).to.deep.equal({radius:15, unit:'kilometers'});
+    });
+
+    it('should convert radius 5280 with unit foot to 1 miles', () => {
+        expect(convertRadiusUnit(5280, 'feet')).to.deep.equal({radius:1, unit:'miles'});
+    });
+
+    it('should convert radius 15 with unit miles to 15 miles', () => {
+        expect(convertRadiusUnit(15, 'miles')).to.deep.equal({radius:15, unit:'miles'});
     });
 });
