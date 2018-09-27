@@ -12,26 +12,23 @@ const CIRCLE_POINTS_CONFIG = 64;
  * Array of possible units
  * @type {Array}
  */
-const UNITS = ["kilometers", "meters", "miles", "feet"];
+export const UNITS = ["kilometers", "meters", "miles", "feet"];
 
 /**
  * Convert the radius into the unit given
- * @param {int} radius unit 
- * @param {string} unit to convert to if necessary
+ * @param {Number} radius unit 
+ * @param {String} unit to convert to if necessary
  */
-export function convertRadiusUnit(radius, unit) {
+export function convertRadiusUnit(radius, unit='kilometers') {
     let convertedRadius = radius;
     let convertedUnit = unit;
 
-    if(!Number.isInteger(radius)) {
-        global.console.error('Radius is not an integer');
+    if(UNITS.indexOf(unit) === -1) {
+        convertedUnit = 'kilometers'
+        global.console.warn(`The unit is not supported, the fallback "${convertedUnit}" is used`);
     }
 
-    if(unit && UNITS.indexOf(unit) === -1) {
-        global.console.warn('The unit is not supported, the fallback \'kilometers\' is used');
-    }
-
-    if(!unit || (unit && (unit === 'meters' || UNITS.indexOf(unit) === -1))) {
+    if(unit === 'meters') {
         convertedRadius = radius / 1000;
         convertedUnit = 'kilometers';
     }

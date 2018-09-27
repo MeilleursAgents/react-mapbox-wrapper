@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { deepEqual } from 'Utils';
-import { coordinatesAreEqual, drawGeoJSON, removeGeoJSON, getCircleData } from 'Helpers';
+import { coordinatesAreEqual, drawGeoJSON, removeGeoJSON, getCircleData, UNITS } from 'Helpers';
 
 /**
  * Update radius GeoJSON layer.
@@ -79,12 +79,12 @@ Circle.propTypes = {
     onClick: PropTypes.func,
     paint: PropTypes.shape({}),
     radius: PropTypes.number.isRequired,
-    unit: PropTypes.string,
+    unit: PropTypes.oneOf(UNITS),
 };
 
 Circle.defaultProps = {
     onClick: undefined,
     paint: {},
-    unit: 'kilometers',
+    unit: UNITS[0],
 };
 

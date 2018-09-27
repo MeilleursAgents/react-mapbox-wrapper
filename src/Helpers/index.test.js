@@ -103,16 +103,20 @@ describe('removeGeoJSON', () => {
 
 
 describe('convertRadiusUnit', () => {
-    it('should convert radius 15 with a bad unit to 0.015 km', () => {
-        expect(convertRadiusUnit(15, 'notValidUnit')).to.deep.equal({radius:0.015, unit:'kilometers'});
+    it('should convert radius 15 with a bad unit to 15 km', () => {
+        expect(convertRadiusUnit(15, 'notValidUnit')).to.deep.equal({radius:15, unit:'kilometers'});
     });
     
-    it('should convert radius 15 with no unit to 0.015 km', () => {
-        expect(convertRadiusUnit(15)).to.deep.equal({radius:0.015, unit:'kilometers'});
+    it('should convert radius 15 with no unit to 15 km', () => {
+        expect(convertRadiusUnit(15)).to.deep.equal({radius:15, unit:'kilometers'});
     });
 
     it('should convert radius 15 with unit kilometers to 15 km', () => {
         expect(convertRadiusUnit(15, 'kilometers')).to.deep.equal({radius:15, unit:'kilometers'});
+    });
+
+    it('should convert radius 15 with unit meters to 0.015 km', () => {
+        expect(convertRadiusUnit(15, 'meters')).to.deep.equal({radius:0.015, unit:'kilometers'});
     });
 
     it('should convert radius 5280 with unit foot to 1 miles', () => {

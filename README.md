@@ -104,7 +104,7 @@ React Component that render a Circle. Extra props are directly passed to the [Ma
 | onClick | func | | Callback function called on circle's click |
 | paint | Object | | [Paint option of the layer](https://www.mapbox.com/mapbox-gl-js/style-spec#layer-paint) |
 | radius | number | required | Radius of circle, in kilometers |
-| unit | string | `meters` | Unit of the radius. values can be : `meters`, `kilometers`, `miles`, `feet` |
+| unit | string | `kilometers` | Unit of the radius. values can be : `kilometers`, `meters`, `miles`, `feet` |
 
 ## Development
 

@@ -59,6 +59,7 @@ export default class AllInOne extends Component {
           coordinates={RADIUS_COORDINATES}
           map={this.map}
           radius={500}
+          unit="meters"
           paint={{
             'fill-color': '#0074e4',
             'fill-opacity': 0.33,
