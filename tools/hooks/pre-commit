@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+diffInitial=`git diff --name-only --diff-filter=ACMR`
+
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+RESET='\033[0m'
+
+package=`git diff --cached --name-only --diff-filter=ACMR | grep -E "package.json$"`
+js=`git diff --cached --name-only --diff-filter=ACMR | grep -E "jsx?$"`
+
+pass=0
+installed=false
+
+function installDependencies() {
+  if [ "${installed}" = true ]; then
+      return
+  fi
+
+  installed=true
+
+  if command -v npm > /dev/null 2>&1; then
+    npm --silent install --no-audit
+    npm run peers
+
+    pass=$?
+  else
+    echo -e "${RED}${#:-npm not found}{RESET}"
+  fi
+}
+
+function checkInstall() {
+  echo -e "${BLUE}Package.json has changed, running install${RESET}"
+
+  installDependencies "npm not found in $PATH, check status of ${BLUE}package-lock.json"
+}
+
+function checkFormat() {
+  echo -e "${BLUE}JS/JSX has changed, formatting files${RESET}"
+
+  installDependencies
+  npm run --silent format:file ${1}
+
+  pass=$?
+}
+
+function checkEsLint() {
+  echo -e "${BLUE}JS/JSX has changed, linting files${RESET}"
+
+  installDependencies
+  npm run --silent lint:file ${1}
+
+  pass=$?
+}
+
+if [ "${package}" != "" ]; then
+  checkInstall
+fi
+
+if [ "${pass}" == "0" ] && [ "${js}" != "" ]; then
+  checkFormat "${js}"
+fi
+
+if [ "${pass}" == "0" ] && [ "${js}" != "" ]; then
+  checkEsLint "${js}"
+fi
+
+if [ ! "${pass}" == "0" ]; then
+    echo -e "${RED}COMMIT FAILED${RESET}"
+    echo -e "${RED}Last check failed during pre-commit. Please fix errors and try committing again.${RESET}"
+
+    exit 1
+fi
+
+diffFinal=`git diff --name-only --diff-filter=ACMR`
+
+if [ ! "$diffInitial" == "$diffFinal" ]; then
+  echo -e "${RED}Pre-commit has changes files${RESET}"
+  echo -e "${RED}Consider adding updated files with ${BLUE}git add -i \&\& git commit --amend${RESET}"
+fi
+
+exit 0

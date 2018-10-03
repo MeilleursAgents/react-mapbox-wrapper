@@ -116,3 +116,11 @@ You can use [`npm link`](https://docs.npmjs.com/cli/link) while developping new 
 ```bash
 npm link /path/to/react-mapbox-wrapper
 ```
+
+### Git hooks
+
+You can use our `pre-commit` hook for ensuring consistent format and linting before committing by running command:
+
+```bash
+./tools/install_hooks.sh
+```
