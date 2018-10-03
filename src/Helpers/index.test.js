@@ -1,5 +1,9 @@
 import sinon from 'sinon';
+import chai from 'chai';
+import sinonChai from 'sinon-chai';
 import { drawGeoJSON, removeGeoJSON, getLayerId, convertRadiusUnit } from './';
+
+chai.use(sinonChai);
 
 describe('drawGeoJSON', () => {
     it('should do nothing if no map', () => {
@@ -103,12 +107,40 @@ describe('removeGeoJSON', () => {
 
 
 describe('convertRadiusUnit', () => {
-    it('should convert radius 15 with a bad unit to 15 km', () => {
+    beforeEach(() => {
+        sinon.spy(console, 'error');
+        sinon.spy(console, 'warn');
+      });
+    
+      afterEach(() => {
+        global.console.error.restore();
+        global.console.warn.restore();
+      });
+
+    it('should display error "The radius given is not a number" when no radius is given', () => {
+        convertRadiusUnit();
+        // eslint-disable-next-line no-unused-expressions
+        expect(global.console.error).to.be.called;
+    });
+
+    it('should display error "The radius given is not a number" when the radius given isNaN', () => {
+        convertRadiusUnit('NotANumber');
+        // eslint-disable-next-line no-unused-expressions
+        expect(global.console.error).to.be.called;
+    })
+    
+    it('should convert radius 15 with a bad unit to 15 km and display warn', () => {
         expect(convertRadiusUnit(15, 'notValidUnit')).to.deep.equal({radius:15, unit:'kilometers'});
+        // eslint-disable-next-line no-unused-expressions
+        expect(global.console.warn).to.be.called;
     });
     
     it('should convert radius 15 with no unit to 15 km', () => {
         expect(convertRadiusUnit(15)).to.deep.equal({radius:15, unit:'kilometers'});
+    });
+
+    it('should convert radius "15" in string with no unit to 15 km', () => {
+        expect(convertRadiusUnit('15')).to.deep.equal({radius:15, unit:'kilometers'});
     });
 
     it('should convert radius 15 with unit kilometers to 15 km', () => {

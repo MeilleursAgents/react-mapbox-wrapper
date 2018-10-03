@@ -20,8 +20,12 @@ export const UNITS = ["kilometers", "meters", "miles", "feet"];
  * @param {String} unit to convert to if necessary
  */
 export function convertRadiusUnit(radius, unit='kilometers') {
-    let convertedRadius = radius;
+    let convertedRadius = Number(radius);
     let convertedUnit = unit;
+
+    if(isNaN(radius)) {
+        global.console.error('The radius given is not a number');
+    }
 
     if(UNITS.indexOf(unit) === -1) {
         convertedUnit = 'kilometers'
@@ -31,8 +35,7 @@ export function convertRadiusUnit(radius, unit='kilometers') {
     if(unit === 'meters') {
         convertedRadius = radius / 1000;
         convertedUnit = 'kilometers';
-    }
-    else if(unit === 'feet') {
+    } else if(unit === 'feet') {
         convertedRadius = radius / 5280;
         convertedUnit = 'miles';
     }
