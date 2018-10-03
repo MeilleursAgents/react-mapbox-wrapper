@@ -9,8 +9,10 @@
   "main": "build/index.js",
   "scripts": {
     "peers": "npm-install-peers",
-    "format": "prettier-eslint --write",
-    "lint": "eslint --fix --ext .jsx,.js src",
+    "format:file": "prettier-eslint --write --",
+    "format": "npm run format:file \"src/**/**.js\" \"src/**/**.jsx\"",
+    "lint:file": "eslint --fix --ext .jsx,.js --",
+    "lint": "npm run lint:file src",
     "test": "NODE_PATH=./src nyc --all mocha --opts ./mocha.opts \"./src/**/*.test.js\" \"./src/**/*.test.jsx\"",
     "test:file": "NODE_PATH=./src mocha --opts ./mocha.opts",
     "doc": "esdoc -c esdoc.json",
