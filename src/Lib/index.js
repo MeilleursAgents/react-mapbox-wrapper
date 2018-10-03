@@ -5,4 +5,4 @@ import { isBrowser } from 'Utils';
  * @type {Object}
  */
 // eslint-disable-next-line global-require
-export default isBrowser() ? require('mapbox-gl') : {};
+export default (isBrowser() ? require('mapbox-gl') : {});

@@ -1,4 +1,4 @@
-import { deepEqual } from './'
+import { deepEqual } from './';
 
 describe('deepEqual', () => {
     it('should work with native variable', () => {

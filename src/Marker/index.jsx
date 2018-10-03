@@ -143,15 +143,7 @@ export default class Marker extends Component {
             return;
         }
 
-        const {
-            coordinates,
-            map,
-            draggable,
-            onDragEnd,
-            getRef,
-            children,
-            ...rest
-        } = this.props;
+        const { coordinates, map, draggable, onDragEnd, getRef, children, ...rest } = this.props;
 
         this.marker = new mapboxgl.Marker({
             element: children ? element : null,
