@@ -118,12 +118,12 @@ describe('convertRadiusUnit', () => {
 
     it('should display error "The radius given is not a number" when no radius is given', () => {
         convertRadiusUnit();
-        expect(global.console.error.called).to.equal(true);
+        expect(global.console.error.calledWith('The radius given is not a number')).to.equal(true);
     });
 
     it('should display error "The radius given is not a number" when the radius given isNaN', () => {
         convertRadiusUnit('NotANumber');
-        expect(global.console.error.called).to.equal(true);
+        expect(global.console.error.calledWith('The radius given is not a number')).to.equal(true);
     });
 
     it('should convert radius 15 with a bad unit to 15 km and display warn', () => {
@@ -131,7 +131,7 @@ describe('convertRadiusUnit', () => {
             radius: 15,
             unit: 'kilometers',
         });
-        expect(global.console.warn.called).to.equal(true);
+        expect(global.console.warn.calledWith('The unit "notValidUnit" is not supported, the fallback "kilometers" is used')).to.equal(true);
     });
 
     it('should convert radius 15 with no unit to 15 km', () => {
