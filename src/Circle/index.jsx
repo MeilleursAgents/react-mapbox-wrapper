@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { deepEqual } from 'Utils';
-import { coordinatesAreEqual, drawGeoJSON, removeGeoJSON, getCircleData } from 'Helpers';
+import { coordinatesAreEqual, drawGeoJSON, removeGeoJSON, getCircleData, UNITS } from 'Helpers';
 
 /**
  * Update radius GeoJSON layer.
@@ -12,7 +12,7 @@ import { coordinatesAreEqual, drawGeoJSON, removeGeoJSON, getCircleData } from '
  * @param {Object} paint       Paint options
  * @param {Function} onClick   onClick callback
  */
-function updateRadiusLayer(map, id, coordinates, radius, paint, onClick) {
+function updateRadiusLayer(map, id, coordinates, radius, unit, paint, onClick) {
     if (!map) {
         return;
     }
@@ -20,7 +20,7 @@ function updateRadiusLayer(map, id, coordinates, radius, paint, onClick) {
     if (!radius) {
         removeGeoJSON(map, id);
     } else {
-        drawGeoJSON(map, id, getCircleData(coordinates, radius), paint, onClick);
+        drawGeoJSON(map, id, getCircleData(coordinates, radius, unit), paint, onClick);
     }
 }
 
@@ -32,16 +32,16 @@ export default class Circle extends Component {
      * React lifecycle.
      */
     componentWillMount() {
-        const { map, id, coordinates, radius, paint, onClick } = this.props;
+        const { map, id, coordinates, radius, unit, paint, onClick } = this.props;
 
-        updateRadiusLayer(map, id, coordinates, radius, paint, onClick);
+        updateRadiusLayer(map, id, coordinates, radius, unit, paint, onClick);
     }
 
     /**
      * React lifecycle.
      * @param {Object} nextProps Next props
      */
-    componentWillReceiveProps({ id, map, coordinates, radius, paint, onClick }) {
+    componentWillReceiveProps({ id, map, coordinates, radius, unit, paint, onClick }) {
         const currentCoord = this.props.coordinates;
 
         if (
@@ -49,7 +49,7 @@ export default class Circle extends Component {
             this.props.radius !== radius ||
             !deepEqual(this.props.paint, paint)
         ) {
-            updateRadiusLayer(map, id, coordinates, radius, paint, onClick);
+            updateRadiusLayer(map, id, coordinates, radius, unit, paint, onClick);
         }
     }
 
@@ -80,9 +80,11 @@ Circle.propTypes = {
     onClick: PropTypes.func,
     paint: PropTypes.shape({}),
     radius: PropTypes.number.isRequired,
+    unit: PropTypes.oneOf(UNITS),
 };
 
 Circle.defaultProps = {
     onClick: undefined,
     paint: {},
+    unit: UNITS[0],
 };
