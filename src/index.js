@@ -7,4 +7,4 @@ export { default as Marker } from 'Marker';
 export { default as Popup } from 'Popup';
 export { default as Utils } from 'Utils';
 
-export default MapboxMap
+export default MapboxMap;

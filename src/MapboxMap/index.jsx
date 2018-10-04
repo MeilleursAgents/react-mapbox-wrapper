@@ -139,11 +139,7 @@ export default class MapboxMap extends Component {
             return;
         }
 
-        const {
-            coordinates,
-            onLoad,
-            ...mapOptions
-        } = this.props;
+        const { coordinates, onLoad, ...mapOptions } = this.props;
 
         this.map = new mapboxgl.Map({
             ...mapOptions,
@@ -213,7 +209,11 @@ export default class MapboxMap extends Component {
         }
 
         return (
-            <div className={className || ''} ref={this.initMap} style={{ height: '100%', width: '100%' }}>
+            <div
+                className={className || ''}
+                ref={this.initMap}
+                style={{ height: '100%', width: '100%' }}
+            >
                 {children}
             </div>
         );
@@ -259,7 +259,7 @@ MapboxMap.defaultProps = {
     withFullscreen: false,
     withZoom: false,
     zoom: 15,
-    renderNotSupported: (className) => (
+    renderNotSupported: className => (
         <div
             className={className || ''}
             style={{

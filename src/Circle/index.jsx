@@ -22,7 +22,7 @@ function updateRadiusLayer(map, id, coordinates, radius, unit, paint, onClick) {
     } else {
         drawGeoJSON(map, id, getCircleData(coordinates, radius, unit), paint, onClick);
     }
-};
+}
 
 /**
  * Circle Component.
@@ -44,7 +44,8 @@ export default class Circle extends Component {
     componentWillReceiveProps({ id, map, coordinates, radius, unit, paint, onClick }) {
         const currentCoord = this.props.coordinates;
 
-        if (!coordinatesAreEqual(currentCoord, coordinates) ||
+        if (
+            !coordinatesAreEqual(currentCoord, coordinates) ||
             this.props.radius !== radius ||
             !deepEqual(this.props.paint, paint)
         ) {
@@ -87,4 +88,3 @@ Circle.defaultProps = {
     paint: {},
     unit: UNITS[0],
 };
-

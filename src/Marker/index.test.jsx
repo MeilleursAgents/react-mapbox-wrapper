@@ -56,9 +56,7 @@ describe('<Marker />', () => {
     it('should set marker coordinates', () => {
         const props = defaultProps();
         const wrapper = mount(<Marker {...props} />);
-        expect(wrapper.instance().marker.setLngLat.calledWith({ lat: 10, lng: 10 })).to.equal(
-            true,
-        );
+        expect(wrapper.instance().marker.setLngLat.calledWith({ lat: 10, lng: 10 })).to.equal(true);
     });
 
     it('should add marker to map', () => {
@@ -129,7 +127,11 @@ describe('<Marker />', () => {
         const props = defaultProps();
         props.popup = <span>Hello World!</span>;
 
-        const wrapper = mount(<Marker {...props} popupOnOver>Content</Marker>);
+        const wrapper = mount(
+            <Marker {...props} popupOnOver>
+                Content
+            </Marker>,
+        );
         wrapper.instance().popup.isOpen = sinon.fake.returns(false);
         wrapper.find('[data-marker]').simulate('mouseOver');
 
@@ -141,7 +143,11 @@ describe('<Marker />', () => {
         props.popup = <span>Hello World!</span>;
         const onMouseOver = sinon.spy();
 
-        const wrapper = mount(<Marker {...props} popupOnOver onMouseOver={onMouseOver}>Content</Marker>);
+        const wrapper = mount(
+            <Marker {...props} popupOnOver onMouseOver={onMouseOver}>
+                Content
+            </Marker>,
+        );
         wrapper.instance().popup.isOpen = sinon.fake.returns(false);
         wrapper.find('[data-marker]').simulate('mouseOver');
 
@@ -152,7 +158,11 @@ describe('<Marker />', () => {
         const props = defaultProps();
         props.popup = <span>Hello World!</span>;
 
-        const wrapper = mount(<Marker {...props} popupOnOver>Content</Marker>);
+        const wrapper = mount(
+            <Marker {...props} popupOnOver>
+                Content
+            </Marker>,
+        );
         wrapper.instance().popup.isOpen = sinon.fake.returns(true);
         wrapper.find('[data-marker]').simulate('mouseOut');
 
@@ -166,7 +176,11 @@ describe('<Marker />', () => {
         props.popup = <span>Hello World!</span>;
         const onMouseOut = sinon.spy();
 
-        const wrapper = mount(<Marker {...props} popupOnOver onMouseOut={onMouseOut}>Content</Marker>);
+        const wrapper = mount(
+            <Marker {...props} popupOnOver onMouseOut={onMouseOut}>
+                Content
+            </Marker>,
+        );
         wrapper.instance().popup.isOpen = sinon.fake.returns(false);
         wrapper.find('[data-marker]').simulate('mouseOut');
 
