@@ -28,8 +28,10 @@ export function convertRadiusUnit(radius, unit = 'kilometers') {
     }
 
     if (UNITS.indexOf(unit) === -1) {
-        convertedUnit = 'kilometers';
-        global.console.warn(`The unit is not supported, the fallback "${convertedUnit}" is used`);
+        convertedUnit = UNITS[0];
+        global.console.warn(
+            `The unit "${unit}" is not supported, the fallback "${convertedUnit}" is used`,
+        );
     }
 
     if (unit === 'meters') {
@@ -51,10 +53,10 @@ export function convertRadiusUnit(radius, unit = 'kilometers') {
  * @return {Object}             GeoJSON data
  */
 export function getCircleData(coordinates, radius, unit) {
-    const convertedRadiusUnit = convertRadiusUnit(radius, unit);
-    return circle([coordinates.lng, coordinates.lat], convertedRadiusUnit.radius, {
+    const { radius: usedRadius, unit: usedUnit } = convertRadiusUnit(radius, unit);
+    return circle([coordinates.lng, coordinates.lat], usedRadius, {
         steps: CIRCLE_POINTS_CONFIG,
-        units: convertedRadiusUnit.unit,
+        units: usedUnit,
     });
 }
 
