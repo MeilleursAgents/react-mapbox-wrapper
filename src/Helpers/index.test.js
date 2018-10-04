@@ -105,17 +105,16 @@ describe('removeGeoJSON', () => {
     });
 });
 
-
 describe('convertRadiusUnit', () => {
     beforeEach(() => {
         sinon.spy(console, 'error');
         sinon.spy(console, 'warn');
-      });
-    
-      afterEach(() => {
+    });
+
+    afterEach(() => {
         global.console.error.restore();
         global.console.warn.restore();
-      });
+    });
 
     it('should display error "The radius given is not a number" when no radius is given', () => {
         convertRadiusUnit();
@@ -127,35 +126,44 @@ describe('convertRadiusUnit', () => {
         convertRadiusUnit('NotANumber');
         // eslint-disable-next-line no-unused-expressions
         expect(global.console.error).to.be.called;
-    })
-    
+    });
+
     it('should convert radius 15 with a bad unit to 15 km and display warn', () => {
-        expect(convertRadiusUnit(15, 'notValidUnit')).to.deep.equal({radius:15, unit:'kilometers'});
+        expect(convertRadiusUnit(15, 'notValidUnit')).to.deep.equal({
+            radius: 15,
+            unit: 'kilometers',
+        });
         // eslint-disable-next-line no-unused-expressions
         expect(global.console.warn).to.be.called;
     });
-    
+
     it('should convert radius 15 with no unit to 15 km', () => {
-        expect(convertRadiusUnit(15)).to.deep.equal({radius:15, unit:'kilometers'});
+        expect(convertRadiusUnit(15)).to.deep.equal({ radius: 15, unit: 'kilometers' });
     });
 
     it('should convert radius "15" in string with no unit to 15 km', () => {
-        expect(convertRadiusUnit('15')).to.deep.equal({radius:15, unit:'kilometers'});
+        expect(convertRadiusUnit('15')).to.deep.equal({ radius: 15, unit: 'kilometers' });
     });
 
     it('should convert radius 15 with unit kilometers to 15 km', () => {
-        expect(convertRadiusUnit(15, 'kilometers')).to.deep.equal({radius:15, unit:'kilometers'});
+        expect(convertRadiusUnit(15, 'kilometers')).to.deep.equal({
+            radius: 15,
+            unit: 'kilometers',
+        });
     });
 
     it('should convert radius 15 with unit meters to 0.015 km', () => {
-        expect(convertRadiusUnit(15, 'meters')).to.deep.equal({radius:0.015, unit:'kilometers'});
+        expect(convertRadiusUnit(15, 'meters')).to.deep.equal({
+            radius: 0.015,
+            unit: 'kilometers',
+        });
     });
 
     it('should convert radius 5280 with unit foot to 1 miles', () => {
-        expect(convertRadiusUnit(5280, 'feet')).to.deep.equal({radius:1, unit:'miles'});
+        expect(convertRadiusUnit(5280, 'feet')).to.deep.equal({ radius: 1, unit: 'miles' });
     });
 
     it('should convert radius 15 with unit miles to 15 miles', () => {
-        expect(convertRadiusUnit(15, 'miles')).to.deep.equal({radius:15, unit:'miles'});
+        expect(convertRadiusUnit(15, 'miles')).to.deep.equal({ radius: 15, unit: 'miles' });
     });
 });

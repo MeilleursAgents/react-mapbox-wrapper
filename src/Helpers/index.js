@@ -12,30 +12,30 @@ const CIRCLE_POINTS_CONFIG = 64;
  * Array of possible units
  * @type {Array}
  */
-export const UNITS = ["kilometers", "meters", "miles", "feet"];
+export const UNITS = ['kilometers', 'meters', 'miles', 'feet'];
 
 /**
  * Convert the radius into the unit given
- * @param {Number} radius unit 
+ * @param {Number} radius unit
  * @param {String} unit to convert to if necessary
  */
-export function convertRadiusUnit(radius, unit='kilometers') {
+export function convertRadiusUnit(radius, unit = 'kilometers') {
     let convertedRadius = Number(radius);
     let convertedUnit = unit;
 
-    if(isNaN(radius)) {
+    if (isNaN(radius)) {
         global.console.error('The radius given is not a number');
     }
 
-    if(UNITS.indexOf(unit) === -1) {
-        convertedUnit = 'kilometers'
+    if (UNITS.indexOf(unit) === -1) {
+        convertedUnit = 'kilometers';
         global.console.warn(`The unit is not supported, the fallback "${convertedUnit}" is used`);
     }
 
-    if(unit === 'meters') {
+    if (unit === 'meters') {
         convertedRadius = radius / 1000;
         convertedUnit = 'kilometers';
-    } else if(unit === 'feet') {
+    } else if (unit === 'feet') {
         convertedRadius = radius / 5280;
         convertedUnit = 'miles';
     }
@@ -57,7 +57,6 @@ export function getCircleData(coordinates, radius, unit) {
         units: convertedRadiusUnit.unit,
     });
 }
-
 
 /**
  * Get layer identifier from source identifier.
