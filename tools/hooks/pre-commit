@@ -7,7 +7,7 @@ RED='\033[0;31m'
 RESET='\033[0m'
 
 package=`git diff --cached --name-only --diff-filter=ACMR | grep -E "package.json$"`
-js=`git diff --cached --name-only --diff-filter=ACMR | grep -E "jsx?$"`
+js=`git diff --cached --name-only --diff-filter=ACMR src/ | grep -E "jsx?$"`
 
 pass=0
 installed=false
@@ -53,6 +53,15 @@ function checkEsLint() {
   pass=$?
 }
 
+function buildDist() {
+  echo -e "${BLUE}JS/JSX has changed, building index.js${RESET}"
+
+  installDependencies
+  npm run --silent build
+
+  pass=$?
+}
+
 if [ "${package}" != "" ]; then
   checkInstall
 fi
@@ -63,6 +72,10 @@ fi
 
 if [ "${pass}" == "0" ] && [ "${js}" != "" ]; then
   checkEsLint "${js}"
+fi
+
+if [ "${pass}" == "0" ] && [ "${js}" != "" ]; then
+  buildDist
 fi
 
 if [ ! "${pass}" == "0" ]; then
