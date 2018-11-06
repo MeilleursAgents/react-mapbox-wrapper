@@ -23,11 +23,12 @@ export function convertRadiusUnit(radius, unit = 'kilometers') {
     let convertedRadius = Number(radius);
     let convertedUnit = unit;
 
-    if (isNaN(radius)) {
+    if (!Number.isFinite(radius)) {
         global.console.error('The radius given is not a number');
     }
 
     if (UNITS.indexOf(unit) === -1) {
+        // eslint-disable-next-line prefer-destructuring
         convertedUnit = UNITS[0];
         global.console.warn(
             `The unit "${unit}" is not supported, the fallback "${convertedUnit}" is used`,

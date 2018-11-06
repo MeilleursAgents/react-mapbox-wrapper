@@ -3,7 +3,9 @@ import { mount } from 'enzyme';
 import sinon from 'sinon';
 import mapboxgl from 'Lib';
 import { DEBOUNCE_TIMEOUT } from 'MapboxMap';
-import Marker from './';
+import Marker from '.';
+
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 
 function defaultProps() {
     return {
@@ -30,19 +32,29 @@ describe('<Marker />', () => {
         /* eslint-disable no-undef */
         mapboxgl.Marker = class MarkerMock {
             setLngLat = sinon.spy();
+
             addTo = sinon.spy();
+
             setPopup = sinon.spy();
+
             togglePopup = sinon.spy();
+
             remove = sinon.spy();
+
             on = sinon.spy();
+
             getLngLat = sinon.spy();
         };
 
         mapboxgl.Popup = class PopupMock {
             setLngLat = sinon.spy();
+
             addTo = sinon.spy();
+
             remove = sinon.spy();
+
             isOpen = sinon.spy();
+
             setDOMContent = sinon.spy();
         };
         /* eslint-enable no-undef */

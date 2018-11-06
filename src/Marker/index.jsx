@@ -64,7 +64,7 @@ export default class Marker extends Component {
             return;
         }
 
-        const currentCoord = this.props.coordinates;
+        const { coordinates: currentCoord } = this.props;
         const nextCoord = nextProps.coordinates;
 
         if (currentCoord.lat !== nextCoord.lat || currentCoord.lng !== nextCoord.lng) {
@@ -196,6 +196,7 @@ export default class Marker extends Component {
     moveToTop() {
         if (this.marker) {
             this.marker.remove();
+            // eslint-disable-next-line react/destructuring-assignment
             this.marker.addTo(this.props.map);
         }
     }
@@ -213,7 +214,9 @@ export default class Marker extends Component {
                 <div
                     key="marker"
                     onMouseOver={this.onMarkerOver}
+                    onFocus={this.onMarkerOver}
                     onMouseOut={this.onMarkerOut}
+                    onBlur={this.onMarkerOut}
                     {...this.markerProps}
                 >
                     {children}
@@ -231,7 +234,9 @@ export default class Marker extends Component {
                         key="popup"
                         ref={this.initPopup}
                         onMouseOver={this.clearDebounce}
+                        onFocus={this.clearDebounce}
                         onMouseOut={this.onMarkerOut}
+                        onBlur={this.onMarkerOut}
                         closeButton={popupCloseButton}
                         offset={popupOffset}
                     >

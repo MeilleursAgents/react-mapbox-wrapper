@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import mapboxgl from 'Lib';
-import Popup from './';
+import Popup from '.';
 
 function defaultProps() {
     return {};
@@ -13,8 +13,11 @@ describe('<Popup />', () => {
         /* eslint-disable no-undef */
         mapboxgl.Popup = class PopupMock {
             setLngLat = sinon.spy();
+
             addTo = sinon.spy();
+
             remove = sinon.spy();
+
             setDOMContent = sinon.spy();
         };
         /* eslint-enable no-undef */
@@ -54,7 +57,7 @@ describe('<Popup />', () => {
 
         wrapper.instance().popup.setLngLat.resetHistory();
 
-        wrapper.setProps();
+        wrapper.setProps({});
 
         expect(wrapper.instance().popup.setLngLat.called).to.equal(false);
     });

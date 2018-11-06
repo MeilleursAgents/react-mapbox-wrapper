@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
-import { drawGeoJSON, removeGeoJSON, getLayerId, convertRadiusUnit } from './';
+import { drawGeoJSON, removeGeoJSON, getLayerId, convertRadiusUnit } from '.';
 
 chai.use(sinonChai);
 
@@ -131,7 +131,11 @@ describe('convertRadiusUnit', () => {
             radius: 15,
             unit: 'kilometers',
         });
-        expect(global.console.warn.calledWith('The unit "notValidUnit" is not supported, the fallback "kilometers" is used')).to.equal(true);
+        expect(
+            global.console.warn.calledWith(
+                'The unit "notValidUnit" is not supported, the fallback "kilometers" is used',
+            ),
+        ).to.equal(true);
     });
 
     it('should convert radius 15 with no unit to 15 km', () => {
