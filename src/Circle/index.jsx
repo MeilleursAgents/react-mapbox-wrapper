@@ -42,12 +42,16 @@ export default class Circle extends Component {
      * @param {Object} nextProps Next props
      */
     componentWillReceiveProps({ id, map, coordinates, radius, unit, paint, onClick }) {
-        const currentCoord = this.props.coordinates;
+        const {
+            coordinates: currentCoord,
+            radius: currentRadius,
+            paint: currentPaint,
+        } = this.props;
 
         if (
             !coordinatesAreEqual(currentCoord, coordinates) ||
-            this.props.radius !== radius ||
-            !deepEqual(this.props.paint, paint)
+            currentRadius !== radius ||
+            !deepEqual(currentPaint, paint)
         ) {
             updateRadiusLayer(map, id, coordinates, radius, unit, paint, onClick);
         }

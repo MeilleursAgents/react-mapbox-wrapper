@@ -30,7 +30,8 @@ export default class MapboxMap extends Component {
     constructor(props) {
         super(props);
 
-        mapboxgl.accessToken = this.props.accessToken;
+        const { accessToken } = this.props;
+        mapboxgl.accessToken = accessToken;
 
         /**
          * Store Mapbox map instance
@@ -62,24 +63,31 @@ export default class MapboxMap extends Component {
             return;
         }
 
-        const currentCenter = this.props.coordinates;
+        const {
+            coordinates: currentCenter,
+            zoom: currentZoom,
+            minZoom: currentMinZoom,
+            maxZoom: currentMaxZoom,
+            style: currentStyle,
+        } = this.props;
+
         if (!coordinatesAreEqual(currentCenter, coordinates)) {
             this.map.setCenter([coordinates.lng, coordinates.lat]);
         }
 
-        if (this.props.zoom !== zoom) {
+        if (currentZoom !== zoom) {
             this.map.setZoom(zoom);
         }
 
-        if (this.props.minZoom !== minZoom) {
+        if (currentMinZoom !== minZoom) {
             this.map.setMinZoom(minZoom);
         }
 
-        if (this.props.maxZoom !== maxZoom) {
+        if (currentMaxZoom !== maxZoom) {
             this.map.setMaxZoom(maxZoom);
         }
 
-        if (this.props.style !== style) {
+        if (currentStyle !== style) {
             this.map.setStyle(style);
         }
     }
@@ -240,7 +248,7 @@ MapboxMap.propTypes = {
     withCompass: PropTypes.bool,
     withFullscreen: PropTypes.bool,
     withZoom: PropTypes.bool,
-    zoom: PropTypes.number.isRequired,
+    zoom: PropTypes.number,
 };
 
 MapboxMap.defaultProps = {

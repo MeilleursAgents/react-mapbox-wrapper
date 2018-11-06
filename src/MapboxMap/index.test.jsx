@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 import mapboxgl from 'Lib';
-import MapboxMap from './';
+import MapboxMap from '.';
 
 function defaultProps() {
     return {
@@ -29,15 +29,25 @@ describe('<MapboxMap />', () => {
         /* eslint-disable no-undef */
         mapboxgl.Map = class MapMock {
             on = sinon.spy();
+
             addControl = sinon.spy();
+
             addLayer = sinon.spy();
+
             getCenter = sinon.fake.returns({ lat: 20, lng: 20 });
+
             setCenter = sinon.spy();
+
             getZoom = sinon.fake.returns(15);
+
             setZoom = sinon.spy();
+
             setMinZoom = sinon.spy();
+
             setMaxZoom = sinon.spy();
+
             setStyle = sinon.spy();
+
             remove = sinon.spy();
         };
 

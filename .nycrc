@@ -4,7 +4,7 @@
     "lcov"
   ],
   "require": [
-    "babel-core/register"
+    "@babel/register"
   ],
   "extension": [
     ".jsx"
@@ -16,8 +16,7 @@
     "**/*webpack*",
     "src/index.js",
     "src/Diagnose/",
-    "**/*.test.js",
-    "**/*.test.jsx"
+    "examples/**"
   ],
   "check-coverage": true,
   "lines": 80,

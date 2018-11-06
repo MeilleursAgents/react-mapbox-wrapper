@@ -24,7 +24,7 @@ export function deepEqual(o1, o2) {
         return false;
     }
 
-    if (typeO1 === 'number' && isNaN(o1) && isNaN(o2)) {
+    if (typeO1 === 'number' && Number.isNaN(o1) && Number.isNaN(o2)) {
         return true;
     }
 

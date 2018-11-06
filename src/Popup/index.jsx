@@ -63,11 +63,11 @@ export default class Popup extends Component {
      * @param {Object} nextProps Next props
      */
     componentWillReceiveProps(nextProps) {
-        const currentCoord = this.props.coordinates || {};
-        const nextCoord = nextProps.coordinates || {};
+        const { coordinates: currentCoord } = this.props;
+        const { coordinates: nextCoord } = nextProps;
 
-        if (!coordinatesAreEqual(currentCoord, nextCoord)) {
-            this.popup.setLngLat(nextProps.coordinates);
+        if (!coordinatesAreEqual(currentCoord || {}, nextCoord || {})) {
+            this.popup.setLngLat(nextCoord);
         }
     }
 
@@ -90,6 +90,7 @@ export default class Popup extends Component {
      * React lifecycle.
      */
     render() {
+        // eslint-disable-next-line react/destructuring-assignment
         return ReactDOM.createPortal(this.props.children, this.container);
     }
 }
