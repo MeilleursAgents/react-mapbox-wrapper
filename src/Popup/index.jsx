@@ -60,14 +60,14 @@ export default class Popup extends Component {
 
     /**
      * React lifecycle.
-     * @param {Object} nextProps Next props
+     * @param {Object} prevProps Previous props
      */
-    componentWillReceiveProps(nextProps) {
-        const { coordinates: currentCoord } = this.props;
-        const { coordinates: nextCoord } = nextProps;
+    componentDidUpdate(prevProps) {
+        const { coordinates: prevCoord } = prevProps;
+        const { coordinates } = this.props;
 
-        if (!coordinatesAreEqual(currentCoord || {}, nextCoord || {})) {
-            this.popup.setLngLat(nextCoord);
+        if (!coordinatesAreEqual(prevCoord || {}, coordinates || {})) {
+            this.popup.setLngLat(coordinates);
         }
     }
 

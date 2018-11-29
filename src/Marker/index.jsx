@@ -57,18 +57,18 @@ export default class Marker extends Component {
 
     /**
      * React lifecycle.
-     * @param {Object} nextProps Next props
+     * @param {Object} prevProps Previous props
      */
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
         if (!this.marker) {
             return;
         }
 
-        const { coordinates: currentCoord } = this.props;
-        const nextCoord = nextProps.coordinates;
+        const { coordinates: prevCoord } = prevProps;
+        const { coordinates } = this.props;
 
-        if (currentCoord.lat !== nextCoord.lat || currentCoord.lng !== nextCoord.lng) {
-            this.marker.setLngLat(nextProps.coordinates);
+        if (coordinates.lat !== prevCoord.lat || coordinates.lng !== prevCoord.lng) {
+            this.marker.setLngLat(coordinates);
         }
     }
 

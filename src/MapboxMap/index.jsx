@@ -56,38 +56,39 @@ export default class MapboxMap extends Component {
 
     /**
      * React lifecycle.
-     * @param {Object} nextProps Next props
+     * @param {Object} prevProps Previous props
      */
-    componentWillReceiveProps({ coordinates, zoom, minZoom, maxZoom, mapboxStyle }) {
+    componentDidUpdate(prevProps) {
         if (!this.map) {
             return;
         }
 
+        const { coordinates, zoom, minZoom, maxZoom, mapboxStyle } = this.props;
         const {
-            coordinates: currentCenter,
-            zoom: currentZoom,
-            minZoom: currentMinZoom,
-            maxZoom: currentMaxZoom,
-            mapboxStyle: currentStyle,
-        } = this.props;
+            coordinates: prevCenter,
+            zoom: prevZoom,
+            minZoom: prevMinZoom,
+            maxZoom: prevMaxZoom,
+            mapboxStyle: prevMapboxStyle,
+        } = prevProps;
 
-        if (!coordinatesAreEqual(currentCenter, coordinates)) {
+        if (!coordinatesAreEqual(coordinates, prevCenter)) {
             this.map.setCenter([coordinates.lng, coordinates.lat]);
         }
 
-        if (currentZoom !== zoom) {
+        if (zoom !== prevZoom) {
             this.map.setZoom(zoom);
         }
 
-        if (currentMinZoom !== minZoom) {
+        if (minZoom !== prevMinZoom) {
             this.map.setMinZoom(minZoom);
         }
 
-        if (currentMaxZoom !== maxZoom) {
+        if (maxZoom !== prevMaxZoom) {
             this.map.setMaxZoom(maxZoom);
         }
 
-        if (currentStyle !== mapboxStyle) {
+        if (mapboxStyle !== prevMapboxStyle) {
             this.map.setStyle(mapboxStyle);
         }
     }
