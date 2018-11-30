@@ -15,14 +15,16 @@ export default class MapWithMarker extends Component {
 
   render() {
     let marker;
+    const { coordinates } = this.props;
+
     if (this.map) {
-      marker = <Marker coordinates={global.DEFAULT_COORDINATES} map={this.map} />;
+      marker = <Marker coordinates={coordinates} map={this.map} />;
     }
 
     return (
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
-        coordinates={global.DEFAULT_COORDINATES}
+        coordinates={coordinates}
         className="map-container"
         onLoad={this.onMapLoad}
       >

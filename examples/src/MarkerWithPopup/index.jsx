@@ -15,12 +15,14 @@ export default class MarkerWithPopup extends Component {
 
   render() {
     let marker;
+    const { coordinates } = this.props;
+
     if (this.map) {
       const popup = <div>Meaningful content on my Marker</div>;
 
       marker = (
         <Marker
-          coordinates={global.DEFAULT_COORDINATES}
+          coordinates={coordinates}
           map={this.map}
           popup={popup}
           popupOffset={30}
@@ -31,7 +33,7 @@ export default class MarkerWithPopup extends Component {
     return (
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
-        coordinates={global.DEFAULT_COORDINATES}
+        coordinates={coordinates}
         className="map-container"
         onLoad={this.onMapLoad}
       >

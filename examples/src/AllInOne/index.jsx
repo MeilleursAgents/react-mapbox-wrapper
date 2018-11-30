@@ -11,12 +11,12 @@ export default class AllInOne extends Component {
     this.onMapLoad = this.onMapLoad.bind(this);
   }
 
-  onMapLoad(map) {
+  onMapLoad(map, coordinates) {
     this.map = map;
     this.forceUpdate();
 
     const bounds = Helpers.newBounds();
-    bounds.extend(Helpers.newBound(global.DEFAULT_COORDINATES));
+    bounds.extend(Helpers.newBound({lat: 48.872198, lng: 2.3366308}));
     bounds.extend(Helpers.newBound(SENTIER_COORDINATES));
 
     this.map.jumpTo(this.map.cameraForBounds(bounds, { padding: 120 }));
@@ -31,7 +31,7 @@ export default class AllInOne extends Component {
       markers = [
         <Marker
           key="haussmann"
-          coordinates={global.DEFAULT_COORDINATES}
+          coordinates={{lat: 48.872198, lng: 2.3366308}}
           map={this.map}
           popup={popupHaussmann}
           popupOnOver
@@ -71,7 +71,7 @@ export default class AllInOne extends Component {
     return (
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
-        coordinates={global.DEFAULT_COORDINATES}
+        coordinates={{lat: 48.872198, lng: 2.3366308}}
         className="map-container"
         onLoad={this.onMapLoad}
         withCompass

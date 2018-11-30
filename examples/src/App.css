@@ -22,6 +22,14 @@ body {
   padding: 5px;
 }
 
+.ap-input-wrapper {
+  margin: 20px auto;
+  margin-bottom: 40px;
+  text-align: left;
+  color: black;
+  width: 400px;
+}
+
 .footer {
   padding: 20px 10px;
   font-size: 12px;
