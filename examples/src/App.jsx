@@ -73,6 +73,8 @@ export default class App extends Component {
           </a>
         </header>
 
+        <br />
+
         <a
           className="link"
           href="https://github.com/MeilleursAgents/react-mapbox-wrapper#usage"
@@ -92,6 +94,9 @@ export default class App extends Component {
 
         <div className="ap-input-wrapper">
           <input type="search" id="address-input" placeholder="Search a place" />
+          <span className="disclaimer">
+            We use algolia's default api key, places may have imprecise coordinates
+          </span>
         </div>
 
         <div className="content">

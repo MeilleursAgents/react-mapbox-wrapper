@@ -30,6 +30,13 @@ body {
   width: 400px;
 }
 
+.disclaimer {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: gray;
+}
+
 .footer {
   padding: 20px 10px;
   font-size: 12px;
