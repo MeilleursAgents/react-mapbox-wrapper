@@ -58,7 +58,7 @@ export default class MapboxMap extends Component {
      * React lifecycle.
      * @param {Object} nextProps Next props
      */
-    componentWillReceiveProps({ coordinates, zoom, minZoom, maxZoom, style }) {
+    componentWillReceiveProps({ coordinates, zoom, minZoom, maxZoom, mapboxStyle }) {
         if (!this.map) {
             return;
         }
@@ -68,7 +68,7 @@ export default class MapboxMap extends Component {
             zoom: currentZoom,
             minZoom: currentMinZoom,
             maxZoom: currentMaxZoom,
-            style: currentStyle,
+            mapboxStyle: currentStyle,
         } = this.props;
 
         if (!coordinatesAreEqual(currentCenter, coordinates)) {
@@ -87,8 +87,8 @@ export default class MapboxMap extends Component {
             this.map.setMaxZoom(maxZoom);
         }
 
-        if (currentStyle !== style) {
-            this.map.setStyle(style);
+        if (currentStyle !== mapboxStyle) {
+            this.map.setStyle(mapboxStyle);
         }
     }
 
@@ -244,7 +244,7 @@ MapboxMap.propTypes = {
     onZoomEnd: PropTypes.func,
     onZoomStart: PropTypes.func,
     renderNotSupported: PropTypes.func,
-    style: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
+    mapboxStyle: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     withCompass: PropTypes.bool,
     withFullscreen: PropTypes.bool,
     withZoom: PropTypes.bool,
@@ -262,7 +262,7 @@ MapboxMap.defaultProps = {
     onLoad: undefined,
     onZoomEnd: undefined,
     onZoomStart: undefined,
-    style: DEFAULT_STYLE,
+    mapboxStyle: DEFAULT_STYLE,
     withCompass: false,
     withFullscreen: false,
     withZoom: false,

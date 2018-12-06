@@ -282,7 +282,7 @@ describe('<MapboxMap />', () => {
         const wrapper = mount(<MapboxMap {...props} />);
 
         wrapper.setProps({
-            style: 'test',
+            mapboxStyle: 'test',
         });
 
         expect(wrapper.instance().map.setStyle.calledWith('test')).to.equal(true);
