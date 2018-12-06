@@ -15,12 +15,13 @@ export default class MapWithCircle extends Component {
 
   render() {
     let circle;
+    const { coordinates } = this.props;
 
     if(this.map) {
         circle = <Circle
         key="radius"
         id="radius"
-        coordinates={{lat: 40.7590403, lng: -74.0392709}}
+        coordinates={coordinates}
         map={this.map}
         radius={330}
         unit="feet"
@@ -34,7 +35,7 @@ export default class MapWithCircle extends Component {
     return (
       <MapboxMap
         accessToken={global.ACCESS_TOKEN}
-        coordinates={{lat: 40.7590403, lng: -74.0392709}}
+        coordinates={coordinates}
         className="map-container"
         onLoad={this.onMapLoad}
       >
