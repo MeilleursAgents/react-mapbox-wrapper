@@ -14,7 +14,7 @@
     "react-syntax-highlighter": "8.0.1"
   },
   "scripts": {
-    "link": "npm link ../",
+    "link": "npm link react-mapbox-wrapper",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
