@@ -148,12 +148,13 @@ export default class MapboxMap extends Component {
             return;
         }
 
-        const { coordinates, onLoad, ...mapOptions } = this.props;
+        const { coordinates, onLoad, mapboxStyle, ...mapOptions } = this.props;
 
         this.map = new mapboxgl.Map({
-            ...mapOptions,
             container,
             center: new mapboxgl.LngLat(coordinates.lng, coordinates.lat),
+            style: mapboxStyle,
+            ...mapOptions,
         });
 
         this.map.on('load', () => {
