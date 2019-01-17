@@ -4,6 +4,7 @@ import jsx from 'react-syntax-highlighter/languages/prism/jsx';
 import prism from 'react-syntax-highlighter/styles/prism/prism';
 import SimpleMap from './SimpleMap';
 import MapWithMarker from './MapWithMarker';
+import MapWithMovingMarker from './MapWithMovingMarker';
 import MarkerWithPopup from './MarkerWithPopup';
 import CustomMarkerOnOver from './CustomMarkerOnOver';
 import MapWithCircle from './MapWithCircle';
@@ -165,6 +166,69 @@ export default class App extends Component {
   }
 
   MapWithMarker.displayName = 'MapWithMarker';`}
+            </SyntaxHighlighter>
+          </div>
+        </div>
+
+        <div className="content">
+          <h2>Moving Marker</h2>
+          <div className="example">
+            <MapWithMovingMarker coordinates={coordinates} />
+            <SyntaxHighlighter className="code" language="jsx" style={prism}>
+              {`import React, { Component } from 'react';
+import MapboxMap, { Marker } from 'react-mapbox-wrapper';
+
+export default class MapWithMovingMarker extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      coordinates: props.coordinates,
+    };
+
+    this.onMapLoad = this.onMapLoad.bind(this);
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      const { lat, lng } = this.props.coordinates;
+
+      this.setState({
+        coordinates: {
+          lat: lat + 0.001 * Math.random(),
+          lng: lng + 0.001 * Math.random(),
+        },
+      });
+    }, 1000);
+  }
+
+  onMapLoad(map) {
+    this.map = map;
+    this.forceUpdate();
+  }
+
+  render() {
+    let marker;
+    const { coordinates } = this.props;
+
+    if (this.map) {
+      marker = <Marker coordinates={this.state.coordinates} map={this.map} />;
+    }
+
+    return (
+      <MapboxMap
+        accessToken={global.ACCESS_TOKEN}
+        coordinates={coordinates}
+        className="map-container"
+        onLoad={this.onMapLoad}
+      >
+        {marker}
+      </MapboxMap>
+    );
+  }
+}
+
+MapWithMovingMarker.displayName = 'MapWithMovingMarker';`}
             </SyntaxHighlighter>
           </div>
         </div>
