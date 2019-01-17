@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { coordinatesAreEqual } from 'Helpers';
+import { coordinatesAreEqual, LngLatLike } from 'Helpers';
 import { isFunction } from 'Utils';
 import mapboxgl from 'Lib';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -232,10 +232,7 @@ export default class MapboxMap extends Component {
 
 MapboxMap.propTypes = {
     accessToken: PropTypes.string,
-    coordinates: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        lng: PropTypes.number.isRequired,
-    }).isRequired,
+    coordinates: LngLatLike.isRequired,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     className: PropTypes.string,
     maxZoom: PropTypes.number,

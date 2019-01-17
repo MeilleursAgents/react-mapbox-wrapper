@@ -20,10 +20,7 @@ export default class MapWithMovingMarker extends Component {
       const { lat, lng } = this.props.coordinates;
 
       this.setState({
-        coordinates: {
-          lat: lat + 0.001 * Math.random(),
-          lng: lng + 0.001 * Math.random(),
-        },
+        coordinates: [lng + 0.001 * Math.random(), lat + 0.001 * Math.random()],
       });
     }, 1000);
   }

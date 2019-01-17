@@ -1,6 +1,23 @@
 import circle from '@turf/circle';
+import PropTypes from 'prop-types';
 import { isFunction } from 'Utils';
 import mapboxgl from 'Lib';
+
+/**
+ * Props describing a coordinates
+ * @type {Object}
+ */
+export const LngLatLike = PropTypes.oneOfType([
+    PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        lng: PropTypes.number.isRequired,
+    }),
+    PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        lon: PropTypes.number.isRequired,
+    }),
+    PropTypes.arrayOf(PropTypes.number.isRequired),
+]);
 
 /**
  * Number of points to draw a circle.
@@ -71,13 +88,39 @@ export function getLayerId(id) {
 }
 
 /**
+ * Parse given argument as a coordinates
+ * @param  {Any} coord Value representing a LngLatLike
+ * @return {Object} A comparable coordinates
+ */
+function parseCoordinates(coord) {
+    if (Array.isArray(coord) && coord.length === 2) {
+        return {
+            lng: coord[0],
+            lat: coord[1],
+        };
+    }
+
+    if (coord instanceof Object && coord !== null) {
+        return {
+            lng: coord.lng || coord.lon,
+            lat: coord.lat,
+        };
+    }
+
+    return {};
+}
+
+/**
  * Check if coordinates are equal.
  * @param  {Object} a First coordinates
  * @param  {Object} b Second coordinates
  * @return {Boolean}  True if they are equal, false otherwise
  */
 export function coordinatesAreEqual(a, b) {
-    return a.lat === b.lat && a.lng === b.lng;
+    const aCoord = parseCoordinates(a);
+    const bCoord = parseCoordinates(b);
+
+    return aCoord.lat === bCoord.lat && aCoord.lng === bCoord.lng;
 }
 
 /**

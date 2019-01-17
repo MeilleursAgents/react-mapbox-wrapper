@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isFunction } from 'Utils';
-import { coordinatesAreEqual } from 'Helpers';
+import { coordinatesAreEqual, LngLatLike } from 'Helpers';
 import Popup from 'Popup';
 import mapboxgl from 'Lib';
 import { DEBOUNCE_TIMEOUT } from 'MapboxMap';
@@ -250,10 +250,7 @@ export default class Marker extends Component {
 }
 
 Marker.propTypes = {
-    coordinates: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        lng: PropTypes.number.isRequired,
-    }).isRequired,
+    coordinates: LngLatLike.isRequired,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     draggable: PropTypes.bool,
     getRef: PropTypes.func,
