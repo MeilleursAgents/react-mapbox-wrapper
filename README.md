@@ -56,7 +56,7 @@ Wrapper is CSS flex-ready for *width* but you **have to set a height** for havin
 | Props | Type | Default | Description |
 | -- | -- | -- | -- |
 | accessToken | String | required | Mapbox Access Token ([find it here](https://www.mapbox.com/account/access-tokens)) |
-| coordinates | Object | required | Coordinates of the map center <br /> In the form `{ lng: 3.4, lat: 1.2 }` |
+| coordinates | Object | required | Coordinates of the map center <br /> According to the [LngLatLike](https://www.mapbox.com/mapbox-gl-js/api/#lnglatlike) model |
 | className | string | `''` | `className` added to map's wrapper. Your should provide a height in order to render the map (default at 0) |
 | children | Node | `null` | Rendered children, typically a [Marker](#Marker) and/or [Circle](#Circle) |
 | minZoom | number | `undefined` | The minimum zoom level of the map (0-24). |
@@ -80,7 +80,7 @@ React Component that render a Marker. Extra props are directly passed to the [Ma
 | Props | Type | Default | Description |
 | -- | -- | -- | -- |
 | children | Node | `null` | Marker HTML DOM, default marker will be used if not provided |
-| coordinates | Object | required | Coordinates of the marker <br /> In the form `{ lng: 3.4, lat: 1.2 }` |
+| coordinates | Object | required | Coordinates of the marker <br /> According to the [LngLatLike](https://www.mapbox.com/mapbox-gl-js/api/#lnglatlike) model |
 | draggable | bool | `false` | Allow user to drag'n'drop Marker |
 | getRef | func |  | Callback function called with marker's ref (useful for calling `#moveToTop()` function) |
 | map | Object | required | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn) |
@@ -98,7 +98,7 @@ React Component that render a Circle. Extra props are directly passed to the [Ma
 
 | Props | Type | Default | Description |
 | -- | -- | -- | -- |
-| coordinates | Object | required | Coordinates of the marker <br /> In the form `{ lng: 3.4, lat: 1.2 }` |
+| coordinates | Object | required | Coordinates of the marker <br /> According to the [LngLatLike](https://www.mapbox.com/mapbox-gl-js/api/#lnglatlike) model |
 | id | string | required | Identifier of circle, used to name the underlying layer |
 | map | Object | required | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn) |
 | onClick | func | | Callback function called on circle's click |
@@ -115,7 +115,7 @@ npm install && npm run peers # install both dependencies and peers
 You can use [`npm link`](https://docs.npmjs.com/cli/link) while developping new features on this repo for use in targeted repository.
 
 ```bash
-npm link /path/to/react-mapbox-wrapper
+npm link
 ```
 
 ### Git hooks
