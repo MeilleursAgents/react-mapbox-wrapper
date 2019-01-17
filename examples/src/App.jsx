@@ -171,7 +171,7 @@ export default class App extends Component {
         </div>
 
         <div className="content">
-          <h2>Moving Marker</h2>
+          <h2>Moving Marker with array-style LngLat</h2>
           <div className="example">
             <MapWithMovingMarker coordinates={coordinates} />
             <SyntaxHighlighter className="code" language="jsx" style={prism}>
@@ -194,10 +194,7 @@ export default class MapWithMovingMarker extends Component {
       const { lat, lng } = this.props.coordinates;
 
       this.setState({
-        coordinates: {
-          lat: lat + 0.001 * Math.random(),
-          lng: lng + 0.001 * Math.random(),
-        },
+        coordinates: [lng + 0.001 * Math.random(), lat + 0.001 * Math.random()],
       });
     }, 1000);
   }

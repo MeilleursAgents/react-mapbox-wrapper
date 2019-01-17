@@ -2,7 +2,7 @@ import { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import mapboxgl from 'Lib';
-import { coordinatesAreEqual } from 'Helpers';
+import { coordinatesAreEqual, LngLatLike } from 'Helpers';
 
 /**
  * Popup Component.
@@ -100,10 +100,7 @@ Popup.propTypes = {
     className: PropTypes.string,
     closeButton: PropTypes.bool,
     closeOnClick: PropTypes.bool,
-    coordinates: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        lng: PropTypes.number.isRequired,
-    }),
+    coordinates: LngLatLike,
     map: PropTypes.shape({}),
     offset: PropTypes.number,
     onMouseOut: PropTypes.func,

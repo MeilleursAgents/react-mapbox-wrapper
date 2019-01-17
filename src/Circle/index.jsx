@@ -1,7 +1,14 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { deepEqual } from 'Utils';
-import { coordinatesAreEqual, drawGeoJSON, removeGeoJSON, getCircleData, UNITS } from 'Helpers';
+import {
+    coordinatesAreEqual,
+    drawGeoJSON,
+    removeGeoJSON,
+    getCircleData,
+    UNITS,
+    LngLatLike,
+} from 'Helpers';
 
 /**
  * Update radius GeoJSON layer.
@@ -72,10 +79,7 @@ export default class Circle extends Component {
 }
 
 Circle.propTypes = {
-    coordinates: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        lng: PropTypes.number.isRequired,
-    }).isRequired,
+    coordinates: LngLatLike.isRequired,
     id: PropTypes.string.isRequired,
     map: PropTypes.shape({}).isRequired,
     onClick: PropTypes.func,

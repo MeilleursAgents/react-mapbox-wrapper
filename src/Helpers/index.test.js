@@ -1,9 +1,47 @@
 import sinon from 'sinon';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
-import { drawGeoJSON, removeGeoJSON, getLayerId, convertRadiusUnit } from '.';
+import { drawGeoJSON, removeGeoJSON, getLayerId, convertRadiusUnit, coordinatesAreEqual } from '.';
 
 chai.use(sinonChai);
+
+describe('coordinatesAreEqual', () => {
+    it('should handle undefined params', () => {
+        expect(coordinatesAreEqual()).to.equal(true);
+    });
+
+    it('should handle null params', () => {
+        expect(coordinatesAreEqual(null, null)).to.equal(true);
+    });
+
+    it('should handle different params', () => {
+        expect(coordinatesAreEqual([10, 20], null)).to.equal(false);
+    });
+
+    it('should handle array params', () => {
+        expect(coordinatesAreEqual([10, 20], [10, 20])).to.equal(true);
+    });
+
+    it('should handle mixed params', () => {
+        expect(coordinatesAreEqual([10, 20], { lng: 10, lat: 20 })).to.equal(true);
+    });
+
+    it('should handle lon value', () => {
+        expect(coordinatesAreEqual({ lng: 10, lat: 20 }, { lon: 10, lat: 20 })).to.equal(true);
+    });
+
+    it('should compare both value', () => {
+        expect(coordinatesAreEqual({ lng: 10, lat: 20 }, { lng: 10, lat: 19.999999 })).to.equal(
+            false,
+        );
+    });
+
+    it('should compare both value', () => {
+        expect(coordinatesAreEqual({ lng: 9.99999, lat: 20 }, { lng: 10, lat: 20 })).to.equal(
+            false,
+        );
+    });
+});
 
 describe('drawGeoJSON', () => {
     it('should do nothing if no map', () => {
