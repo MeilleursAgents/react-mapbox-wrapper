@@ -12,6 +12,12 @@ describe('<Popup />', () => {
     beforeEach(() => {
         /* eslint-disable no-undef */
         mapboxgl.Popup = class PopupMock {
+            constructor(options) {
+                this.constructorSpy(options);
+            }
+
+            constructorSpy = sinon.spy();
+
             setLngLat = sinon.spy();
 
             addTo = sinon.spy();
@@ -94,5 +100,22 @@ describe('<Popup />', () => {
         expect(
             wrapper.instance().popup.setLngLat.calledWith({ lat: props.coordinates.lat, lng: 0 }),
         ).to.equal(true);
+    });
+
+    it('should not pass anchor option to mapbox popin options if not provided', () => {
+        const props = defaultProps();
+        const wrapper = mount(<Popup {...props} />);
+
+        const constructorSpyCall = wrapper.instance().popup.constructorSpy.getCall(0);
+        expect(constructorSpyCall.args[0].anchor).to.equal(undefined);
+    });
+
+    it('should pass anchor option to mapbox popin options if provided', () => {
+        const props = defaultProps();
+        props.anchor = 'top';
+        const wrapper = mount(<Popup {...props} />);
+
+        const constructorSpyCall = wrapper.instance().popup.constructorSpy.getCall(0);
+        expect(constructorSpyCall.args[0].anchor).to.equal('top');
     });
 });

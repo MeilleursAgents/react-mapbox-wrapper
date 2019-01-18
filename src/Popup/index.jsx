@@ -30,6 +30,7 @@ export default class Popup extends Component {
         this.popup = null;
 
         const {
+            anchor,
             onMouseOver,
             onMouseOut,
             closeButton,
@@ -44,7 +45,7 @@ export default class Popup extends Component {
         this.container.addEventListener('mouseover', onMouseOver);
         this.container.addEventListener('mouseout', onMouseOut);
 
-        this.popup = new mapboxgl.Popup({ closeButton, closeOnClick, offset, className });
+        this.popup = new mapboxgl.Popup({ closeButton, closeOnClick, offset, className, anchor });
         this.popup.setDOMContent(this.container);
 
         if (coordinates) {
@@ -96,6 +97,17 @@ export default class Popup extends Component {
 }
 
 Popup.propTypes = {
+    anchor: PropTypes.oneOf([
+        'center',
+        'top',
+        'bottom',
+        'left',
+        'right',
+        'top-left',
+        'top-right',
+        'bottom-left',
+        'bottom-right',
+    ]),
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     className: PropTypes.string,
     closeButton: PropTypes.bool,
@@ -108,6 +120,7 @@ Popup.propTypes = {
 };
 
 Popup.defaultProps = {
+    anchor: undefined,
     children: null,
     className: '',
     closeButton: true,
