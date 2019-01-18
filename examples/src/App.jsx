@@ -17,7 +17,7 @@ import './App.css';
  * @type {String}
  */
 global.ACCESS_TOKEN =
-  'pk.eyJ1IjoibHVjYXN3b2oiLCJhIjoiY2l5Nmg4cWU1MDA0ejMzcDJtNHJmZzJkcyJ9.WhcEdTYQH6sSw2pm0RSP9Q';
+    'pk.eyJ1IjoibHVjYXN3b2oiLCJhIjoiY2l5Nmg4cWU1MDA0ejMzcDJtNHJmZzJkcyJ9.WhcEdTYQH6sSw2pm0RSP9Q';
 
 registerLanguage('jsx', jsx);
 
@@ -25,87 +25,87 @@ registerLanguage('jsx', jsx);
  * App Component.
  */
 export default class App extends Component {
-  /**
-   * Creates an instance of App.
-   * @param {Object} props Component props
-   */
-  constructor(props) {
-    super(props);
+    /**
+     * Creates an instance of App.
+     * @param {Object} props Component props
+     */
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      coordinates: {
-        lat: 48.872198,
-        lng: 2.3366308
-      }
-    };
-  }
+        this.state = {
+            coordinates: {
+                lat: 48.872198,
+                lng: 2.3366308,
+            },
+        };
+    }
 
-  /**
-   * React lifecycle.
-   */
-  componentDidMount() {
-    const placesAutocomplete = Places({
-      container: document.querySelector('#address-input')
-    });
+    /**
+     * React lifecycle.
+     */
+    componentDidMount() {
+        const placesAutocomplete = Places({
+            container: document.querySelector('#address-input'),
+        });
 
-    placesAutocomplete.on('change', e => this.setState({coordinates: e.suggestion.latlng}));
-  }
-  
-  /**
-   * React lifecycle.
-   */
-  render() {
-    const { coordinates } = this.state;
+        placesAutocomplete.on('change', e => this.setState({ coordinates: e.suggestion.latlng }));
+    }
 
-    return (
-      <div>
-        <header className="header">
-          <h1>react-mapbox-wrapper</h1>
-          <a
-            href="https://github.com/MeilleursAgents/react-mapbox-wrapper"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            <img
-              style={{ position: 'absolute', top: 0, right: 0, border: 0 }}
-              src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
-              alt="Fork me on GitHub"
-            />
-          </a>
-        </header>
+    /**
+     * React lifecycle.
+     */
+    render() {
+        const { coordinates } = this.state;
 
-        <br />
+        return (
+            <div>
+                <header className="header">
+                    <h1>react-mapbox-wrapper</h1>
+                    <a
+                        href="https://github.com/MeilleursAgents/react-mapbox-wrapper"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                    >
+                        <img
+                            style={{ position: 'absolute', top: 0, right: 0, border: 0 }}
+                            src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+                            alt="Fork me on GitHub"
+                        />
+                    </a>
+                </header>
 
-        <a
-          className="link"
-          href="https://github.com/MeilleursAgents/react-mapbox-wrapper#usage"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Documentation
-        </a>
-        <a
-          className="link margin-left"
-          href="https://github.com/MeilleursAgents/react-mapbox-wrapper/tree/master/examples/src"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Examples sources
-        </a>
+                <br />
 
-        <div className="ap-input-wrapper">
-          <input type="search" id="address-input" placeholder="Search a place" />
-          <span className="disclaimer">
-            We use algolia's default api key, places may have imprecise coordinates
-          </span>
-        </div>
+                <a
+                    className="link"
+                    href="https://github.com/MeilleursAgents/react-mapbox-wrapper#usage"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                >
+                    Documentation
+                </a>
+                <a
+                    className="link margin-left"
+                    href="https://github.com/MeilleursAgents/react-mapbox-wrapper/tree/master/examples/src"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                >
+                    Examples sources
+                </a>
 
-        <div className="content">
-          <h2>SimpleMap with fixed size</h2>
-          <div className="example">
-            <SimpleMap  className="map-container" coordinates={coordinates} />
-            <SyntaxHighlighter className="code" language="jsx" style={prism}>
-              {`import React from 'react';
+                <div className="ap-input-wrapper">
+                    <input type="search" id="address-input" placeholder="Search a place" />
+                    <span className="disclaimer">
+                        We use algolia's default api key, places may have imprecise coordinates
+                    </span>
+                </div>
+
+                <div className="content">
+                    <h2>SimpleMap with fixed size</h2>
+                    <div className="example">
+                        <SimpleMap className="map-container" coordinates={coordinates} />
+                        <SyntaxHighlighter className="code" language="jsx" style={prism}>
+                            {`import React from 'react';
   import MapboxMap from 'react-mapbox-wrapper';
 
   export default function SimpleMap({coordinates}) {
@@ -120,16 +120,16 @@ export default class App extends Component {
   }
 
   SimpleMap.displayName = 'SimpleMap';`}
-            </SyntaxHighlighter>
-          </div>
-        </div>
+                        </SyntaxHighlighter>
+                    </div>
+                </div>
 
-        <div className="content">
-          <h2>Marker</h2>
-          <div className="example">
-            <MapWithMarker coordinates={coordinates} />
-            <SyntaxHighlighter className="code" language="jsx" style={prism}>
-              {`import React, { Component } from 'react';
+                <div className="content">
+                    <h2>Marker</h2>
+                    <div className="example">
+                        <MapWithMarker coordinates={coordinates} />
+                        <SyntaxHighlighter className="code" language="jsx" style={prism}>
+                            {`import React, { Component } from 'react';
   import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
   export default class MapWithMarker extends Component {
@@ -166,16 +166,16 @@ export default class App extends Component {
   }
 
   MapWithMarker.displayName = 'MapWithMarker';`}
-            </SyntaxHighlighter>
-          </div>
-        </div>
+                        </SyntaxHighlighter>
+                    </div>
+                </div>
 
-        <div className="content">
-          <h2>Moving Marker with array-style LngLat</h2>
-          <div className="example">
-            <MapWithMovingMarker coordinates={coordinates} />
-            <SyntaxHighlighter className="code" language="jsx" style={prism}>
-              {`import React, { Component } from 'react';
+                <div className="content">
+                    <h2>Moving Marker with array-style LngLat</h2>
+                    <div className="example">
+                        <MapWithMovingMarker coordinates={coordinates} />
+                        <SyntaxHighlighter className="code" language="jsx" style={prism}>
+                            {`import React, { Component } from 'react';
 import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
 export default class MapWithMovingMarker extends Component {
@@ -226,131 +226,137 @@ export default class MapWithMovingMarker extends Component {
 }
 
 MapWithMovingMarker.displayName = 'MapWithMovingMarker';`}
-            </SyntaxHighlighter>
-          </div>
-        </div>
+                        </SyntaxHighlighter>
+                    </div>
+                </div>
 
-        <div className="content">
-          <h2>Marker with Popup on Click</h2>
-          <div className="example">
-            <MarkerWithPopup coordinates={coordinates} />
-            <SyntaxHighlighter className="code" language="jsx" style={prism}>
-              {`import React, { Component } from 'react';
-  import MapboxMap, { Marker } from 'react-mapbox-wrapper';
+                <div className="content">
+                    <h2>Marker with Popup on Click</h2>
+                    <div className="example">
+                        <MarkerWithPopup coordinates={coordinates} />
+                        <SyntaxHighlighter className="code" language="jsx" style={prism}>
+                            {`
+import React, { Component } from 'react';
+import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
-  export default class MarkerWithPopup extends Component {
-    constructor(props) {
-      super(props);
+export default class MarkerWithPopup extends Component {
+  constructor(props) {
+    super(props);
 
-      this.onMapLoad = this.onMapLoad.bind(this);
-    }
-
-    onMapLoad(map) {
-      this.map = map;
-      this.forceUpdate();
-    }
-
-    render() {
-      let marker;
-      const { coordinates } = this.props;
-
-      if (this.map) {
-        const popup = <div>Meaningful content on my Marker</div>;
-
-        marker = (
-          <Marker
-            coordinates={coordinates}
-            map={this.map}
-            popup={popup}
-            popupOffset={30}
-          />
-        );
-      }
-
-      return (
-        <MapboxMap
-          accessToken={global.ACCESS_TOKEN}
-          coordinates={coordinates}
-          className="map-container"
-          onLoad={this.onMapLoad}
-        >
-          {marker}
-        </MapboxMap>
-      );
-    }
+    this.onMapLoad = this.onMapLoad.bind(this);
   }
 
-  MarkerWithPopup.displayName = 'MarkerWithPopup';`}
-            </SyntaxHighlighter>
-          </div>
-        </div>
-
-        <div className="content">
-          <h2>Custom Marker with Popup on Over</h2>
-          <div className="example">
-            <CustomMarkerOnOver coordinates={coordinates} />
-            <SyntaxHighlighter className="code" language="jsx" style={prism}>
-              {`import React, { Component } from 'react';
-  import MapboxMap, { Marker } from 'react-mapbox-wrapper';
-
-  export default class CustomMarker extends Component {
-    constructor(props) {
-      super(props);
-
-      this.onMapLoad = this.onMapLoad.bind(this);
-    }
-
-    onMapLoad(map) {
-      this.map = map;
-      this.forceUpdate();
-    }
-
-    render() {
-      let marker;
-      const { coordinates } = this.props;
-
-      if (this.map) {
-        const popup = <div>http://localhost</div>;
-
-        marker = (
-          <Marker
-            coordinates={coordinates}
-            map={this.map}
-            popup={popup}
-            popupOnOver
-            popupOffset={20}
-          >
-            <span role="img" aria-label="Emoji Marker" style={{ fontSize: '30px' }}>
-              🏢
-            </span>
-          </Marker>
-        );
-      }
-
-      return (
-        <MapboxMap
-          accessToken={global.ACCESS_TOKEN}
-          coordinates={coordinates}
-          className="map-container"
-          onLoad={this.onMapLoad}
-        >
-          {marker}
-        </MapboxMap>
-      );
-    }
+  onMapLoad(map) {
+    this.map = map;
+    this.forceUpdate();
   }
 
-  CustomMarker.displayName = 'CustomMarker';`}
-            </SyntaxHighlighter>
-          </div>
-        </div>
+  render() {
+    let marker;
+    const { coordinates } = this.props;
 
-        <div className="content">
-          <h2>Circle</h2>
-          <div className="example">
-            <MapWithCircle coordinates={coordinates} />
-            <SyntaxHighlighter className="code" language="jsx" style={prism}>
-              {`import React, { Component } from 'react';
+    if (this.map) {
+      const popup = <div>Meaningful content on my Marker</div>;
+
+      marker = (
+        <Marker
+          coordinates={coordinates}
+          map={this.map}
+          popup={popup}
+          popupAnchor='bottom'
+          popupOffset={30}
+        />
+      );
+    }
+
+    return (
+      <MapboxMap
+        accessToken={global.ACCESS_TOKEN}
+        coordinates={coordinates}
+        className="map-container"
+        onLoad={this.onMapLoad}
+      >
+        {marker}
+      </MapboxMap>
+    );
+  }
+}
+
+MarkerWithPopup.displayName = 'MarkerWithPopup';
+  `}
+                        </SyntaxHighlighter>
+                    </div>
+                </div>
+
+                <div className="content">
+                    <h2>Custom Marker with Popup on Over</h2>
+                    <div className="example">
+                        <CustomMarkerOnOver coordinates={coordinates} />
+                        <SyntaxHighlighter className="code" language="jsx" style={prism}>
+                            {`
+import React, { Component } from 'react';
+import MapboxMap, { Marker } from 'react-mapbox-wrapper';
+
+export default class CustomMarker extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onMapLoad = this.onMapLoad.bind(this);
+  }
+
+  onMapLoad(map) {
+    this.map = map;
+    this.forceUpdate();
+  }
+
+  render() {
+    let marker;
+    const { coordinates } = this.props;
+
+    if (this.map) {
+      const popup = <div>http://localhost</div>;
+
+      marker = (
+        <Marker
+          coordinates={coordinates}
+          map={this.map}
+          popup={popup}
+          popupAnchor='bottom'
+          popupOnOver
+          popupOffset={20}
+        >
+          <span role="img" aria-label="Emoji Marker" style={{ fontSize: '30px' }}>
+            🏢
+          </span>
+        </Marker>
+      );
+    }
+
+    return (
+      <MapboxMap
+        accessToken={global.ACCESS_TOKEN}
+        coordinates={coordinates}
+        className="map-container"
+        onLoad={this.onMapLoad}
+      >
+        {marker}
+      </MapboxMap>
+    );
+  }
+}
+
+CustomMarker.displayName = 'CustomMarker';
+  `}
+                        </SyntaxHighlighter>
+                    </div>
+                </div>
+
+                <div className="content">
+                    <h2>Circle</h2>
+                    <div className="example">
+                        <MapWithCircle coordinates={coordinates} />
+                        <SyntaxHighlighter className="code" language="jsx" style={prism}>
+                            {`import React, { Component } from 'react';
   import MapboxMap, { Circle } from 'react-mapbox-wrapper';
 
   export default class MapWithCircle extends Component {
@@ -398,116 +404,125 @@ MapWithMovingMarker.displayName = 'MapWithMovingMarker';`}
   }
 
   MapWithCircle.displayName = 'MapWithCircle';`}
-            </SyntaxHighlighter>
-          </div>
-        </div>
+                        </SyntaxHighlighter>
+                    </div>
+                </div>
 
-        <div className="content">
-          <h2>Radius, Marker, Popup and fitBounds</h2>
-          <div className="example">
-            <AllInOne coordinates={coordinates} />
-            <SyntaxHighlighter className="code" language="jsx" style={prism}>
-              {`import React, { Component } from 'react';
-  import MapboxMap, { Marker, Circle, Helpers } from 'react-mapbox-wrapper';
+                <div className="content">
+                    <h2>Radius, Marker, Popup and fitBounds</h2>
+                    <div className="example">
+                        <AllInOne coordinates={coordinates} />
+                        <SyntaxHighlighter className="code" language="jsx" style={prism}>
+                            {`
+import React, { Component } from 'react';
+import MapboxMap, { Marker, Circle, Helpers } from 'react-mapbox-wrapper';
 
-  const SENTIER_COORDINATES = { lat: 48.868526, lng: 2.3434886 };
-  const RADIUS_COORDINATES = { lat: 48.870362, lng: 2.3400597 };
+const SENTIER_COORDINATES = { lat: 48.868526, lng: 2.3434886 };
+const RADIUS_COORDINATES = { lat: 48.870362, lng: 2.3400597 };
 
-  export default class AllInOne extends Component {
-    constructor(props) {
-      super(props);
+export default class AllInOne extends Component {
+  constructor(props) {
+    super(props);
 
-      this.onMapLoad = this.onMapLoad.bind(this);
-    }
-
-    onMapLoad(map) {
-      this.map = map;
-      this.forceUpdate();
-
-      const bounds = Helpers.newBounds();
-      bounds.extend(Helpers.newBound({lat: 48.872198, lng: 2.3366308}));
-      bounds.extend(Helpers.newBound(SENTIER_COORDINATES));
-
-      this.map.jumpTo(this.map.cameraForBounds(bounds, { padding: 120 }));
-    }
-
-    render() {
-      let markers;
-      if (this.map) {
-        const popupHaussmann = <div>Happy to be here</div>;
-        const popupSentier = <div>Old home</div>;
-
-        markers = [
-          <Marker
-            key="haussmann"
-            coordinates={{lat: 48.872198, lng: 2.3366308}}
-            map={this.map}
-            popup={popupHaussmann}
-            popupOnOver
-            popupOffset={20}
-          >
-            <span role="img" aria-label="Emoji Marker" style={{ fontSize: '30px' }}>
-              🏢
-            </span>
-          </Marker>,
-          <Marker
-            key="sentier"
-            coordinates={SENTIER_COORDINATES}
-            map={this.map}
-            popup={popupSentier}
-            popupOnOver
-            popupOffset={20}
-          >
-            <span role="img" aria-label="Emoji Marker" style={{ fontSize: '30px' }}>
-              🏠
-            </span>
-          </Marker>,
-          <Circle
-            key="radius"
-            id="radius"
-            coordinates={RADIUS_COORDINATES}
-            map={this.map}
-            radius={500}
-            paint={{
-              'fill-color': '#0074e4',
-              'fill-opacity': 0.33,
-            }}
-          />,
-        ];
-      }
-
-      return (
-        <MapboxMap
-          accessToken={global.ACCESS_TOKEN}
-          coordinates={{lat: 48.872198, lng: 2.3366308}}
-          className="map-container"
-          onLoad={this.onMapLoad}
-          withCompass
-          withZoom
-          withFullscreen
-        >
-          {markers}
-        </MapboxMap>
-      );
-    }
+    this.onMapLoad = this.onMapLoad.bind(this);
   }
 
-  AllInOne.displayName = 'AllInOne';`}
-            </SyntaxHighlighter>
-          </div>
-        </div>
+  onMapLoad(map, coordinates) {
+    this.map = map;
+    this.forceUpdate();
 
-        <footer className="footer">
-          Made with{' '}
-          <span role="img" aria-label="love">
-            ❤️
-          </span>{' '}
-          by{' '}
-          <a href="https://www.meilleursagents.com" target="_blank" rel="noreferrer noopener">
-            MeilleursAgents
-          </a>
-        </footer>
-      </div>
+    const bounds = Helpers.newBounds();
+    bounds.extend(Helpers.newBound({lat: 48.872198, lng: 2.3366308}));
+    bounds.extend(Helpers.newBound(SENTIER_COORDINATES));
+
+    this.map.jumpTo(this.map.cameraForBounds(bounds, { padding: 120 }));
+  }
+
+  render() {
+    let markers;
+    if (this.map) {
+      const popupHaussmann = <div>Happy to be here</div>;
+      const popupSentier = <div>Old home</div>;
+
+      markers = [
+        <Marker
+          key="haussmann"
+          coordinates={{lat: 48.872198, lng: 2.3366308}}
+          map={this.map}
+          popup={popupHaussmann}
+          popupAnchor='top-left'
+          popupOnOver
+          popupOffset={20}
+        >
+          <span role="img" aria-label="Emoji Marker" style={{ fontSize: '30px' }}>
+            🏢
+          </span>
+        </Marker>,
+        <Marker
+          key="sentier"
+          coordinates={SENTIER_COORDINATES}
+          map={this.map}
+          popup={popupSentier}
+          popupAnchor='bottom-right'
+          popupOnOver
+          popupOffset={20}
+        >
+          <span role="img" aria-label="Emoji Marker" style={{ fontSize: '30px' }}>
+            🏠
+          </span>
+        </Marker>,
+        <Circle
+          key="radius"
+          id="radius"
+          coordinates={RADIUS_COORDINATES}
+          map={this.map}
+          radius={500}
+          unit="meters"
+          paint={{
+            'fill-color': '#0074e4',
+            'fill-opacity': 0.33,
+          }}
+        />,
+      ];
+    }
+
+    return (
+      <MapboxMap
+        accessToken={global.ACCESS_TOKEN}
+        coordinates={{lat: 48.872198, lng: 2.3366308}}
+        className="map-container"
+        onLoad={this.onMapLoad}
+        withCompass
+        withZoom
+        withFullscreen
+      >
+        {markers}
+      </MapboxMap>
     );
   }
+}
+
+AllInOne.displayName = 'AllInOne';
+`}
+                        </SyntaxHighlighter>
+                    </div>
+                </div>
+
+                <footer className="footer">
+                    Made with{' '}
+                    <span role="img" aria-label="love">
+                        ❤️
+                    </span>{' '}
+                    by{' '}
+                    <a
+                        href="https://www.meilleursagents.com"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                    >
+                        MeilleursAgents
+                    </a>
+                </footer>
+            </div>
+        );
+    }
 }
