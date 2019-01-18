@@ -106,20 +106,20 @@ export default class App extends Component {
                         <SimpleMap className="map-container" coordinates={coordinates} />
                         <SyntaxHighlighter className="code" language="jsx" style={prism}>
                             {`import React from 'react';
-  import MapboxMap from 'react-mapbox-wrapper';
+import MapboxMap from 'react-mapbox-wrapper';
 
-  export default function SimpleMap({coordinates}) {
-    return (
-      <div style={{ height: 400, width: 400 }}>
-        <MapboxMap
-          accessToken={global.ACCESS_TOKEN}
-          coordinates={coordinates}
-        />
-      </div>
-    );
-  }
+export default function SimpleMap({coordinates}) {
+  return (
+    <div style={{ height: 400, width: 400 }}>
+      <MapboxMap
+        accessToken={global.ACCESS_TOKEN}
+        coordinates={coordinates}
+      />
+    </div>
+  );
+}
 
-  SimpleMap.displayName = 'SimpleMap';`}
+SimpleMap.displayName = 'SimpleMap';`}
                         </SyntaxHighlighter>
                     </div>
                 </div>
@@ -130,42 +130,42 @@ export default class App extends Component {
                         <MapWithMarker coordinates={coordinates} />
                         <SyntaxHighlighter className="code" language="jsx" style={prism}>
                             {`import React, { Component } from 'react';
-  import MapboxMap, { Marker } from 'react-mapbox-wrapper';
+import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
-  export default class MapWithMarker extends Component {
-    constructor(props) {
-      super(props);
+export default class MapWithMarker extends Component {
+  constructor(props) {
+    super(props);
 
-      this.onMapLoad = this.onMapLoad.bind(this);
-    }
-
-    onMapLoad(map) {
-      this.map = map;
-      this.forceUpdate();
-    }
-
-    render() {
-      let marker;
-      const { coordinates } = this.props;
-
-      if (this.map) {
-        marker = <Marker coordinates={coordinates} map={this.map} />;
-      }
-
-      return (
-        <MapboxMap
-          accessToken={global.ACCESS_TOKEN}
-          coordinates={coordinates}
-          className="map-container"
-          onLoad={this.onMapLoad}
-        >
-          {marker}
-        </MapboxMap>
-      );
-    }
+    this.onMapLoad = this.onMapLoad.bind(this);
   }
 
-  MapWithMarker.displayName = 'MapWithMarker';`}
+  onMapLoad(map) {
+    this.map = map;
+    this.forceUpdate();
+  }
+
+  render() {
+    let marker;
+    const { coordinates } = this.props;
+
+    if (this.map) {
+      marker = <Marker coordinates={coordinates} map={this.map} />;
+    }
+
+    return (
+      <MapboxMap
+        accessToken={global.ACCESS_TOKEN}
+        coordinates={coordinates}
+        className="map-container"
+        onLoad={this.onMapLoad}
+      >
+        {marker}
+      </MapboxMap>
+    );
+  }
+}
+
+MapWithMarker.displayName = 'MapWithMarker';`}
                         </SyntaxHighlighter>
                     </div>
                 </div>
@@ -235,8 +235,7 @@ MapWithMovingMarker.displayName = 'MapWithMovingMarker';`}
                     <div className="example">
                         <MarkerWithPopup coordinates={coordinates} />
                         <SyntaxHighlighter className="code" language="jsx" style={prism}>
-                            {`
-import React, { Component } from 'react';
+                            {`import React, { Component } from 'react';
 import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
 export default class MarkerWithPopup extends Component {
@@ -282,8 +281,7 @@ export default class MarkerWithPopup extends Component {
   }
 }
 
-MarkerWithPopup.displayName = 'MarkerWithPopup';
-  `}
+MarkerWithPopup.displayName = 'MarkerWithPopup';`}
                         </SyntaxHighlighter>
                     </div>
                 </div>
@@ -293,8 +291,7 @@ MarkerWithPopup.displayName = 'MarkerWithPopup';
                     <div className="example">
                         <CustomMarkerOnOver coordinates={coordinates} />
                         <SyntaxHighlighter className="code" language="jsx" style={prism}>
-                            {`
-import React, { Component } from 'react';
+                            {`import React, { Component } from 'react';
 import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
 export default class CustomMarker extends Component {
@@ -345,8 +342,7 @@ export default class CustomMarker extends Component {
   }
 }
 
-CustomMarker.displayName = 'CustomMarker';
-  `}
+CustomMarker.displayName = 'CustomMarker';`}
                         </SyntaxHighlighter>
                     </div>
                 </div>
@@ -357,53 +353,53 @@ CustomMarker.displayName = 'CustomMarker';
                         <MapWithCircle coordinates={coordinates} />
                         <SyntaxHighlighter className="code" language="jsx" style={prism}>
                             {`import React, { Component } from 'react';
-  import MapboxMap, { Circle } from 'react-mapbox-wrapper';
+import MapboxMap, { Circle } from 'react-mapbox-wrapper';
 
-  export default class MapWithCircle extends Component {
-    constructor(props) {
-      super(props);
+export default class MapWithCircle extends Component {
+  constructor(props) {
+    super(props);
 
-      this.onMapLoad = this.onMapLoad.bind(this);
-    }
-
-    onMapLoad(map) {
-      this.map = map;
-      this.forceUpdate();
-    }
-
-    render() {
-      let circle;
-      const { coordinates } = this.props;
-
-      if(this.map) {
-          circle = <Circle
-          key="radius"
-          id="radius"
-          coordinates={{lat: 40.7590403, lng: -74.0392709}}
-          map={this.map}
-          radius={330}
-          unit="feet"
-          paint={{
-            'fill-color': '#0074e4',
-            'fill-opacity': 0.33,
-          }}
-        />
-      }
-
-      return (
-        <MapboxMap
-          accessToken={global.ACCESS_TOKEN}
-          coordinates={{lat: 40.7590403, lng: -74.0392709}}
-          className="map-container"
-          onLoad={this.onMapLoad}
-        >
-          {circle}
-        </MapboxMap>
-      );
-    }
+    this.onMapLoad = this.onMapLoad.bind(this);
   }
 
-  MapWithCircle.displayName = 'MapWithCircle';`}
+  onMapLoad(map) {
+    this.map = map;
+    this.forceUpdate();
+  }
+
+  render() {
+    let circle;
+    const { coordinates } = this.props;
+
+    if(this.map) {
+        circle = <Circle
+        key="radius"
+        id="radius"
+        coordinates={{lat: 40.7590403, lng: -74.0392709}}
+        map={this.map}
+        radius={330}
+        unit="feet"
+        paint={{
+          'fill-color': '#0074e4',
+          'fill-opacity': 0.33,
+        }}
+      />
+    }
+
+    return (
+      <MapboxMap
+        accessToken={global.ACCESS_TOKEN}
+        coordinates={{lat: 40.7590403, lng: -74.0392709}}
+        className="map-container"
+        onLoad={this.onMapLoad}
+      >
+        {circle}
+      </MapboxMap>
+    );
+  }
+}
+
+MapWithCircle.displayName = 'MapWithCircle';`}
                         </SyntaxHighlighter>
                     </div>
                 </div>
@@ -413,8 +409,7 @@ CustomMarker.displayName = 'CustomMarker';
                     <div className="example">
                         <AllInOne coordinates={coordinates} />
                         <SyntaxHighlighter className="code" language="jsx" style={prism}>
-                            {`
-import React, { Component } from 'react';
+                            {`import React, { Component } from 'react';
 import MapboxMap, { Marker, Circle, Helpers } from 'react-mapbox-wrapper';
 
 const SENTIER_COORDINATES = { lat: 48.868526, lng: 2.3434886 };
@@ -502,8 +497,7 @@ export default class AllInOne extends Component {
   }
 }
 
-AllInOne.displayName = 'AllInOne';
-`}
+AllInOne.displayName = 'AllInOne';`}
                         </SyntaxHighlighter>
                     </div>
                 </div>
