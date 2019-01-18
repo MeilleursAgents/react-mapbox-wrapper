@@ -88,6 +88,7 @@ React Component that render a Marker. Extra props are directly passed to the [Ma
 | onMouseOut | func |  | Callback function called on marker or popup mouseOut |
 | onMouseOver | func |  | Callback function called on marker or popup mouseOver |
 | popup | Node |  | Popup attached to the marker, displayed on click to marker |
+| popupAnchor | string | `bottom` | [Popup anchor param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
 | popupCloseButton | bool | `false` | [Popup closeButton param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
 | popupOffset | number |  | [Popup offset param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
 | popupOnOver | bool | `false` | Trigger popup show on mouse over (only available if **children** are provided, default marker cannot be bind) |
@@ -112,7 +113,7 @@ React Component that render a Circle. Extra props are directly passed to the [Ma
 npm install && npm run peers # install both dependencies and peers
 ```
 
-You can use [`npm link`](https://docs.npmjs.com/cli/link) while developping new features on this repo for use in targeted repository.
+You can use [`npm link`](https://docs.npmjs.com/cli/link) while developing new features on this repo for use in targeted repository.
 
 ```bash
 npm link
