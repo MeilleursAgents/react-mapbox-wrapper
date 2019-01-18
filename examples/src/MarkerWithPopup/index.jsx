@@ -25,6 +25,7 @@ export default class MarkerWithPopup extends Component {
           coordinates={coordinates}
           map={this.map}
           popup={popup}
+          popupAnchor='bottom'
           popupOffset={30}
         />
       );

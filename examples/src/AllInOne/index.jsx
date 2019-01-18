@@ -34,6 +34,7 @@ export default class AllInOne extends Component {
           coordinates={{lat: 48.872198, lng: 2.3366308}}
           map={this.map}
           popup={popupHaussmann}
+          popupAnchor='top-left'
           popupOnOver
           popupOffset={20}
         >
@@ -46,6 +47,7 @@ export default class AllInOne extends Component {
           coordinates={SENTIER_COORDINATES}
           map={this.map}
           popup={popupSentier}
+          popupAnchor='bottom-right'
           popupOnOver
           popupOffset={20}
         >

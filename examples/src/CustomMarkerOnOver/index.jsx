@@ -25,6 +25,7 @@ export default class CustomMarker extends Component {
           coordinates={coordinates}
           map={this.map}
           popup={popup}
+          popupAnchor='bottom'
           popupOnOver
           popupOffset={20}
         >
