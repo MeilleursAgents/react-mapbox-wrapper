@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import Circle from 'Circle';
 import { getLayerId } from 'Helpers';
+import Circle from './index';
 
 describe('<Circle />', () => {
     function defaultProps() {

@@ -107,9 +107,39 @@ React Component that render a Circle. Extra props are directly passed to the [Ma
 | radius | number | required | Radius of circle, in kilometers |
 | unit | string | `kilometers` | Unit of the radius. values can be : `kilometers`, `meters`, `miles`, `feet` |
 
-## Development
+### Helpers
+
+We provide some [helpers](https://github.com/MeilleursAgents/react-mapbox-wrapper/blob/master/src/Helpers/index.js) for interacting with Mapbox Map object, all in `Helpers` import.
+
 
 ```js
+import { Helpers } from react-mapbox-wrapper;
+
+Helpers.convertRadiusUnit(580, 'meters');
+// > { radius: 0.58, unit: 'kilometers' }
+
+Helpers.getCircleData({ lat: 48.868526, lng: 2.3434886 }, 800, 'meters')
+// > Coordinates for drawing a circle with a 800meters radius at given coordinates
+
+Helpers.coordinatesAreEqual({ lat: 48.868526, lng: 2.3434886 }, [2.3434886, 48.868526]);
+// > Check if given coordinates are equal, even in different format
+
+Helpers.newBounds(coordinatesSouthWest, coordinatesNorthEast);
+// > Create a new LngLatBounds from Mapbox library
+
+Helpers.newBound(coordinates);
+// > Create a new LngLatLike from Mapbox library
+
+Helpers.drawGeoJSON(map, 'foodTruck', data, { 'fill-opacity': 0.2 }, undefined, 'fill');
+// > Draw a geoJSON with given data and type. Can be used to also update geoJSON if layer already exist
+
+Helpers.removeGeoJSON(map, 'foodTruck');
+// > Remove the layer previously added with #addGeoJSON method
+```
+
+## Development
+
+```bash
 npm install && npm run peers # install both dependencies and peers
 ```
 

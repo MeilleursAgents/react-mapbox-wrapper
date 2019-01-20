@@ -32,9 +32,9 @@ const CIRCLE_POINTS_CONFIG = 64;
 export const UNITS = ['kilometers', 'meters', 'miles', 'feet'];
 
 /**
- * Convert the radius into the unit given
- * @param {Number} radius unit
- * @param {String} unit to convert to if necessary
+ * Convert the radius on given unit to a compatible unit for turf/circle
+ * @param {Number} radius on given unit
+ * @param {String} unit of radius given
  */
 export function convertRadiusUnit(radius, unit = 'kilometers') {
     let convertedRadius = Number(radius);
@@ -61,30 +61,6 @@ export function convertRadiusUnit(radius, unit = 'kilometers') {
     }
 
     return { radius: convertedRadius, unit: convertedUnit };
-}
-
-/**
- * Get circle points.
- * @param  {Object} coordinates Center coordinates
- * @param  {Number} radius      Radius
- * @param  {String} unit        Unit of the radius
- * @return {Object}             GeoJSON data
- */
-export function getCircleData(coordinates, radius, unit) {
-    const { radius: usedRadius, unit: usedUnit } = convertRadiusUnit(radius, unit);
-    return circle([coordinates.lng, coordinates.lat], usedRadius, {
-        steps: CIRCLE_POINTS_CONFIG,
-        units: usedUnit,
-    });
-}
-
-/**
- * Get layer identifier from source identifier.
- * @param  {String} id Source's identifier
- * @return {String} Layer's identifier
- */
-export function getLayerId(id) {
-    return `${id}_layer`;
 }
 
 /**
@@ -139,7 +115,34 @@ export function newBounds(sw, ne) {
  * @return {BoundObject} Bound object matching the underlying map library
  */
 export function newBound(coordinates) {
-    return [coordinates.lng, coordinates.lat];
+    const safeCoordinates = parseCoordinates(coordinates);
+
+    return [safeCoordinates.lng, safeCoordinates.lat];
+}
+
+/**
+ * Get circle points.
+ * @param  {Object} coordinates Center coordinates
+ * @param  {Number} radius      Radius
+ * @param  {String} unit        Unit of the radius
+ * @return {Object}             GeoJSON data
+ */
+export function getCircleData(coordinates, radius, unit) {
+    const { radius: usedRadius, unit: usedUnit } = convertRadiusUnit(radius, unit);
+
+    return circle(newBound(coordinates), usedRadius, {
+        steps: CIRCLE_POINTS_CONFIG,
+        units: usedUnit,
+    });
+}
+
+/**
+ * Get layer identifier from source identifier.
+ * @param  {String} id Source's identifier
+ * @return {String} Layer's identifier
+ */
+export function getLayerId(id) {
+    return `${id}_layer`;
 }
 
 /**
@@ -150,7 +153,7 @@ export function newBound(coordinates) {
  * @param {Object}   paint   Paint option of polygon
  * @param {Function} onClick Add on click to the layer
  */
-export function drawGeoJSON(map, id, data, paint = {}, onClick) {
+export function drawGeoJSON(map, id, data, paint = {}, onClick, type = 'fill') {
     if (!id || !map || !data) {
         return;
     }
@@ -171,7 +174,7 @@ export function drawGeoJSON(map, id, data, paint = {}, onClick) {
 
         map.addLayer({
             id: layerId,
-            type: 'fill',
+            type,
             source: id,
             layout: {},
             paint,

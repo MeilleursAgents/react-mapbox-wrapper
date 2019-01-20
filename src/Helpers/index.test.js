@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
-import { drawGeoJSON, removeGeoJSON, getLayerId, convertRadiusUnit, coordinatesAreEqual } from '.';
+import { drawGeoJSON, removeGeoJSON, getLayerId, convertRadiusUnit, coordinatesAreEqual } from './index';
 
 chai.use(sinonChai);
 
