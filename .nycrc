@@ -16,6 +16,8 @@
     "**/*webpack*",
     "src/index.js",
     "src/Diagnose/",
+    "src/**/*test.js",
+    "src/**/*test.jsx",
     "examples/**"
   ],
   "check-coverage": true,

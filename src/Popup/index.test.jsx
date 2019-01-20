@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import mapboxgl from 'Lib';
-import Popup from '.';
+import Popup from './index';
 
 function defaultProps() {
     return {};

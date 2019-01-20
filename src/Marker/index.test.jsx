@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import sinon from 'sinon';
 import mapboxgl from 'Lib';
 import { DEBOUNCE_TIMEOUT } from 'MapboxMap';
-import Marker from '.';
+import Marker from './index';
 
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 

@@ -1,4 +1,4 @@
-import { deepEqual } from '.';
+import { deepEqual } from './index';
 
 describe('deepEqual', () => {
     it('should work with native variable', () => {

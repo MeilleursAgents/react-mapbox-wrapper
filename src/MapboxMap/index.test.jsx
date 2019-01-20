@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 import mapboxgl from 'Lib';
-import MapboxMap from '.';
+import MapboxMap from './index';
 
 function defaultProps() {
     return {
