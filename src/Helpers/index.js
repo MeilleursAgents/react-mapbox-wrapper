@@ -33,8 +33,8 @@ export const UNITS = ['kilometers', 'meters', 'miles', 'feet'];
 
 /**
  * Convert the radius on given unit to a compatible unit for turf/circle
- * @param {Number} radius on given unit
- * @param {String} unit of radius given
+ * @param {Number} radius of given unit
+ * @param {String} unit of given radius
  */
 export function convertRadiusUnit(radius, unit = 'kilometers') {
     let convertedRadius = Number(radius);
