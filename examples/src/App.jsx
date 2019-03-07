@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/prism-light';
-import jsx from 'react-syntax-highlighter/languages/prism/jsx';
-import prism from 'react-syntax-highlighter/styles/prism/prism';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import SimpleMap from './SimpleMap';
 import MapWithMarker from './MapWithMarker';
 import MapWithMovingMarker from './MapWithMovingMarker';
@@ -18,8 +17,6 @@ import './App.css';
  */
 global.ACCESS_TOKEN =
     'pk.eyJ1IjoibHVjYXN3b2oiLCJhIjoiY2l5Nmg4cWU1MDA0ejMzcDJtNHJmZzJkcyJ9.WhcEdTYQH6sSw2pm0RSP9Q';
-
-registerLanguage('jsx', jsx);
 
 /**
  * App Component.
