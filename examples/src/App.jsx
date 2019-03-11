@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Diagnose } from 'react-mapbox-wrapper';
+import Places from 'places.js';
 import SimpleMap from './SimpleMap';
 import MapWithMarker from './MapWithMarker';
 import MapWithMovingMarker from './MapWithMovingMarker';
@@ -8,7 +10,6 @@ import MarkerWithPopup from './MarkerWithPopup';
 import CustomMarkerOnOver from './CustomMarkerOnOver';
 import MapWithCircle from './MapWithCircle';
 import AllInOne from './AllInOne';
-import Places from 'places.js';
 import './App.css';
 
 /**
@@ -46,6 +47,8 @@ export default class App extends Component {
         });
 
         placesAutocomplete.on('change', e => this.setState({ coordinates: e.suggestion.latlng }));
+
+        global.console.info(Diagnose.fullDiagnostic());
     }
 
     /**
