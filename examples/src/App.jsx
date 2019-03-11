@@ -48,7 +48,9 @@ export default class App extends Component {
 
         placesAutocomplete.on('change', e => this.setState({ coordinates: e.suggestion.latlng }));
 
-        global.console.info(Diagnose.fullDiagnostic());
+        Diagnose.fullDiagnostic().then((content) => {
+          global.console.debug(content);
+        });
     }
 
     /**

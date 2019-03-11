@@ -9,7 +9,7 @@
     "places.js": "^1.14.0",
     "react": "16.8.4",
     "react-dom": "16.8.4",
-    "react-mapbox-wrapper": "2.2.0",
+    "react-mapbox-wrapper": "2.3.0",
     "react-scripts": "2.1.8",
     "react-syntax-highlighter": "10.1.3"
   },
