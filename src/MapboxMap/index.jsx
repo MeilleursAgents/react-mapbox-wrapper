@@ -171,17 +171,23 @@ export default class MapboxMap extends Component {
      * Add controls to map according to component's props.
      */
     addControls() {
-        const { withZoom, withCompass, withFullscreen } = this.props;
+        const {
+            fullscreenControlPosition,
+            navigationControlPosition,
+            withZoom,
+            withCompass,
+            withFullscreen,
+        } = this.props;
 
         if (withZoom || withCompass) {
             this.map.addControl(
                 new mapboxgl.NavigationControl({ showCompass: withCompass, showZoom: withZoom }),
-                'bottom-right',
+                navigationControlPosition,
             );
         }
 
         if (withFullscreen) {
-            this.map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+            this.map.addControl(new mapboxgl.FullscreenControl(), fullscreenControlPosition);
         }
     }
 
@@ -235,8 +241,10 @@ MapboxMap.propTypes = {
     coordinates: LngLatLike.isRequired,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     className: PropTypes.string,
+    fullscreenControlPosition: PropTypes.string,
     maxZoom: PropTypes.number,
     minZoom: PropTypes.number,
+    navigationControlPosition: PropTypes.string,
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     onLoad: PropTypes.func,
@@ -254,8 +262,10 @@ MapboxMap.defaultProps = {
     accessToken: '',
     children: null,
     className: '',
+    fullscreenControlPosition: 'top-right',
     maxZoom: undefined,
     minZoom: undefined,
+    navigationControlPosition: 'bottom-right',
     onChange: undefined,
     onClick: undefined,
     onLoad: undefined,

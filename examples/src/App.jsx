@@ -9,6 +9,7 @@ import MapWithMovingMarker from './MapWithMovingMarker';
 import MarkerWithPopup from './MarkerWithPopup';
 import CustomMarkerOnOver from './CustomMarkerOnOver';
 import MapWithCircle from './MapWithCircle';
+import MapWithNavigationControlsPosition from './MapWithNavigationControlsPosition';
 import AllInOne from './AllInOne';
 import './App.css';
 
@@ -402,6 +403,38 @@ export default class MapWithCircle extends Component {
 }
 
 MapWithCircle.displayName = 'MapWithCircle';`}
+                        </SyntaxHighlighter>
+                    </div>
+                </div>
+
+                <div className="content">
+                    <h2>Map navigation controls with custom position</h2>
+                    <div className="example">
+                        <MapWithNavigationControlsPosition coordinates={coordinates} />
+                        <SyntaxHighlighter className="code" language="jsx" style={prism}>
+                            {`import React from 'react';
+import PropTypes from 'prop-types';
+import MapboxMap from 'react-mapbox-wrapper';
+
+/**
+ * MapControlPosition Functional Component.
+ */
+export default function MapWithNavigationControlsPosition({coordinates}) {
+    return (
+        <MapboxMap
+          accessToken={global.ACCESS_TOKEN}
+          coordinates={coordinates}
+          className="map-container"
+          fullscreenControlPosition="top-left"
+          navigationControlPosition="top-right"
+          withCompass
+          withZoom
+          withFullscreen
+        />
+    );
+};
+
+MapWithNavigationControlsPosition.displayName = 'MapWithNavigationControlsPosition';`}
                         </SyntaxHighlighter>
                     </div>
                 </div>
