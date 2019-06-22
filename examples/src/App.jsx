@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/prism-light';
-import jsx from 'react-syntax-highlighter/languages/prism/jsx';
-import prism from 'react-syntax-highlighter/styles/prism/prism';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Diagnose } from 'react-mapbox-wrapper';
+import Places from 'places.js';
 import SimpleMap from './SimpleMap';
 import MapWithMarker from './MapWithMarker';
 import MapWithMovingMarker from './MapWithMovingMarker';
 import MarkerWithPopup from './MarkerWithPopup';
 import CustomMarkerOnOver from './CustomMarkerOnOver';
 import MapWithCircle from './MapWithCircle';
+import MapWithNavigationControlsPosition from './MapWithNavigationControlsPosition';
 import AllInOne from './AllInOne';
-import Places from 'places.js';
 import './App.css';
 
 /**
@@ -18,8 +19,6 @@ import './App.css';
  */
 global.ACCESS_TOKEN =
     'pk.eyJ1IjoibHVjYXN3b2oiLCJhIjoiY2l5Nmg4cWU1MDA0ejMzcDJtNHJmZzJkcyJ9.WhcEdTYQH6sSw2pm0RSP9Q';
-
-registerLanguage('jsx', jsx);
 
 /**
  * App Component.
@@ -49,6 +48,10 @@ export default class App extends Component {
         });
 
         placesAutocomplete.on('change', e => this.setState({ coordinates: e.suggestion.latlng }));
+
+        Diagnose.fullDiagnostic().then((content) => {
+          global.console.debug(content);
+        });
     }
 
     /**
@@ -400,6 +403,38 @@ export default class MapWithCircle extends Component {
 }
 
 MapWithCircle.displayName = 'MapWithCircle';`}
+                        </SyntaxHighlighter>
+                    </div>
+                </div>
+
+                <div className="content">
+                    <h2>Map navigation controls with custom position</h2>
+                    <div className="example">
+                        <MapWithNavigationControlsPosition coordinates={coordinates} />
+                        <SyntaxHighlighter className="code" language="jsx" style={prism}>
+                            {`import React from 'react';
+import PropTypes from 'prop-types';
+import MapboxMap from 'react-mapbox-wrapper';
+
+/**
+ * MapControlPosition Functional Component.
+ */
+export default function MapWithNavigationControlsPosition({coordinates}) {
+    return (
+        <MapboxMap
+          accessToken={global.ACCESS_TOKEN}
+          coordinates={coordinates}
+          className="map-container"
+          fullscreenControlPosition="top-left"
+          navigationControlPosition="top-right"
+          withCompass
+          withZoom
+          withFullscreen
+        />
+    );
+};
+
+MapWithNavigationControlsPosition.displayName = 'MapWithNavigationControlsPosition';`}
                         </SyntaxHighlighter>
                     </div>
                 </div>

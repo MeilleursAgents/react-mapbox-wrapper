@@ -4,25 +4,31 @@
   "private": true,
   "homepage": "https://meilleursagents.github.io/react-mapbox-wrapper",
   "dependencies": {
-    "@turf/circle": "^6.0.0",
-    "mapbox-gl": "^0.46.0",
-    "places.js": "^1.14.0",
-    "react": "16.5.0",
-    "react-dom": "16.5.0",
-    "react-mapbox-wrapper": "2.2.0",
-    "react-scripts": "1.1.5",
-    "react-syntax-highlighter": "8.0.1"
+    "@turf/circle": "^6.0.1",
+    "mapbox-gl": "^0.54.0",
+    "places.js": "^1.16.4",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-mapbox-wrapper": "2.3.0",
+    "react-scripts": "3.0.0",
+    "react-syntax-highlighter": "10.2.1"
   },
   "scripts": {
     "link": "npm link react-mapbox-wrapper",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "test": "SKIP_PREFLIGHT_CHECK=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "gh-pages": "1.2.0"
-  }
+    "gh-pages": "2.0.1"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

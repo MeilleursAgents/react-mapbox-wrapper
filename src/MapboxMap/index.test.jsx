@@ -99,6 +99,13 @@ describe('<MapboxMap />', () => {
         expect(wrapper.instance().map.on.callCount).to.equal(1);
     });
 
+    it('should add control if compass is asked', () => {
+        const props = defaultProps();
+        const wrapper = mount(<MapboxMap {...props} withCompass />);
+
+        expect(wrapper.instance().map.addControl.called).to.equal(true);
+    });
+
     it('should add control if zoom is asked', () => {
         const props = defaultProps();
         const wrapper = mount(<MapboxMap {...props} withZoom />);
@@ -106,11 +113,40 @@ describe('<MapboxMap />', () => {
         expect(wrapper.instance().map.addControl.called).to.equal(true);
     });
 
+    it('should add control with navigation control position if asked', () => {
+        const props = defaultProps();
+        const wrapper = mount(
+            <MapboxMap {...props} withCompass withZoom navigationControlPosition="top-right" />,
+        );
+
+        expect(
+            wrapper
+                .instance()
+                .map.addControl.calledWith(
+                    new mapboxgl.NavigationControl({ showCompass: true, showZoom: true }),
+                    'top-right',
+                ),
+        ).to.equal(true);
+    });
+
     it('should add control if fullscreen is asked', () => {
         const props = defaultProps();
         const wrapper = mount(<MapboxMap {...props} withFullscreen />);
 
         expect(wrapper.instance().map.addControl.called).to.equal(true);
+    });
+
+    it('should add control with fullscreen control position if asked', () => {
+        const props = defaultProps();
+        const wrapper = mount(
+            <MapboxMap {...props} withFullscreen fullscreenControlPosition="top-right" />,
+        );
+
+        expect(
+            wrapper
+                .instance()
+                .map.addControl.calledWith(new mapboxgl.FullscreenControl(), 'top-right'),
+        ).to.equal(true);
     });
 
     it('should call given onChange', () => {

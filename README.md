@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/MeilleursAgents/react-mapbox-wrapper.svg?branch=master)](https://travis-ci.org/MeilleursAgents/react-mapbox-wrapper)
 [![npm version](https://badge.fury.io/js/react-mapbox-wrapper.svg)](https://badge.fury.io/js/react-mapbox-wrapper)
+[![codecov](https://codecov.io/gh/MeilleursAgents/react-mapbox-wrapper/branch/master/graph/badge.svg)](https://codecov.io/gh/MeilleursAgents/react-mapbox-wrapper)
 
 React wrapper for [mapboxgl-js API](https://www.mapbox.com/mapbox-gl-js/api/).
 
@@ -68,10 +69,12 @@ Wrapper is CSS flex-ready for *width* but you **have to set a height** for havin
 | onZoomStart | func | `undefined` | Callback function called on [map's zoomstart](https://www.mapbox.com/mapbox-gl-js/api/#map.event:zoomstart) |
 | onZoomEnd | func | `undefined` | Callback function called on [map's zoomend](https://www.mapbox.com/mapbox-gl-js/api/#map.event:zoomend) with a debounce of 300ms in order to avoid too many `render()` call |
 | renderNotSupported | func | *Simple message* | Callback function called when [browser does not support mapbox-gl](https://www.mapbox.com/mapbox-gl-js/api/#supported) |
-| style | String | | [Mapbox style layer](https://www.mapbox.com/mapbox-gl-js/style-spec/) |
+| mapboxStyle | String | | [Mapbox style layer](https://www.mapbox.com/mapbox-gl-js/style-spec/) |
 | withCompass | bool | `false` | Show compass [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol) |
 | withFullscreen | bool | `false` | Show [Fullscreen Control](https://www.mapbox.com/mapbox-gl-js/api/#fullscreencontrol) |
 | withZoom | bool | `false` | Show zoom [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol) |
+| fullscreenControlPosition | string | `top-right` | Set [Fullscreen Control](https://www.mapbox.com/mapbox-gl-js/api/#fullscreencontrol) position |
+| navigationControlPosition | string | `bottom-right` | Set [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol) position |
 
 ### Marker
 

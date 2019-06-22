@@ -1,6 +1,6 @@
 {
   "name": "react-mapbox-wrapper",
-  "version": "2.2.0",
+  "version": "2.4.0",
   "description": "Mapbox GL Javascript wrapper for ReactJS",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
     "doc": "esdoc -c esdoc.json",
     "start": "webpack --watch",
     "build": "webpack -p",
-    "ci": "npm run format && npm run lint && npm run test && npm run doc && npm run build"
+    "ci": "npm run format && npm run lint && npm run test && npm run doc && npm run build && codecov"
   },
   "keywords": [
     "react",
@@ -53,6 +53,7 @@
     "babel-template": "6.26.0",
     "babel-types": "6.26.0",
     "chai": "4.2.0",
+    "codecov": "3.3.0",
     "css-loader": "2.1.0",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.1",
