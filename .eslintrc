@@ -20,5 +20,9 @@
         "Promise": true,
         "expect": true
     },
-    "plugins": ["babel", "react"]
+    "plugins": ["babel", "react"],
+    "rules": {
+        "react/jsx-props-no-spreading": 0,
+        "max-classes-per-file": 0
+    }
 }
