@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://meilleursagents.github.io/react-mapbox-wrapper",
   "dependencies": {
+    "@sentry/browser": "5.6.3",
     "@turf/circle": "^6.0.1",
     "mapbox-gl": "^1.1.1",
     "places.js": "^1.16.4",
