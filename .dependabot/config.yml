@@ -6,4 +6,10 @@ update_configs:
   directory: "/"
   update_schedule: "weekly"
   default_reviewers:
-  - "MeilleursAgents/web-front"
+  - "Eldraed"
+  - "Heisendev"
+  - "JiDai"
+  - "liv7c"
+  - "PierrickGT"
+  - "simrobin"
+  - "susan-almassi"
