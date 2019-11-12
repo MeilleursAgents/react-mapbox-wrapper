@@ -75,7 +75,7 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.14.3",
     "ignore-styles": "5.0.1",
-    "jsdom": "15.1.1",
+    "jsdom": "15.2.1",
     "mocha": "6.2.2",
     "npm-install-peers": "1.2.1",
     "nyc": "14.1.1",
