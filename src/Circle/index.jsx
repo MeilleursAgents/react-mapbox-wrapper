@@ -38,7 +38,7 @@ export default class Circle extends Component {
     /**
      * React lifecycle.
      */
-    componentWillMount() {
+    componentDidMount() {
         const { map, id, coordinates, radius, unit, paint, onClick } = this.props;
 
         updateRadiusLayer(map, id, coordinates, radius, unit, paint, onClick);
