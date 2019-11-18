@@ -1,11 +1,40 @@
 #!/usr/bin/env bash
 
-HOOKS_DIR="tools/hooks"
-ROOT_PATH="`pwd`/`git rev-parse --show-cdup`"
+set -o nounset -o pipefail -o errexit
 
-for file in `ls "${ROOT_PATH}${HOOKS_DIR}"`; do
-  fullpath="${ROOT_PATH}/.git/hooks/${file}"
+install() {
+  local SCRIPT_DIR
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-  ln -s -f "${ROOT_PATH}${HOOKS_DIR}/${file}" "${fullpath}"
-  echo "${file} hook installed"
-done
+  local GREEN='\033[0;32m'
+  local YELLOW='\033[33m'
+  local RESET='\033[0m'
+
+  (
+    cd "${SCRIPT_DIR}"
+    if [[ "$(git rev-parse --is-inside-work-tree 2>&1)" != "true" ]]; then
+        printf "%bNot inside a git work tree%b\n" "${YELLOW}" "${RESET}"
+      return
+    fi
+
+    local HOOKS_SOURCE_DIR="${SCRIPT_DIR}/hooks"
+    local HOOKS_TARGET_DIR
+    HOOKS_TARGET_DIR="$(git rev-parse --show-toplevel)/.git/hooks"
+
+    if ! [[ -d "${HOOKS_TARGET_DIR}" ]]; then
+      mkdir -p "${HOOKS_TARGET_DIR}"
+      return
+    fi
+
+    (
+      cd "${HOOKS_SOURCE_DIR}"
+
+      for file in *; do
+        ln -s -f "${HOOKS_SOURCE_DIR}/${file}" "${HOOKS_TARGET_DIR}/${file}"
+        printf "%b✔ %s hook installed %b\n" "${GREEN}" "${file}" "${RESET}"
+      done
+    )
+  )
+}
+
+install
