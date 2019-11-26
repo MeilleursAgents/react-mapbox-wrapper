@@ -1,95 +1,65 @@
 #!/usr/bin/env bash
 
-diffInitial=`git diff --name-only --diff-filter=ACMR`
+set -o nounset -o pipefail
 
-BLUE='\033[0;34m'
-RED='\033[0;31m'
-RESET='\033[0m'
-
-package=`git diff --cached --name-only --diff-filter=ACMR | grep -E "package.json$"`
-js=`git diff --cached --name-only --diff-filter=ACMR src/ | grep -E "jsx?$"`
-
-pass=0
-installed=false
-
-function installDependencies() {
-  if [ "${installed}" = true ]; then
-      return
-  fi
-
-  installed=true
-
-  if command -v npm > /dev/null 2>&1; then
-    npm --silent install --no-audit
-    npm run peers
-
-    pass=$?
-  else
-    echo -e "${RED}${#:-npm not found}{RESET}"
-  fi
-}
-
-function checkInstall() {
-  echo -e "${BLUE}Package.json has changed, running install${RESET}"
-
-  installDependencies "npm not found in $PATH, check status of ${BLUE}package-lock.json"
-}
-
-function checkFormat() {
-  echo -e "${BLUE}JS/JSX has changed, formatting files${RESET}"
-
-  installDependencies
-  npm run --silent format:file ${1}
-
-  pass=$?
-}
-
-function checkEsLint() {
-  echo -e "${BLUE}JS/JSX has changed, linting files${RESET}"
-
-  installDependencies
-  npm run --silent lint:file ${1}
-
-  pass=$?
-}
-
-function buildDist() {
-  echo -e "${BLUE}JS/JSX has changed, building index.js${RESET}"
-
-  installDependencies
-  npm run --silent build
-
-  pass=$?
-}
-
-if [ "${package}" != "" ]; then
-  checkInstall
-fi
-
-if [ "${pass}" == "0" ] && [ "${js}" != "" ]; then
-  checkFormat "${js}"
-fi
-
-if [ "${pass}" == "0" ] && [ "${js}" != "" ]; then
-  checkEsLint "${js}"
-fi
-
-if [ "${pass}" == "0" ] && [ "${js}" != "" ]; then
-  buildDist
-fi
-
-if [ ! "${pass}" == "0" ]; then
-    echo -e "${RED}COMMIT FAILED${RESET}"
-    echo -e "${RED}Last check failed during pre-commit. Please fix errors and try committing again.${RESET}"
+run_command() {
+  if ! "${@}"; then
+    printf "%bCommit Failed%b\n" "${RED}" "${RESET}"
+    printf "%bPlease fix errors and try committing again.%b\n" "${RED}" "${RESET}"
 
     exit 1
-fi
+  fi
+}
 
-diffFinal=`git diff --name-only --diff-filter=ACMR`
+get_files() {
+  git diff --name-only --diff-filter=ACMR --cached -- "${@}" | tr '\n' ' ' | sed "s| *$||g"
+}
 
-if [ ! "$diffInitial" == "$diffFinal" ]; then
-  echo -e "${RED}Pre-commit has changes files${RESET}"
-  echo -e "${RED}Consider adding updated files with ${BLUE}git add -i \&\& git commit --amend${RESET}"
-fi
+get_diff() {
+  git diff --name-only --diff-filter=ACMR
+}
 
-exit 0
+diff_check() {
+  if ! [[ "${1}" == "$(get_diff)" ]]; then
+    printf "%bPre-commit has changed files%b\n" "${RED}" "${RESET}"
+    printf "%bConsider adding updated file with %bgit add -i \&\& git commit --amend%b\n" "${RED}" "${BLUE}" "${RESET}"
+  fi
+}
+
+npm_check() {
+  local PACKAGE_JSON
+  PACKAGE_JSON=$(get_files "package.json")
+
+  local JS_FILES
+  JS_FILES=$(get_files \*.js{,x})
+
+  if [[ -n "${PACKAGE_JSON:-}" ]] || [[ -n "${JS_FILES:-}" ]]; then
+    printf "%bChecking node_modules installation%b\n" "${BLUE}" "${RESET}"
+    run_command npm --silent install --no-audit
+    run_command npm --silent run peers
+  fi
+
+  if [[ -n "${JS_FILES:-}" ]]; then
+    printf "%bFormating javascript files%b\n" "${BLUE}" "${RESET}"
+    run_command npm --silent run format:file "${JS_FILES}"
+
+    printf "%bLinting javascript files%b\n" "${BLUE}" "${RESET}"
+    run_command npm --silent run lint:file "${JS_FILES}"
+
+    printf "%bBuilding dist%b\n" "${BLUE}" "${RESET}"
+    run_command npm --silent build
+  fi
+}
+
+main() {
+  local INITIAL_DIFF
+  INITIAL_DIFF=$(get_diff)
+
+  npm_check
+
+  diff_check "${INITIAL_DIFF}"
+
+  exit 0
+}
+
+main
