@@ -1,15 +1,21 @@
+---
+
 # https://dependabot.com/docs/config-file/
 
 version: 1
 update_configs:
-- package_manager: "javascript"
-  directory: "/"
-  update_schedule: "weekly"
-  default_reviewers:
-  - "Eldraed"
-  - "Heisendev"
-  - "JiDai"
-  - "liv7c"
-  - "PierrickGT"
-  - "simrobin"
-  - "susan-almassi"
+  - package_manager: "javascript"
+    directory: "/"
+    update_schedule: "weekly"
+    default_reviewers:
+      - "Eldraed"
+      - "Heisendev"
+      - "JiDai"
+      - "liv7c"
+      - "PierrickGT"
+      - "simrobin"
+      - "susan-almassi"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "all"

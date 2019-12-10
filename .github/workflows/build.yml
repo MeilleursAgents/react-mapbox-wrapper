@@ -1,9 +1,11 @@
+---
+
 name: Build Package
 
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
 
 jobs:
