@@ -10,7 +10,7 @@
   "scripts": {
     "peers": "npm-install-peers",
     "format:file": "prettier-eslint --write --",
-    "format": "npm run format:file \"src/**/**.js\" \"src/**/**.jsx\"",
+    "format": "npm run format:file \"$(pwd)/src/**/**.js\" \"$(pwd)/src/**/**.jsx\"",
     "lint:file": "eslint --fix --ext .jsx,.js --",
     "lint": "npm run lint:file src",
     "test": "nyc --all mocha --opts ./mocha.opts \"./src/**/*.test.js\" \"./src/**/*.test.jsx\"",
