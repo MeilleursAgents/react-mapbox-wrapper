@@ -10,14 +10,6 @@ update_configs:
     commit_message:
       prefix: "chore"
       include_scope: true
-    default_reviewers:
-      - "Eldraed"
-      - "Heisendev"
-      - "JiDai"
-      - "liv7c"
-      - "PierrickGT"
-      - "simrobin"
-      - "susan-almassi"
     automerged_updates:
       - match:
           dependency_type: "all"
