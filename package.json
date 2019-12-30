@@ -82,7 +82,7 @@
     "prettier-eslint-cli": "5.0.0",
     "sinon": "7.5.0",
     "sinon-chai": "3.4.0",
-    "style-loader": "1.1.1",
+    "style-loader": "1.1.2",
     "webpack": "4.41.4",
     "webpack-cli": "3.3.10",
     "webpack-node-externals": "1.7.2"
