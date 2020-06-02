@@ -6,6 +6,7 @@ version: 1
 update_configs:
   - package_manager: "javascript"
     directory: "/"
+    target_branch: "dependencies_update"
     update_schedule: "weekly"
     commit_message:
       prefix: "chore"
