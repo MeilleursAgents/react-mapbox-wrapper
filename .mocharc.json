@@ -1,0 +1,8 @@
+{
+    "diff": true,
+    "extension": ["js", "jsx"],
+    "file": "src/test.js",
+    "full-trace": true,
+    "recursive": true,
+    "require": ["@babel/register", "ignore-styles"]
+}
