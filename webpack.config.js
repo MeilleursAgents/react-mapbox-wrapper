@@ -38,7 +38,9 @@ module.exports = {
         modules: ['node_modules', './src'],
     },
 
-    externals: [nodeExternals({
-        whitelist: [/mapbox-gl\/dist\/mapbox-gl.css/],
-    })]
+    externals: [
+        nodeExternals({
+            allowlist: [/mapbox-gl\/dist\/mapbox-gl.css/],
+        }),
+    ],
 };
