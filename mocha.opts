@@ -1,6 +1,0 @@
---require @babel/register
---require ignore-styles
---require src/test.js
---watch-extensions jsx
---full-trace
---recursive
