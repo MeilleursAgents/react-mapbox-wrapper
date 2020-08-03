@@ -76,7 +76,7 @@
     "eslint-plugin-react": "7.20.4",
     "ignore-styles": "5.0.1",
     "jsdom": "16.3.0",
-    "mocha": "8.0.1",
+    "mocha": "8.1.0",
     "npm-install-peers": "1.2.1",
     "nyc": "15.1.0",
     "prettier-eslint-cli": "5.0.0",
