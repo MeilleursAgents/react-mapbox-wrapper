@@ -85,7 +85,7 @@
     "style-loader": "1.2.1",
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12",
-    "webpack-node-externals": "2.5.0"
+    "webpack-node-externals": "2.5.1"
   },
   "bugs": {
     "url": "https://github.com/MeilleursAgents/react-mapbox-wrapper/issues"
