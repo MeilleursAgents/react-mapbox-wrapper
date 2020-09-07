@@ -80,7 +80,6 @@ export default class MapboxMap extends Component {
                 case "ease":
                 this.map.easeTo({center: [coordinates.lng, coordinates.lat]});
                 break;
-
                 case "jump":
                 this.map.jumpTo({center: [coordinates.lng, coordinates.lat]});
                 break;
