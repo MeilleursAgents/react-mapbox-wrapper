@@ -74,17 +74,17 @@ export default class MapboxMap extends Component {
 
         if (!coordinatesAreEqual(coordinates, prevCenter)) {
             switch(navigationType) {
-                case "fly": 
+                case "flyTo": 
                 this.map.flyTo({center: [coordinates.lng, coordinates.lat]});
                 break;
-                case "ease":
+                case "easeTo":
                 this.map.easeTo({center: [coordinates.lng, coordinates.lat]});
                 break;
-                case "jump":
+                case "jumpTo":
                 this.map.jumpTo({center: [coordinates.lng, coordinates.lat]});
                 break;
                 default: 
-                this.map.setCenter([coordinates.lng, coordinates.lat]);
+                this.map.jumpTo({center: [coordinates.lng, coordinates.lat]});
                 break;
             }
         }
