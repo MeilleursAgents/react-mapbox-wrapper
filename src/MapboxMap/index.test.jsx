@@ -37,6 +37,8 @@ describe('<MapboxMap />', () => {
             getCenter = sinon.fake.returns({ lat: 20, lng: 20 });
 
             setCenter = sinon.spy();
+            
+            jumpTo = sinon.spy();
 
             getZoom = sinon.fake.returns(15);
 
@@ -259,7 +261,7 @@ describe('<MapboxMap />', () => {
             },
         });
 
-        expect(wrapper.instance().map.setCenter.calledWith([props.coordinates.lng, 0])).to.equal(
+        expect(wrapper.instance().map.jumpTo.calledWith({center: [props.coordinates.lng, 0]})).to.equal(
             true,
         );
     });
@@ -275,7 +277,7 @@ describe('<MapboxMap />', () => {
             },
         });
 
-        expect(wrapper.instance().map.setCenter.calledWith([0, props.coordinates.lat])).to.equal(
+        expect(wrapper.instance().map.jumpTo.calledWith({center:[0, props.coordinates.lat]})).to.equal(
             true,
         );
     });
