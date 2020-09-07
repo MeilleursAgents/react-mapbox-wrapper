@@ -75,7 +75,7 @@ Wrapper is CSS flex-ready for *width* but you **have to set a height** for havin
 | withZoom | bool | `false` | Show zoom [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol) |
 | fullscreenControlPosition | string | `top-right` | Set [Fullscreen Control](https://www.mapbox.com/mapbox-gl-js/api/#fullscreencontrol) position |
 | navigationControlPosition | string | `bottom-right` | Set [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol) position |
-| navigationType| string | `jumpTo` | Set type of navigation when changing coordinates: `flyTo`, `easeTo` or `jumpTo` |
+| navigationType| Object | `{type: "jumpTo"}` | Set type of navigation when changing coordinates: `flyTo`, `easeTo` or `jumpTo`. You can change speed and curve options for type `flyTo` as follows: `{type: "flyTo", options: {curve: 1.42, speed: 1.2}}`|
 
 ### Marker
 

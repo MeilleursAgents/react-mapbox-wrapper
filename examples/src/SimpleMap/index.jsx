@@ -8,7 +8,7 @@ import MapboxMap from 'react-mapbox-wrapper';
 export default function SimpleMap({ coordinates }) {
     return (
         <div style={{ height: 400, width: 400 }}>
-            <MapboxMap accessToken={global.ACCESS_TOKEN} coordinates={coordinates} />
+            <MapboxMap accessToken={global.ACCESS_TOKEN} coordinates={coordinates}/>
         </div>
     );
 }

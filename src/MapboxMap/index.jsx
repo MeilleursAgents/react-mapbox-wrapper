@@ -6,6 +6,9 @@ import mapboxgl from 'Lib';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './index.css';
 
+const navigationMethods = ['jumpTo','easeTo','flyTo']
+
+
 /**
  * Debounce timeout on zoom change.
  * @type {Number}
@@ -73,19 +76,16 @@ export default class MapboxMap extends Component {
         } = prevProps;
 
         if (!coordinatesAreEqual(coordinates, prevCenter)) {
-            switch(navigationType) {
-                case "flyTo": 
-                this.map.flyTo({center: [coordinates.lng, coordinates.lat]});
-                break;
-                case "easeTo":
-                this.map.easeTo({center: [coordinates.lng, coordinates.lat]});
-                break;
-                case "jumpTo":
-                this.map.jumpTo({center: [coordinates.lng, coordinates.lat]});
-                break;
-                default: 
-                this.map.jumpTo({center: [coordinates.lng, coordinates.lat]});
-                break;
+            const mapNavigationType = navigationType?.type || 'jumpTo';
+
+            if(navigationMethods.indexOf(mapNavigationType) >= 0) { // Méthode valide
+                const navigationDetails = {center: [coordinates.lng, coordinates.lat]}
+
+                if(mapNavigationType === "flyTo") {
+                    navigationDetails.curve = navigationType?.options?.curve || 1.42;
+                    navigationDetails.speed = navigationType?.options?.speed || 1.2;
+                }
+                this.map[mapNavigationType](navigationDetails);  
             }
         }
 
@@ -258,7 +258,7 @@ MapboxMap.propTypes = {
     maxZoom: PropTypes.number,
     minZoom: PropTypes.number,
     navigationControlPosition: PropTypes.string,
-    navigationType: PropTypes.string,
+    navigationType: PropTypes.shape({type: PropTypes.oneOf(navigationMethods), options: PropTypes.shape({speed: PropTypes.number, curve: PropTypes.number})}),
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     onLoad: PropTypes.func,
@@ -286,7 +286,7 @@ MapboxMap.defaultProps = {
     onZoomEnd: undefined,
     onZoomStart: undefined,
     mapboxStyle: DEFAULT_STYLE,
-    navigationType: undefined,
+    navigationType: {type: 'jumpTo'},
     withCompass: false,
     withFullscreen: false,
     withZoom: false,
