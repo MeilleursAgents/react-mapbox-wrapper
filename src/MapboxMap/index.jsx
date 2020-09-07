@@ -63,7 +63,7 @@ export default class MapboxMap extends Component {
             return;
         }
 
-        const { coordinates, zoom, minZoom, maxZoom, mapboxStyle } = this.props;
+        const { coordinates, zoom, minZoom, maxZoom, mapboxStyle, navigationType } = this.props;
         const {
             coordinates: prevCenter,
             zoom: prevZoom,
@@ -73,7 +73,21 @@ export default class MapboxMap extends Component {
         } = prevProps;
 
         if (!coordinatesAreEqual(coordinates, prevCenter)) {
-            this.map.setCenter([coordinates.lng, coordinates.lat]);
+            switch(navigationType) {
+                case "fly": 
+                this.map.flyTo({center: [coordinates.lng, coordinates.lat]});
+                break;
+                case "ease":
+                this.map.easeTo({center: [coordinates.lng, coordinates.lat]});
+                break;
+
+                case "jump":
+                this.map.jumpTo({center: [coordinates.lng, coordinates.lat]});
+                break;
+                default: 
+                this.map.setCenter([coordinates.lng, coordinates.lat]);
+                break;
+            }
         }
 
         if (zoom !== prevZoom) {
@@ -245,6 +259,7 @@ MapboxMap.propTypes = {
     maxZoom: PropTypes.number,
     minZoom: PropTypes.number,
     navigationControlPosition: PropTypes.string,
+    navigationType: PropTypes.string,
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     onLoad: PropTypes.func,
@@ -272,6 +287,7 @@ MapboxMap.defaultProps = {
     onZoomEnd: undefined,
     onZoomStart: undefined,
     mapboxStyle: DEFAULT_STYLE,
+    navigationType: undefined,
     withCompass: false,
     withFullscreen: false,
     withZoom: false,
