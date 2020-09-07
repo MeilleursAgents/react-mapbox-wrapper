@@ -286,7 +286,7 @@ describe('<MapboxMap />', () => {
         );
     });
 
-    it('should ease to new coordinates', () => {
+    it('should jump to new coordinates', () => {
         const props = defaultProps();
         const wrapper = mount(<MapboxMap {...props} />);
 
