@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+set -o nounset -o pipefail
+
+run_command() {
+  if ! "${@}"; then
+    printf "%bCommit Failed%b\n" "${RED}" "${RESET}"
+    printf "%bPlease fix errors and try committing again.%b\n" "${RED}" "${RESET}"
+
+    exit 1
+  fi
+}
+
+get_files() {
+  git diff --name-only --diff-filter=ACMR --cached -- "${@}" | tr '\n' ' ' | sed "s| *$||g"
+}
+
+get_diff() {
+  git diff --name-only --diff-filter=ACMR
+}
+
+diff_check() {
+  if ! [[ "${1}" == "$(get_diff)" ]]; then
+    printf "%bPre-commit has changed files%b\n" "${RED}" "${RESET}"
+    printf "%bConsider adding updated file with %bgit add -i \&\& git commit --amend%b\n" "${RED}" "${BLUE}" "${RESET}"
+  fi
+}
+
+npm_check() {
+  local PACKAGE_JSON
+  PACKAGE_JSON=$(get_files "package.json")
+
+  local JS_FILES
+  JS_FILES=$(get_files \*.js{,x})
+
+  if [[ -n "${PACKAGE_JSON:-}" ]] || [[ -n "${JS_FILES:-}" ]]; then
+    printf "%bChecking node_modules installation%b\n" "${BLUE}" "${RESET}"
+    run_command npm --silent install --no-audit
+    run_command npm --silent run peers
+  fi
+
+  if [[ -n "${JS_FILES:-}" ]]; then
+    printf "%bFormating javascript files%b\n" "${BLUE}" "${RESET}"
+    run_command npm --silent run format:file "${JS_FILES}"
+
+    printf "%bLinting javascript files%b\n" "${BLUE}" "${RESET}"
+    run_command npm --silent run lint:file "${JS_FILES}"
+
+    printf "%bBuilding dist%b\n" "${BLUE}" "${RESET}"
+    run_command npm --silent build
+  fi
+}
+
+main() {
+
+  local YELLOW='\033[33m'
+  local RED='\033[0;31m'
+  local BLUE='\033[0;34m'
+  local RESET='\033[0m'
+
+  local INITIAL_DIFF
+  INITIAL_DIFF=$(get_diff)
+
+  npm_check
+
+  diff_check "${INITIAL_DIFF}"
+
+  exit 0
+}
+
+main
