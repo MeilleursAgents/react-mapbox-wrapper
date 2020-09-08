@@ -265,9 +265,9 @@ describe('<MapboxMap />', () => {
             },
         });
 
-        expect(wrapper.instance().map.jumpTo.calledWith({center: [props.coordinates.lng, 0]})).to.equal(
-            true,
-        );
+        expect(
+            wrapper.instance().map.jumpTo.calledWith({ center: [props.coordinates.lng, 0] }),
+        ).to.equal(true);
     });
 
     it('should update lng on change', () => {
@@ -281,9 +281,9 @@ describe('<MapboxMap />', () => {
             },
         });
 
-        expect(wrapper.instance().map.jumpTo.calledWith({center:[0, props.coordinates.lat]})).to.equal(
-            true,
-        );
+        expect(
+            wrapper.instance().map.jumpTo.calledWith({ center: [0, props.coordinates.lat] }),
+        ).to.equal(true);
     });
 
     it('should jump to new coordinates', () => {
@@ -295,12 +295,12 @@ describe('<MapboxMap />', () => {
                 ...props.coordinates,
                 lng: 0,
             },
-            navigationType: {type: "jumpTo"}
+            navigationType: { type: 'jumpTo' },
         });
 
-        expect(wrapper.instance().map.jumpTo.calledWith({center:[0, props.coordinates.lat]})).to.equal(
-            true,
-        );
+        expect(
+            wrapper.instance().map.jumpTo.calledWith({ center: [0, props.coordinates.lat] }),
+        ).to.equal(true);
     });
 
     it('should ease to new coordinates', () => {
@@ -312,12 +312,12 @@ describe('<MapboxMap />', () => {
                 ...props.coordinates,
                 lng: 0,
             },
-            navigationType: {type: "easeTo"}
+            navigationType: { type: 'easeTo' },
         });
 
-        expect(wrapper.instance().map.easeTo.calledWith({center:[0, props.coordinates.lat]})).to.equal(
-            true,
-        );
+        expect(
+            wrapper.instance().map.easeTo.calledWith({ center: [0, props.coordinates.lat] }),
+        ).to.equal(true);
     });
 
     it('should fly to new coordinates', () => {
@@ -329,12 +329,16 @@ describe('<MapboxMap />', () => {
                 ...props.coordinates,
                 lng: 0,
             },
-            navigationType: {type: "flyTo"}
+            navigationType: { type: 'flyTo' },
         });
 
-        expect(wrapper.instance().map.flyTo.calledWith({center:[0, props.coordinates.lat], curve: 1.42, speed:1.2})).to.equal(
-            true,
-        );
+        expect(
+            wrapper.instance().map.flyTo.calledWith({
+                center: [0, props.coordinates.lat],
+                curve: 1.42,
+                speed: 1.2,
+            }),
+        ).to.equal(true);
     });
 
     it('should fly to new coordinates with customized curve and speed', () => {
@@ -346,12 +350,14 @@ describe('<MapboxMap />', () => {
                 ...props.coordinates,
                 lng: 0,
             },
-            navigationType: {type: "flyTo", options: {curve: 2, speed: 2}}
+            navigationType: { type: 'flyTo', options: { curve: 2, speed: 2 } },
         });
 
-        expect(wrapper.instance().map.flyTo.calledWith({center:[0, props.coordinates.lat], curve: 2, speed: 2})).to.equal(
-            true,
-        );
+        expect(
+            wrapper
+                .instance()
+                .map.flyTo.calledWith({ center: [0, props.coordinates.lat], curve: 2, speed: 2 }),
+        ).to.equal(true);
     });
 
     it('should update zoom on change', () => {

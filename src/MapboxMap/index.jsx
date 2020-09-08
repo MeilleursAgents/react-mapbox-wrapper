@@ -6,8 +6,7 @@ import mapboxgl from 'Lib';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './index.css';
 
-const navigationMethods = ['jumpTo','easeTo','flyTo']
-
+const navigationMethods = ['jumpTo', 'easeTo', 'flyTo'];
 
 /**
  * Debounce timeout on zoom change.
@@ -78,14 +77,15 @@ export default class MapboxMap extends Component {
         if (!coordinatesAreEqual(coordinates, prevCenter)) {
             const mapNavigationType = navigationType?.type || 'jumpTo';
 
-            if(navigationMethods.indexOf(mapNavigationType) >= 0) { // Méthode valide
-                const navigationDetails = {center: [coordinates.lng, coordinates.lat]}
+            if (navigationMethods.indexOf(mapNavigationType) >= 0) {
+                // Méthode valide
+                const navigationDetails = { center: [coordinates.lng, coordinates.lat] };
 
-                if(mapNavigationType === "flyTo") {
+                if (mapNavigationType === 'flyTo') {
                     navigationDetails.curve = navigationType?.options?.curve || 1.42;
                     navigationDetails.speed = navigationType?.options?.speed || 1.2;
                 }
-                this.map[mapNavigationType](navigationDetails);  
+                this.map[mapNavigationType](navigationDetails);
             }
         }
 
@@ -258,7 +258,10 @@ MapboxMap.propTypes = {
     maxZoom: PropTypes.number,
     minZoom: PropTypes.number,
     navigationControlPosition: PropTypes.string,
-    navigationType: PropTypes.shape({type: PropTypes.oneOf(navigationMethods), options: PropTypes.shape({speed: PropTypes.number, curve: PropTypes.number})}),
+    navigationType: PropTypes.shape({
+        type: PropTypes.oneOf(navigationMethods),
+        options: PropTypes.shape({ speed: PropTypes.number, curve: PropTypes.number }),
+    }),
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     onLoad: PropTypes.func,
@@ -286,7 +289,7 @@ MapboxMap.defaultProps = {
     onZoomEnd: undefined,
     onZoomStart: undefined,
     mapboxStyle: DEFAULT_STYLE,
-    navigationType: {type: 'jumpTo'},
+    navigationType: { type: 'jumpTo' },
     withCompass: false,
     withFullscreen: false,
     withZoom: false,
