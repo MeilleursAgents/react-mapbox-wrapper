@@ -17,14 +17,14 @@ import React from 'react';
 import MapboxMap from 'react-mapbox-wrapper';
 
 export default function SimpleMap() {
-  return (
-    <div style={{ height: 400, width: 400 }}>
-      <MapboxMap
-        accessToken="<your acess token here>"
-        coordinates={{ lat: 48.872198, lng: 2.3366308 }}
-      />
-    </div>
-  );
+    return (
+        <div style={{ height: 400, width: 400 }}>
+            <MapboxMap
+                accessToken="<your acess token here>"
+                coordinates={{ lat: 48.872198, lng: 2.3366308 }}
+            />
+        </div>
+    );
 }
 
 SimpleMap.displayName = 'SimpleMap';
@@ -52,68 +52,68 @@ module: {
 
 React Component that render a Mapbox Map. Extra props are directly passed to the [Map constructor](https://www.mapbox.com/mapbox-gl-js/api/#map). Following props are handled by wrapper for updating or handling behavior in the React philosophy.
 
-Wrapper is CSS flex-ready for *width* but you **have to set a height** for having visible Mapbox.
+Wrapper is CSS flex-ready for _width_ but you **have to set a height** for having visible Mapbox.
 
-| Props | Type | Default | Description |
-| -- | -- | -- | -- |
-| accessToken | String | required | Mapbox Access Token ([find it here](https://www.mapbox.com/account/access-tokens)) |
-| coordinates | Object | required | Coordinates of the map center <br /> According to the [LngLatLike](https://www.mapbox.com/mapbox-gl-js/api/#lnglatlike) model |
-| className | string | `''` | `className` added to map's wrapper. Your should provide a height in order to render the map (default at 0) |
-| children | Node | `null` | Rendered children, typically a [Marker](#Marker) and/or [Circle](#Circle) |
-| minZoom | number | `undefined` | The minimum zoom level of the map (0-24). |
-| maxZoom | number | `undefined` | The maximum zoom level of the map (0-24). |
-| zoom | number | `15` | The viewport zoom |
-| onChange | func | `undefined` | Callback function called on every viewport change (`moveend`, `zoomend`) <br /><br /> Callback receive param with the following shape <br /> `{ zoom: 15, coordinates: { lng: 3.4, lat: 1.2 } }` |
-| onClick | func | `undefined` | Callback function called on [map's click](https://www.mapbox.com/mapbox-gl-js/api/#map.event:click) |
-| onLoad | func | `undefined` | Callback function called on [map's load](https://www.mapbox.com/mapbox-gl-js/api/#map.event:load) with current Mapbox instance param |
-| onZoomStart | func | `undefined` | Callback function called on [map's zoomstart](https://www.mapbox.com/mapbox-gl-js/api/#map.event:zoomstart) |
-| onZoomEnd | func | `undefined` | Callback function called on [map's zoomend](https://www.mapbox.com/mapbox-gl-js/api/#map.event:zoomend) with a debounce of 300ms in order to avoid too many `render()` call |
-| renderNotSupported | func | *Simple message* | Callback function called when [browser does not support mapbox-gl](https://www.mapbox.com/mapbox-gl-js/api/#supported) |
-| mapboxStyle | String | | [Mapbox style layer](https://www.mapbox.com/mapbox-gl-js/style-spec/) |
-| withCompass | bool | `false` | Show compass [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol) |
-| withFullscreen | bool | `false` | Show [Fullscreen Control](https://www.mapbox.com/mapbox-gl-js/api/#fullscreencontrol) |
-| withZoom | bool | `false` | Show zoom [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol) |
-| fullscreenControlPosition | string | `top-right` | Set [Fullscreen Control](https://www.mapbox.com/mapbox-gl-js/api/#fullscreencontrol) position |
-| navigationControlPosition | string | `bottom-right` | Set [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol) position |
+| Props                     | Type   | Default            | Description                                                                                                                                                                                                |
+| ------------------------- | ------ | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| accessToken               | String | required           | Mapbox Access Token ([find it here](https://www.mapbox.com/account/access-tokens))                                                                                                                         |
+| coordinates               | Object | required           | Coordinates of the map center <br /> According to the [LngLatLike](https://www.mapbox.com/mapbox-gl-js/api/#lnglatlike) model                                                                              |
+| className                 | string | `''`               | `className` added to map's wrapper. Your should provide a height in order to render the map (default at 0)                                                                                                 |
+| children                  | Node   | `null`             | Rendered children, typically a [Marker](#Marker) and/or [Circle](#Circle)                                                                                                                                  |
+| minZoom                   | number | `undefined`        | The minimum zoom level of the map (0-24).                                                                                                                                                                  |
+| maxZoom                   | number | `undefined`        | The maximum zoom level of the map (0-24).                                                                                                                                                                  |
+| zoom                      | number | `15`               | The viewport zoom                                                                                                                                                                                          |
+| onChange                  | func   | `undefined`        | Callback function called on every viewport change (`moveend`, `zoomend`) <br /><br /> Callback receive param with the following shape <br /> `{ zoom: 15, coordinates: { lng: 3.4, lat: 1.2 } }`           |
+| onClick                   | func   | `undefined`        | Callback function called on [map's click](https://www.mapbox.com/mapbox-gl-js/api/#map.event:click)                                                                                                        |
+| onLoad                    | func   | `undefined`        | Callback function called on [map's load](https://www.mapbox.com/mapbox-gl-js/api/#map.event:load) with current Mapbox instance param                                                                       |
+| onZoomStart               | func   | `undefined`        | Callback function called on [map's zoomstart](https://www.mapbox.com/mapbox-gl-js/api/#map.event:zoomstart)                                                                                                |
+| onZoomEnd                 | func   | `undefined`        | Callback function called on [map's zoomend](https://www.mapbox.com/mapbox-gl-js/api/#map.event:zoomend) with a debounce of 300ms in order to avoid too many `render()` call                                |
+| renderNotSupported        | func   | _Simple message_   | Callback function called when [browser does not support mapbox-gl](https://www.mapbox.com/mapbox-gl-js/api/#supported)                                                                                     |
+| mapboxStyle               | String |                    | [Mapbox style layer](https://www.mapbox.com/mapbox-gl-js/style-spec/)                                                                                                                                      |
+| withCompass               | bool   | `false`            | Show compass [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol)                                                                                                              |
+| withFullscreen            | bool   | `false`            | Show [Fullscreen Control](https://www.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)                                                                                                                      |
+| withZoom                  | bool   | `false`            | Show zoom [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol)                                                                                                                 |
+| fullscreenControlPosition | string | `top-right`        | Set [Fullscreen Control](https://www.mapbox.com/mapbox-gl-js/api/#fullscreencontrol) position                                                                                                              |
+| navigationControlPosition | string | `bottom-right`     | Set [Navigation Control](https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol) position                                                                                                              |
+| navigationType            | Object | `{type: "jumpTo"}` | Set type of navigation when changing coordinates: `flyTo`, `easeTo` or `jumpTo`. You can change speed and curve options for type `flyTo` as follows: `{type: "flyTo", options: {curve: 1.42, speed: 1.2}}` |
 
 ### Marker
 
 React Component that render a Marker. Extra props are directly passed to the [Marker constructor](https://www.mapbox.com/mapbox-gl-js/api/#marker)
 
-| Props | Type | Default | Description |
-| -- | -- | -- | -- |
-| children | Node | `null` | Marker HTML DOM, default marker will be used if not provided |
-| coordinates | Object | required | Coordinates of the marker <br /> According to the [LngLatLike](https://www.mapbox.com/mapbox-gl-js/api/#lnglatlike) model |
-| draggable | bool | `false` | Allow user to drag'n'drop Marker |
-| getRef | func |  | Callback function called with marker's ref (useful for calling `#moveToTop()` function) |
-| map | Object | required | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn) |
-| onDragEnd | func |  | Callback function called on [marker's dragend](https://www.mapbox.com/mapbox-gl-js/api/#marker.event:dragend) |
-| onMouseOut | func |  | Callback function called on marker or popup mouseOut |
-| onMouseOver | func |  | Callback function called on marker or popup mouseOver |
-| popup | Node |  | Popup attached to the marker, displayed on click to marker |
-| popupAnchor | string | `bottom` | [Popup anchor param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
-| popupCloseButton | bool | `false` | [Popup closeButton param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
-| popupOffset | number |  | [Popup offset param](https://www.mapbox.com/mapbox-gl-js/api/#popup) |
-| popupOnOver | bool | `false` | Trigger popup show on mouse over (only available if **children** are provided, default marker cannot be bind) |
+| Props            | Type   | Default  | Description                                                                                                               |
+| ---------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| children         | Node   | `null`   | Marker HTML DOM, default marker will be used if not provided                                                              |
+| coordinates      | Object | required | Coordinates of the marker <br /> According to the [LngLatLike](https://www.mapbox.com/mapbox-gl-js/api/#lnglatlike) model |
+| draggable        | bool   | `false`  | Allow user to drag'n'drop Marker                                                                                          |
+| getRef           | func   |          | Callback function called with marker's ref (useful for calling `#moveToTop()` function)                                   |
+| map              | Object | required | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn)                                    |
+| onDragEnd        | func   |          | Callback function called on [marker's dragend](https://www.mapbox.com/mapbox-gl-js/api/#marker.event:dragend)             |
+| onMouseOut       | func   |          | Callback function called on marker or popup mouseOut                                                                      |
+| onMouseOver      | func   |          | Callback function called on marker or popup mouseOver                                                                     |
+| popup            | Node   |          | Popup attached to the marker, displayed on click to marker                                                                |
+| popupAnchor      | string | `bottom` | [Popup anchor param](https://www.mapbox.com/mapbox-gl-js/api/#popup)                                                      |
+| popupCloseButton | bool   | `false`  | [Popup closeButton param](https://www.mapbox.com/mapbox-gl-js/api/#popup)                                                 |
+| popupOffset      | number |          | [Popup offset param](https://www.mapbox.com/mapbox-gl-js/api/#popup)                                                      |
+| popupOnOver      | bool   | `false`  | Trigger popup show on mouse over (only available if **children** are provided, default marker cannot be bind)             |
 
 ### Circle
 
 React Component that render a Circle. Extra props are directly passed to the [Marker constructor](https://www.mapbox.com/mapbox-gl-js/api/#marker)
 
-| Props | Type | Default | Description |
-| -- | -- | -- | -- |
-| coordinates | Object | required | Coordinates of the marker <br /> According to the [LngLatLike](https://www.mapbox.com/mapbox-gl-js/api/#lnglatlike) model |
-| id | string | required | Identifier of circle, used to name the underlying layer |
-| map | Object | required | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn) |
-| onClick | func | | Callback function called on circle's click |
-| paint | Object | | [Paint option of the layer](https://www.mapbox.com/mapbox-gl-js/style-spec#layer-paint) |
-| radius | number | required | Radius of circle, in kilometers |
-| unit | string | `kilometers` | Unit of the radius. values can be : `kilometers`, `meters`, `miles`, `feet` |
+| Props       | Type   | Default      | Description                                                                                                               |
+| ----------- | ------ | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| coordinates | Object | required     | Coordinates of the marker <br /> According to the [LngLatLike](https://www.mapbox.com/mapbox-gl-js/api/#lnglatlike) model |
+| id          | string | required     | Identifier of circle, used to name the underlying layer                                                                   |
+| map         | Object | required     | Mapbox Map where marker will be added (can be obtained with MapboxMap#onLoad props fn)                                    |
+| onClick     | func   |              | Callback function called on circle's click                                                                                |
+| paint       | Object |              | [Paint option of the layer](https://www.mapbox.com/mapbox-gl-js/style-spec#layer-paint)                                   |
+| radius      | number | required     | Radius of circle, in kilometers                                                                                           |
+| unit        | string | `kilometers` | Unit of the radius. values can be : `kilometers`, `meters`, `miles`, `feet`                                               |
 
 ### Helpers
 
 We provide some [helpers](https://github.com/MeilleursAgents/react-mapbox-wrapper/blob/master/src/Helpers/index.js) for interacting with Mapbox Map object, all in `Helpers` import.
-
 
 ```js
 import { Helpers } from react-mapbox-wrapper;

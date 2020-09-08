@@ -52,6 +52,12 @@ npm_check() {
 }
 
 main() {
+
+  local YELLOW='\033[33m'
+  local RED='\033[0;31m'
+  local BLUE='\033[0;34m'
+  local RESET='\033[0m'
+
   local INITIAL_DIFF
   INITIAL_DIFF=$(get_diff)
 
