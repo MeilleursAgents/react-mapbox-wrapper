@@ -178,13 +178,19 @@ describe('<MapboxMap />', () => {
         const wrapper = mount(<MapboxMap {...props} onChange={onChange} />);
 
         // Simulate moveend call from mapbox
-        const callback = wrapper
-            .instance()
-            .map.on.getCalls()
+        const callback = wrapper.instance().map.on.getCalls()
             .find(call => call.args[0] === 'moveend');
         callback.args[1]();
 
-        expect(onChange.called).to.equal(true);
+        expect(
+            onChange.calledWith(
+                {
+                    zoom: wrapper.instance().map.getZoom(),
+                    coordinates: wrapper.instance().map.getCenter(),
+                },
+                wrapper.instance().map,
+            ),
+        ).to.equal(true);
     });
 
     it('should call given onZoomStart', () => {
@@ -218,7 +224,12 @@ describe('<MapboxMap />', () => {
 
         clock.tick(1000);
 
-        expect(onZoomEnd.called).to.equal(true);
+        expect(
+            onZoomEnd.calledWith(
+                undefined,
+                wrapper.instance().map,
+            ),
+        ).to.equal(true);
     });
 
     it('should call given click', () => {
