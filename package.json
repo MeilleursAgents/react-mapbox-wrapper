@@ -17,7 +17,7 @@
         "test:file": "mocha",
         "doc": "esdoc -c esdoc.json",
         "start": "webpack --watch",
-        "build": "webpack -p",
+        "build": "webpack",
         "ci": "npm run format && npm run lint && npm run test && npm run doc && npm run build && codecov"
     },
     "keywords": [
