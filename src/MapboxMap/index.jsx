@@ -117,7 +117,6 @@ export default class MapboxMap extends Component {
 
     /**
      * Call callback when changing data on map.
-     * @param  {Object} viewport New viewport
      */
     onChange() {
         const { onChange } = this.props;
@@ -128,12 +127,13 @@ export default class MapboxMap extends Component {
             onChange({
                 zoom: this.map.getZoom(),
                 coordinates: { lng, lat },
-            });
+            }, this.map);
         }
     }
 
     /**
      * Call callback on zoom end after a small debounce.
+     * @param {Object} e Event object
      */
     onZoomEnd(e) {
         clearTimeout(this.zoomendTimeout);
@@ -147,7 +147,7 @@ export default class MapboxMap extends Component {
 
             const { onZoomEnd } = this.props;
             if (isFunction(onZoomEnd)) {
-                onZoomEnd(e);
+                onZoomEnd(e, this.map);
             }
         }, DEBOUNCE_TIMEOUT);
     }
