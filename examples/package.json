@@ -1,36 +1,36 @@
 {
-  "name": "examples",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://meilleursagents.github.io/react-mapbox-wrapper",
-  "dependencies": {
-    "@sentry/browser": "5.6.3",
-    "@turf/circle": "^6.0.1",
-    "mapbox-gl": "^1.1.1",
-    "places.js": "^1.16.4",
-    "prop-types": "15.7.2",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
-    "react-mapbox-wrapper": "2.4.0",
-    "react-scripts": "3.0.1",
-    "react-syntax-highlighter": "11.0.2"
-  },
-  "scripts": {
-    "link": "npm link react-mapbox-wrapper",
-    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
-    "test": "SKIP_PREFLIGHT_CHECK=true react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
-  "devDependencies": {
-    "gh-pages": "2.0.1"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "name": "examples",
+    "version": "0.1.0",
+    "private": true,
+    "homepage": "https://meilleursagents.github.io/react-mapbox-wrapper",
+    "dependencies": {
+        "@sentry/browser": "5.6.3",
+        "@turf/circle": "^6.0.1",
+        "mapbox-gl": "^1.1.1",
+        "places.js": "^1.16.4",
+        "prop-types": "15.7.2",
+        "react": "16.8.6",
+        "react-dom": "16.8.6",
+        "react-mapbox-wrapper": "2.5.0",
+        "react-scripts": "3.0.1",
+        "react-syntax-highlighter": "11.0.2"
+    },
+    "scripts": {
+        "link": "npm link react-mapbox-wrapper",
+        "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+        "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+        "test": "SKIP_PREFLIGHT_CHECK=true react-scripts test",
+        "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build"
+    },
+    "devDependencies": {
+        "gh-pages": "2.0.1"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ]
 }

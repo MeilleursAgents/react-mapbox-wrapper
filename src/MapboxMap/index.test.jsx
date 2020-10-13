@@ -34,7 +34,13 @@ describe('<MapboxMap />', () => {
 
             addLayer = sinon.spy();
 
+            easeTo = sinon.spy();
+
+            flyTo = sinon.spy();
+
             getCenter = sinon.fake.returns({ lat: 20, lng: 20 });
+
+            jumpTo = sinon.spy();
 
             setCenter = sinon.spy();
 
@@ -172,13 +178,19 @@ describe('<MapboxMap />', () => {
         const wrapper = mount(<MapboxMap {...props} onChange={onChange} />);
 
         // Simulate moveend call from mapbox
-        const callback = wrapper
-            .instance()
-            .map.on.getCalls()
+        const callback = wrapper.instance().map.on.getCalls()
             .find(call => call.args[0] === 'moveend');
         callback.args[1]();
 
-        expect(onChange.called).to.equal(true);
+        expect(
+            onChange.calledWith(
+                {
+                    zoom: wrapper.instance().map.getZoom(),
+                    coordinates: wrapper.instance().map.getCenter(),
+                },
+                wrapper.instance().map,
+            ),
+        ).to.equal(true);
     });
 
     it('should call given onZoomStart', () => {
@@ -212,7 +224,12 @@ describe('<MapboxMap />', () => {
 
         clock.tick(1000);
 
-        expect(onZoomEnd.called).to.equal(true);
+        expect(
+            onZoomEnd.calledWith(
+                undefined,
+                wrapper.instance().map,
+            ),
+        ).to.equal(true);
     });
 
     it('should call given click', () => {
@@ -259,9 +276,9 @@ describe('<MapboxMap />', () => {
             },
         });
 
-        expect(wrapper.instance().map.setCenter.calledWith([props.coordinates.lng, 0])).to.equal(
-            true,
-        );
+        expect(
+            wrapper.instance().map.jumpTo.calledWith({ center: [props.coordinates.lng, 0] }),
+        ).to.equal(true);
     });
 
     it('should update lng on change', () => {
@@ -275,9 +292,83 @@ describe('<MapboxMap />', () => {
             },
         });
 
-        expect(wrapper.instance().map.setCenter.calledWith([0, props.coordinates.lat])).to.equal(
-            true,
-        );
+        expect(
+            wrapper.instance().map.jumpTo.calledWith({ center: [0, props.coordinates.lat] }),
+        ).to.equal(true);
+    });
+
+    it('should jump to new coordinates', () => {
+        const props = defaultProps();
+        const wrapper = mount(<MapboxMap {...props} />);
+
+        wrapper.setProps({
+            coordinates: {
+                ...props.coordinates,
+                lng: 0,
+            },
+            navigationType: { type: 'jumpTo' },
+        });
+
+        expect(
+            wrapper.instance().map.jumpTo.calledWith({ center: [0, props.coordinates.lat] }),
+        ).to.equal(true);
+    });
+
+    it('should ease to new coordinates', () => {
+        const props = defaultProps();
+        const wrapper = mount(<MapboxMap {...props} />);
+
+        wrapper.setProps({
+            coordinates: {
+                ...props.coordinates,
+                lng: 0,
+            },
+            navigationType: { type: 'easeTo' },
+        });
+
+        expect(
+            wrapper.instance().map.easeTo.calledWith({ center: [0, props.coordinates.lat] }),
+        ).to.equal(true);
+    });
+
+    it('should fly to new coordinates', () => {
+        const props = defaultProps();
+        const wrapper = mount(<MapboxMap {...props} />);
+
+        wrapper.setProps({
+            coordinates: {
+                ...props.coordinates,
+                lng: 0,
+            },
+            navigationType: { type: 'flyTo' },
+        });
+
+        expect(
+            wrapper.instance().map.flyTo.calledWith({
+                center: [0, props.coordinates.lat],
+                curve: 1.42,
+                speed: 1.2,
+            }),
+        ).to.equal(true);
+    });
+
+    it('should fly to new coordinates with customized curve and speed', () => {
+        const props = defaultProps();
+        const wrapper = mount(<MapboxMap {...props} />);
+
+        wrapper.setProps({
+            coordinates: {
+                ...props.coordinates,
+                lng: 0,
+            },
+            navigationType: { type: 'flyTo', options: { curve: 2, speed: 2 } },
+        });
+
+        expect(
+            wrapper
+                .instance()
+                .map.flyTo.calledWith({ center: [0, props.coordinates.lat], curve: 2, speed: 2 }),
+        ).to.equal(true);
     });
 
     it('should update zoom on change', () => {
