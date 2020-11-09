@@ -65,7 +65,7 @@
         "esdoc-plugin-require-coverage": "0.1.2",
         "esdoc-publish-html-plugin": "1.1.2",
         "esdoc-standard-plugin": "1.0.0",
-        "eslint": "7.11.0",
+        "eslint": "7.13.0",
         "eslint-config-airbnb": "18.2.0",
         "eslint-config-prettier": "6.12.0",
         "eslint-import-resolver-webpack": "0.13.0",
