@@ -6,6 +6,10 @@ import mapboxgl from 'Lib';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './index.css';
 
+/**
+ * Mapbox map navigation methods
+ * @type {Array}
+ */
 const navigationMethods = ['jumpTo', 'easeTo', 'flyTo'];
 
 /**
@@ -75,16 +79,21 @@ export default class MapboxMap extends Component {
         } = prevProps;
 
         if (!coordinatesAreEqual(coordinates, prevCenter)) {
-            const mapNavigationType = navigationType?.type || 'jumpTo';
+            const mapNavigationType = navigationType.type || 'jumpTo';
 
             if (navigationMethods.indexOf(mapNavigationType) >= 0) {
-                // Méthode valide
                 const navigationDetails = { center: [coordinates.lng, coordinates.lat] };
 
                 if (mapNavigationType === 'flyTo') {
-                    navigationDetails.curve = navigationType?.options?.curve || 1.42;
-                    navigationDetails.speed = navigationType?.options?.speed || 1.2;
+                    navigationDetails.curve = navigationType.options && navigationType.options.curve
+                        ? navigationType.options.curve
+                        : 1.42;
+
+                    navigationDetails.speed = navigationType.options && navigationType.options.speed
+                        ? navigationType.options.speed
+                        : 1.2;
                 }
+
                 this.map[mapNavigationType](navigationDetails);
             }
         }
