@@ -54,7 +54,7 @@
         "babel-types": "6.26.0",
         "chai": "4.2.0",
         "codecov": "3.8.0",
-        "css-loader": "4.3.0",
+        "css-loader": "5.0.1",
         "enzyme": "3.11.0",
         "enzyme-adapter-react-16": "1.15.5",
         "esdoc": "1.1.0",
