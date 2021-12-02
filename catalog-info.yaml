@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: react-mapbox-wrapper
+  description: lib for wrapping mapbow into react
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - react
+  links:
+    - url: https://meilleursagents.github.io/react-mapbox-wrapper/
+      title: React Mapbox Wrapper Test UI
+      icon: dashboard
+spec:
+  type: website
+  lifecycle: production
+  owner: web-front
+  system: public-websites

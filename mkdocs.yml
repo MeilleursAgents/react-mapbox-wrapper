@@ -1,0 +1,10 @@
+site_name: 'React Mapbox Wrapper'
+site_description: 'Main documentation for RMW'
+
+plugins:
+  - techdocs-core
+
+nav:
+  - Overview:
+    - What is RMW: 'docs/what-is-rmw.md'
+    - Install: 'docs/install.md'
